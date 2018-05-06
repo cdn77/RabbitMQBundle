@@ -6,11 +6,20 @@
 >
     <php>
         <ini name="error_reporting" value="-1" />
+        <env name="RABBITMQ_HOST" value="127.0.0.1" />
+        <env name="RABBITMQ_PORT" value="5672" />
+        <env name="RABBITMQ_VHOST" value="/" />
+        <env name="RABBITMQ_USERNAME" value="guest" />
+        <env name="RABBITMQ_PASSWORD" value="guest" />
     </php>
 
-    <testsuites>
-        <testsuite>
-            <directory>tests</directory>
-        </testsuite>
-    </testsuites>
+    <testsuite name="Tests">
+        <directory>tests</directory>
+    </testsuite>
+
+    <filter>
+        <whitelist>
+            <directory suffix=".php">src</directory>
+        </whitelist>
+    </filter>
 </phpunit>
