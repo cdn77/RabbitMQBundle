@@ -1,0 +1,39 @@
+services:
+    _defaults:
+        autowire: true
+        autoconfigure: true
+        public: false
+
+    Cdn77\RabbitMQBundle\Console\SetUpCommand:
+        tags:
+            - {name: console.command}
+
+    Cdn77\RabbitMQBundle\Console\ConsumerListCommand:
+        tags:
+            - {name: console.command}
+
+    Cdn77\RabbitMQBundle\Console\ConsumerCommand:
+        tags:
+            - {name: console.command}
+
+    Cdn77\RabbitMQBundle\Configuration\Connection:
+        factory: 'Cdn77\RabbitMQBundle\Configuration\Connection::fromDI'
+        arguments:
+            - '%rabbitmq%'
+
+    Cdn77\RabbitMQBundle\Configuration\Topology:
+        factory: 'Cdn77\RabbitMQBundle\Configuration\Topology::fromDI'
+        arguments:
+            - '%rabbitmq%'
+
+    Cdn77\RabbitMQBundle\RabbitMQ\BunnyConnection:
+    Cdn77\RabbitMQBundle\RabbitMQ\Connection:
+        alias: Cdn77\RabbitMQBundle\RabbitMQ\BunnyConnection
+
+    Cdn77\RabbitMQBundle\RabbitMQ\Operation\AcknowledgeOperation:
+    Cdn77\RabbitMQBundle\RabbitMQ\Operation\GetOperation:
+    Cdn77\RabbitMQBundle\RabbitMQ\Operation\RejectOperation:
+    Cdn77\RabbitMQBundle\RabbitMQ\Operation\PublishJsonOperation:
+
+    Cdn77\RabbitMQBundle\ConsumerRunner:
+    Cdn77\RabbitMQBundle\SetupAction:

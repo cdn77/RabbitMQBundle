@@ -1,0 +1,40 @@
+{
+    "name": "cdn77/rabbitmq-bundle",
+    "description": "RabbitMQ Symfony bundle for BunnyPHP.",
+    "type": "library",
+    "license": "MIT",
+    "config": {
+        "sort-packages": true
+    },
+    "require": {
+        "php": ">=7.1",
+        "bunny/bunny": "^0.4.0",
+        "consistence/consistence": "^1.0",
+        "react/promise": "^2.0",
+        "symfony/config": "^3.3|^4.0",
+        "symfony/console": "^3.3|^4.0",
+        "symfony/dependency-injection": "^3.3|^4.0",
+        "symfony/framework-bundle": "^3.3|^4.0",
+        "symfony/http-kernel": "^3.3|^4.0",
+        "symfony/yaml": "^3.3|^4.0"
+    },
+    "require-dev": {
+        "cdn77/coding-standard": "^0.7",
+        "jakub-onderka/php-parallel-lint": "^1.0.0",
+        "phpstan/phpdoc-parser": "dev-master#850b167",
+        "phpstan/phpstan": "dev-master#d966431",
+        "phpstan/phpstan-phpunit": "dev-master#4af7dd1",
+        "phpstan/phpstan-strict-rules": "dev-master#c14b6e1",
+        "phpunit/phpunit": "^7.0"
+    },
+    "autoload": {
+        "psr-4": {
+            "Cdn77\\RabbitMQBundle\\": "src/"
+        }
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Cdn77\\RabbitMQBundle\\Tests\\": "tests/"
+        }
+    }
+}

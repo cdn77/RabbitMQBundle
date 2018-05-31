@@ -1,0 +1,28 @@
+rabbitmq:
+    host: 127.0.0.1
+    port: 5672
+    vhost: /
+    user: guest
+    password: password
+
+    heartbeat: 60
+    connection_timeout: 10
+    read_write_timeout: 11
+
+    exchanges:
+        exchange1:
+            durable: true
+            type: topic
+
+        exchange2:
+            durable: false
+            bindings:
+                -   exchange: exchange1
+                    routing_key: "routing_key1"
+
+    queues:
+        queue1:
+            durable: true
+            bindings:
+                -   exchange: exchange1
+                    routing_key: "queue1"

@@ -1,0 +1,21 @@
+<?xml version="1.0" ?>
+<ruleset>
+    <rule ref="Cdn77CodingStandard"/>
+
+    <arg name="basepath" value="."/>
+    <arg name="extensions" value="php"/>
+    <arg name="encoding" value="utf-8"/>
+    <arg value="s"/>
+    <arg value="n"/>
+    <arg value="p"/>
+    <arg name="colors" />
+    <arg name="parallel" value="80"/>
+    <arg name="cache" value=".phpcs-cache"/>
+
+    <file>src/</file>
+    <file>tests/</file>
+
+    <rule ref="SlevomatCodingStandard.Namespaces.ReferenceUsedNamesOnly.ReferenceViaFallbackGlobalName">
+        <severity>5</severity>
+    </rule>
+</ruleset>
