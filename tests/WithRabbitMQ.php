@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Cdn77\RabbitMQBundle\Tests;
 
 use Cdn77\RabbitMQBundle\Configuration\Connection;
+use Cdn77\RabbitMQBundle\Configuration\Dsn;
 use Cdn77\RabbitMQBundle\Configuration\Topology;
 use Cdn77\RabbitMQBundle\ConsumerRunner;
 use Cdn77\RabbitMQBundle\RabbitMQ\BunnyConnection;
@@ -53,29 +54,10 @@ trait WithRabbitMQ
      */
     protected function setupRabbitMQ() : void
     {
-        $host = getenv('RABBITMQ_HOST');
-        $port = getenv('RABBITMQ_PORT');
-        $vhost = getenv('RABBITMQ_VHOST');
-        $username = getenv('RABBITMQ_USERNAME');
-        $password = getenv('RABBITMQ_PASSWORD');
+        $dsn = getenv('RABBITMQ_DSN');
 
-        assert(is_string($host));
-        assert(is_string($port));
-        assert(is_string($vhost));
-        assert(is_string($username));
-        assert(is_string($password));
+        assert(is_string($dsn));
 
-        $connectionConfiguration = new Connection(
-            $host,
-            (int) $port,
-            $vhost,
-            $username,
-            $password,
-            60,
-            10,
-            3
-        );
-
-        $this->connection = new BunnyConnection($connectionConfiguration);
+        $this->connection = new BunnyConnection(Connection::fromDsn(new Dsn($dsn)));
     }
 }
