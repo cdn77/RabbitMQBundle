@@ -13,11 +13,7 @@ final class Configuration implements ConfigurationInterface
     public const KEY_BINDING_EXCHANGE = 'exchange';
     public const KEY_BINDING_ROUTING_KEY = 'routing_key';
     public const KEY_BINDING_ARGUMENTS = 'arguments';
-    public const KEY_CONFIGURATION_HOST = 'host';
-    public const KEY_CONFIGURATION_PORT = 'port';
-    public const KEY_CONFIGURATION_VHOST = 'vhost';
-    public const KEY_CONFIGURATION_USER = 'user';
-    public const KEY_CONFIGURATION_PASSWORD = 'password';
+    public const KEY_CONFIGURATION_DSN = 'dsn';
     public const KEY_CONFIGURATION_HEARTBEAT = 'heartbeat';
     public const KEY_CONFIGURATION_CONNECTION_TIMEOUT = 'connection_timeout';
     public const KEY_CONFIGURATION_READ_WRITE_TIMEOUT = 'read_write_timeout';
@@ -36,11 +32,7 @@ final class Configuration implements ConfigurationInterface
     public const KEY_QUEUE_AUTO_DELETE = 'auto_delete';
     public const KEY_QUEUE_ARGUMENTS = 'arguments';
     public const KEY_QUEUE_BINDINGS = 'bindings';
-    private const DEFAULT_HOST = '127.0.0.1';
-    private const DEFAULT_PORT = 5672;
-    private const DEFAULT_VHOST = '/';
-    private const DEFAULT_USER = 'guest';
-    private const DEFAULT_PASSWORD = 'guest';
+    private const DEFAULT_DSN = 'rabbitmq://guest:guest@127.0.0.1/';
     private const DEFAULT_HEARTBEAT = 60;
     private const DEFAULT_TIMEOUT = 10;
     private const DEAFULT_READ_WRITE_TIMEOUT = 3;
@@ -62,24 +54,8 @@ final class Configuration implements ConfigurationInterface
     private function configureConnection(ArrayNodeDefinition $rootNode) : void
     {
         $rootNode->children()
-            ->scalarNode(self::KEY_CONFIGURATION_HOST)
-            ->defaultValue(self::DEFAULT_HOST);
-
-        $rootNode->children()
-            ->scalarNode(self::KEY_CONFIGURATION_PORT)
-            ->defaultValue(self::DEFAULT_PORT);
-
-        $rootNode->children()
-            ->scalarNode(self::KEY_CONFIGURATION_VHOST)
-            ->defaultValue(self::DEFAULT_VHOST);
-
-        $rootNode->children()
-            ->scalarNode(self::KEY_CONFIGURATION_USER)
-            ->defaultValue(self::DEFAULT_USER);
-
-        $rootNode->children()
-            ->scalarNode(self::KEY_CONFIGURATION_PASSWORD)
-            ->defaultValue(self::DEFAULT_PASSWORD);
+            ->scalarNode(self::KEY_CONFIGURATION_DSN)
+            ->defaultValue(self::DEFAULT_DSN);
 
         $rootNode->children()
             ->scalarNode(self::KEY_CONFIGURATION_HEARTBEAT)

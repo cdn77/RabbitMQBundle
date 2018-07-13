@@ -1,13 +1,5 @@
 rabbitmq:
-    host: 127.0.0.1
-    port: 5672
-    vhost: /
-    user: guest
-    password: password
-
-    heartbeat: 60
-    connection_timeout: 10
-    read_write_timeout: 11
+    dsn: rabbitmq://guest:password@127.0.0.1:5672/?heartbeat=60&connection_timeout=10&read_write_timeout=11
 
     exchanges:
         exchange1:

@@ -8,6 +8,10 @@ use Cdn77\RabbitMQBundle\DependencyInjection\Configuration;
 
 final class Connection
 {
+    private const DEFAULT_HEARTBEAT = 60;
+    private const DEFAULT_CONNECTION_TIMEOUT = 3;
+    private const DEFAULT_READ_WRITE_TIMEOUT = 5;
+
     /** @var string */
     private $host;
 
@@ -38,9 +42,9 @@ final class Connection
         string $vhost,
         string $user,
         string $password,
-        int $heartbeat,
-        int $connectionTimeout,
-        int $readWriteTimeout
+        int $heartbeat = self::DEFAULT_HEARTBEAT,
+        int $connectionTimeout = self::DEFAULT_CONNECTION_TIMEOUT,
+        int $readWriteTimeout = self::DEFAULT_READ_WRITE_TIMEOUT
     ) {
         $this->host = $host;
         $this->port = $port;
@@ -52,18 +56,48 @@ final class Connection
         $this->readWriteTimeout = $readWriteTimeout;
     }
 
-    /** @param mixed[] $configuration */
+    /**
+     * @param mixed[] $configuration
+     */
     public static function fromDI(array $configuration) : self
     {
+        $dsn = new Dsn($configuration[Configuration::KEY_CONFIGURATION_DSN]);
+        $new = self::fromDsn($dsn);
+
+        if (isset($configuration[Configuration::KEY_CONFIGURATION_HEARTBEAT])
+            && !isset($dsn->getParameters()[Configuration::KEY_CONFIGURATION_HEARTBEAT])
+        ) {
+            $new->heartbeat = (int) $configuration[Configuration::KEY_CONFIGURATION_HEARTBEAT];
+        }
+
+        if (isset($configuration[Configuration::KEY_CONFIGURATION_CONNECTION_TIMEOUT])
+            && !isset($dsn->getParameters()[Configuration::KEY_CONFIGURATION_CONNECTION_TIMEOUT])
+        ) {
+            $new->connectionTimeout = (int) $configuration[Configuration::KEY_CONFIGURATION_CONNECTION_TIMEOUT];
+        }
+
+        if (isset($configuration[Configuration::KEY_CONFIGURATION_READ_WRITE_TIMEOUT])
+            && !isset($dsn->getParameters()[Configuration::KEY_CONFIGURATION_READ_WRITE_TIMEOUT])
+        ) {
+            $new->readWriteTimeout = (int) $configuration[Configuration::KEY_CONFIGURATION_READ_WRITE_TIMEOUT];
+        }
+
+        return $new;
+    }
+
+    public static function fromDsn(Dsn $dsn) : self
+    {
+        $parameters = $dsn->getParameters();
+
         return new self(
-            $configuration[Configuration::KEY_CONFIGURATION_HOST],
-            (int) $configuration[Configuration::KEY_CONFIGURATION_PORT],
-            $configuration[Configuration::KEY_CONFIGURATION_VHOST],
-            $configuration[Configuration::KEY_CONFIGURATION_USER],
-            $configuration[Configuration::KEY_CONFIGURATION_PASSWORD],
-            $configuration[Configuration::KEY_CONFIGURATION_HEARTBEAT],
-            $configuration[Configuration::KEY_CONFIGURATION_CONNECTION_TIMEOUT],
-            $configuration[Configuration::KEY_CONFIGURATION_READ_WRITE_TIMEOUT]
+            $dsn->getHost(),
+            $dsn->getPort(),
+            $dsn->getVhost(),
+            $dsn->getUsername(),
+            $dsn->getPassword(),
+            (int) ($parameters[Configuration::KEY_CONFIGURATION_HEARTBEAT] ?? self::DEFAULT_HEARTBEAT),
+            (int) ($parameters[Configuration::KEY_CONFIGURATION_CONNECTION_TIMEOUT] ?? self::DEFAULT_CONNECTION_TIMEOUT),
+            (int) ($parameters[Configuration::KEY_CONFIGURATION_READ_WRITE_TIMEOUT] ?? self::DEFAULT_READ_WRITE_TIMEOUT)
         );
     }
 
