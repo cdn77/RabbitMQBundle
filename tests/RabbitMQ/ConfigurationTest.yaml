@@ -1,5 +1,5 @@
 rabbitmq:
-    dsn: rabbitmq://guest:password@127.0.0.1:5672/?heartbeat=60&connection_timeout=10&read_write_timeout=11
+    dsn: amqp://guest:password@127.0.0.1:5672/?heartbeat=60&connection_timeout=10&read_write_timeout=11
 
     exchanges:
         exchange1:

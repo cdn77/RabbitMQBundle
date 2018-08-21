@@ -32,7 +32,7 @@ final class Configuration implements ConfigurationInterface
     public const KEY_QUEUE_AUTO_DELETE = 'auto_delete';
     public const KEY_QUEUE_ARGUMENTS = 'arguments';
     public const KEY_QUEUE_BINDINGS = 'bindings';
-    private const DEFAULT_DSN = 'rabbitmq://guest:guest@127.0.0.1/';
+    private const DEFAULT_DSN = 'amqp://127.0.0.1/';
     private const DEFAULT_HEARTBEAT = 60;
     private const DEFAULT_TIMEOUT = 10;
     private const DEAFULT_READ_WRITE_TIMEOUT = 3;

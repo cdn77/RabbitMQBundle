@@ -14,8 +14,9 @@ use function substr;
 
 final class Dsn
 {
-    private const SCHEME = 'rabbitmq';
+    private const SCHEME = 'amqp';
     private const DEFAULT_PORT = 5672;
+    private const DEFAULT_VHOST = '/';
 
     /** @var string */
     private $host;
@@ -23,10 +24,10 @@ final class Dsn
     /** @var int */
     private $port;
 
-    /** @var string */
+    /** @var string|null */
     private $username;
 
-    /** @var string */
+    /** @var string|null */
     private $password;
 
     /** @var string */
@@ -43,7 +44,7 @@ final class Dsn
             throw InvalidDsn::malformed();
         }
 
-        if (!isset($parts['scheme'], $parts['user'], $parts['pass'], $parts['host'], $parts['path'])) {
+        if (!isset($parts['scheme'], $parts['host'])) {
             throw InvalidDsn::missingComponents();
         }
 
@@ -53,12 +54,13 @@ final class Dsn
 
         $this->host = $parts['host'];
         $this->port = (int) ($parts['port'] ?? self::DEFAULT_PORT);
-        $this->username = $parts['user'];
-        $this->password = $parts['pass'];
-        $this->vhost = $parts['path'] === '/' ? '/' : substr($parts['path'], 1);
+        $this->username = $parts['user'] ?? null;
+        $this->password = $parts['pass'] ?? null;
+        $this->vhost = $parts['path'] === '/' ? self::DEFAULT_VHOST : substr($parts['path'], 1);
 
         if (!isset($parts['query'])) {
             $this->parameters = [];
+
             return;
         }
 
@@ -75,12 +77,12 @@ final class Dsn
         return $this->port;
     }
 
-    public function getUsername() : string
+    public function getUsername() : ?string
     {
         return $this->username;
     }
 
-    public function getPassword() : string
+    public function getPassword() : ?string
     {
         return $this->password;
     }
