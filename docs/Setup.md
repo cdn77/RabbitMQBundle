@@ -2,19 +2,13 @@
 
 This bundle uses `rabbitmq` container extension key and is able to merge configurations from multiple files.
 
-These configuration options are available to setup connection to your RabbitMQ instance
+These configuration options are available to setup connection to your RabbitMQ instance. 
+
+Example DSN: `amqp://username:password@host:1234/vhost?heartbeat=60&connection_timeout=10&read_write_timeout=3`
 
 ```yaml
 rabbitmq:
-    host: '%env(RABBITMQ_HOST)%'            # default: 127.0.0.1
-    port: '%env(RABBITMQ_PORT)%'            # default: 5672
-    vhost: '%env(RABBITMQ_VHOST)%'          # default: /
-    user: '%env(RABBITMQ_USER)%'            # default: guest
-    password: '%env(RABBITMQ_PASSWORD)%'    # default: guest
-
-    heartbeat: 60
-    connection_timeout: 10
-    read_write_timeout: 3
+    dsn: '%env(RABBITMQ_DSN)%'
 ```
 
 Exchanges and Queues configuration can be done this way

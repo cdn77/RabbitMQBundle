@@ -21,10 +21,10 @@ final class Connection
     /** @var string */
     private $vhost;
 
-    /** @var string */
+    /** @var string|null */
     private $user;
 
-    /** @var string */
+    /** @var string|null */
     private $password;
 
     /** @var int */
@@ -40,8 +40,8 @@ final class Connection
         string $host,
         int $port,
         string $vhost,
-        string $user,
-        string $password,
+        ?string $user,
+        ?string $password,
         int $heartbeat = self::DEFAULT_HEARTBEAT,
         int $connectionTimeout = self::DEFAULT_CONNECTION_TIMEOUT,
         int $readWriteTimeout = self::DEFAULT_READ_WRITE_TIMEOUT
@@ -116,12 +116,12 @@ final class Connection
         return $this->vhost;
     }
 
-    public function getUser() : string
+    public function getUser() : ?string
     {
         return $this->user;
     }
 
-    public function getPassword() : string
+    public function getPassword() : ?string
     {
         return $this->password;
     }

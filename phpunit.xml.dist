@@ -7,8 +7,8 @@
     <php>
         <ini name="error_reporting" value="-1" />
         <env
-            name="RABBITMQ_DSN"
-            value="rabbitmq://guest:guest@127.0.0.1/?hearbeat=60&amp;connection_timeout=10&amp;read_write_timeout=3"
+                name="RABBITMQ_DSN"
+                value="amqp://127.0.0.1/?hearbeat=60&amp;connection_timeout=10&amp;read_write_timeout=3"
         />
     </php>
 

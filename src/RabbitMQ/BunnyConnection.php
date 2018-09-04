@@ -24,18 +24,23 @@ final class BunnyConnection implements Connection
 
     public function __construct(Configuration\Connection $configuration)
     {
-        $this->client = new Client(
-            [
-                'host' => $configuration->getHost(),
-                'port' => $configuration->getPort(),
-                'vhost' => $configuration->getVhost(),
-                'user' => $configuration->getUser(),
-                'password' => $configuration->getPassword(),
-                'heartbeat' => $configuration->getHeartbeat(),
-                'timeout' => $configuration->getConnectionTimeout(),
-                'read_write_timeout' => $configuration->getReadWriteTimeout(),
-            ]
-        );
+        $options = [
+            'host' => $configuration->getHost(),
+            'port' => $configuration->getPort(),
+            'vhost' => $configuration->getVhost(),
+            'heartbeat' => $configuration->getHeartbeat(),
+            'timeout' => $configuration->getConnectionTimeout(),
+            'read_write_timeout' => $configuration->getReadWriteTimeout(),
+        ];
+
+        if ($configuration->getUser() !== null) {
+            $options['user'] = $configuration->getUser();
+        }
+        if ($configuration->getPassword() !== null) {
+            $options['password'] = $configuration->getPassword();
+        }
+
+        $this->client = new Client($options);
     }
 
     public function getChannel() : Channel
