@@ -72,8 +72,6 @@ final class ConsumerRunner
         while ($this->shouldContinue($startTime, $consumerConfiguration)) {
             $channel->getClient()->run($consumerConfiguration->getMaxSeconds());
         }
-
-        $channel->getClient()->disconnect();
     }
 
     private function shouldContinue(float $startTime, Configuration $consumerConfiguration) : bool
