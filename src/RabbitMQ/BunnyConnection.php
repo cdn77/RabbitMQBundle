@@ -16,7 +16,7 @@ final class BunnyConnection implements Connection
     /** @var Client */
     private $client;
 
-    /** @var Channel */
+    /** @var Channel|null */
     private $channel;
 
     /** @var Channel */
@@ -87,6 +87,7 @@ final class BunnyConnection implements Connection
         }
 
         $this->client->disconnect();
+        $this->channel = null;
     }
 
     private function createChannel() : Channel

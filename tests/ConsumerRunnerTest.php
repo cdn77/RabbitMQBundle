@@ -24,6 +24,26 @@ final class ConsumerRunnerTest extends TestCase
 {
     use WithRabbitMQ;
 
+    public function setUp() : void
+    {
+        $this->clearRabbitMQ();
+
+        parent::setUp();
+    }
+
+    public function tearDown() : void
+    {
+        $this->clearRabbitMQ();
+
+        parent::setUp();
+    }
+
+    private function clearRabbitMQ() : void
+    {
+        $this->getConnection()->getChannel()->queueDelete('testQueue');
+        $this->getConnection()->getChannel()->exchangeDelete('test');
+    }
+
     /**
      * @dataProvider maxMessagesDataProvider
      */
