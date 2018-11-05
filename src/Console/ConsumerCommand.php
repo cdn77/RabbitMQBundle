@@ -12,6 +12,8 @@ use Symfony\Component\Console\Command\Command;
 use Symfony\Component\Console\Input\InputArgument;
 use Symfony\Component\Console\Input\InputInterface;
 use Symfony\Component\Console\Output\OutputInterface;
+use function assert;
+use function is_string;
 use function strtolower;
 
 final class ConsumerCommand extends Command
@@ -48,7 +50,10 @@ final class ConsumerCommand extends Command
 
     protected function execute(InputInterface $input, OutputInterface $output) : void
     {
-        $consumerName = strtolower($input->getArgument(self::CONSUMER_ARGUMENT_NAME));
+        $consumerNameArgument = $input->getArgument(self::CONSUMER_ARGUMENT_NAME);
+        assert(is_string($consumerNameArgument));
+
+        $consumerName = strtolower($consumerNameArgument);
         $consumers = $this->consumerStorage->getConsumers();
 
         if (!isset($consumers[$consumerName])) {
