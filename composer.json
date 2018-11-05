@@ -8,7 +8,7 @@
     },
     "require": {
         "php": ">=7.1",
-        "bunny/bunny": "^0.4.0",
+        "bunny/bunny": "^0.4.1",
         "consistence/consistence": "^1.0",
         "react/promise": "^2.0",
         "symfony/config": "^3.3|^4.0",
@@ -21,10 +21,9 @@
     "require-dev": {
         "cdn77/coding-standard": "^0.7",
         "jakub-onderka/php-parallel-lint": "^1.0.0",
-        "phpstan/phpdoc-parser": "dev-master#850b167",
-        "phpstan/phpstan": "dev-master#d966431",
-        "phpstan/phpstan-phpunit": "dev-master#4af7dd1",
-        "phpstan/phpstan-strict-rules": "dev-master#c14b6e1",
+        "phpstan/phpstan": "^0.10.5",
+        "phpstan/phpstan-phpunit": "^0.10.0",
+        "phpstan/phpstan-strict-rules": "^0.10.1",
         "phpunit/phpunit": "^7.0"
     },
     "autoload": {
