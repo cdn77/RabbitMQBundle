@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Cdn77\RabbitMQBundle\Tests;
 
+use Bunny\Message;
 use Cdn77\RabbitMQBundle\Configuration\Topology;
 use Cdn77\RabbitMQBundle\RabbitMQ\Binding;
 use Cdn77\RabbitMQBundle\RabbitMQ\Consumer\Configuration;
@@ -87,6 +88,8 @@ final class ConsumerRunnerTest extends TestCase
             return;
         }
 
-        self::assertSame((string) $maxMessages, end($consumedMessages)->content);
+        $bunnyMessage = end($consumedMessages);
+        self::assertInstanceOf(Message::class, $bunnyMessage);
+        self::assertSame((string) $maxMessages, $bunnyMessage->content);
     }
 }
