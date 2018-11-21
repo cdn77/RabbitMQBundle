@@ -32,8 +32,8 @@ services:
 
     Cdn77\RabbitMQBundle\RabbitMQ\Operation\AcknowledgeOperation:
     Cdn77\RabbitMQBundle\RabbitMQ\Operation\GetOperation:
+    Cdn77\RabbitMQBundle\RabbitMQ\Operation\PublishOperation:
     Cdn77\RabbitMQBundle\RabbitMQ\Operation\RejectOperation:
-    Cdn77\RabbitMQBundle\RabbitMQ\Operation\PublishJsonOperation:
 
     Cdn77\RabbitMQBundle\ConsumerRunner:
     Cdn77\RabbitMQBundle\SetupAction:
