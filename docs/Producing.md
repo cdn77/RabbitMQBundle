@@ -1,18 +1,20 @@
 # Producing
 
-Producing is very simple and done through [`PublishJsonOperation`](../src/RabbitMQ/Operation/PublishJsonOperation.php) that is registered as a service and autowired by default by the bundle.
+Producing is very simple and done through [`PublishOperation`](../src/RabbitMQ/Operation/PublishOperation.php) that is registered as a service and autowired by default by the bundle. The _publish_ method API requires you to pass _Connection_. It's ready for multiple-connection support that comes in a future.
 
 ```php
-use Cdn77\RabbitMQBundle\RabbitMQ\Operation\PublishJsonOperation;
+use Cdn77\RabbitMQBundle\RabbitMQ\Connection;
+use Cdn77\RabbitMQBundle\RabbitMQ\Message;
+use Cdn77\RabbitMQBundle\RabbitMQ\Operation\PublishOperation;
 
 final class ExampleProducer
 {
-    /** @var PublishJsonOperation */
-    private $publishJsonOperation;
+    /** @var PublishOperation */
+    private $publishOperation;
 
-    public function __construct(PublishJsonOperation $publishJsonOperation)
+    public function __construct(Connection $connection, PublishOperation $publishOperation)
     {
-        $this->publishJsonOperation = $publishJsonOperation;
+        $this->publishOperation = $publishOperation;
     }
 
     /**
@@ -20,11 +22,16 @@ final class ExampleProducer
      */
     public function publishWithRoutingKey(array $data, string $routingKey) : void
     {
-        $this->publishJsonOperation->handle(
-            json_encode($data),
+        $message = Message::json(json_encode($data));
+        
+        // Messages are persistent by default but you can make them transient so they don't persist
+        $message->makeTransient();
+
+        $this->publishOperation->handle(
+            $this->connection
+            $message,
             $routingKey,
             'default_exchange', // Exchange to send the message to
-            false // Messages are persistent by default but you can set 4th argument to `false` to make them non-persistent
         );
     }
 }
