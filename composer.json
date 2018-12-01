@@ -7,7 +7,7 @@
         "sort-packages": true
     },
     "require": {
-        "php": ">=7.1",
+        "php": "^7.2",
         "bunny/bunny": "^0.4.1",
         "consistence/consistence": "^1.0",
         "react/promise": "^2.0",
