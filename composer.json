@@ -9,7 +9,7 @@
     "require": {
         "php": "^7.2",
         "bunny/bunny": "^0.4.1",
-        "consistence/consistence": "^1.0",
+        "consistence/consistence": "^2.0",
         "react/promise": "^2.0",
         "symfony/config": "^3.3|^4.0",
         "symfony/console": "^3.3|^4.0",
