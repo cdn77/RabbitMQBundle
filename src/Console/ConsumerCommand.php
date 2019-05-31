@@ -56,7 +56,7 @@ final class ConsumerCommand extends Command
         $consumerName = strtolower($consumerNameArgument);
         $consumers = $this->consumerStorage->getConsumers();
 
-        if (!isset($consumers[$consumerName])) {
+        if (! isset($consumers[$consumerName])) {
             throw ConsumerFailed::doesNotExist($consumerName);
         }
 

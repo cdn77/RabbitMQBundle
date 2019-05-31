@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Cdn77\RabbitMQBundle\DependencyInjection;
 
 use Cdn77\RabbitMQBundle\RabbitMQ\Consumer\Consumer;
+use InvalidArgumentException;
 
 final class ConsumerStorage
 {
@@ -20,7 +21,7 @@ final class ConsumerStorage
     public function addConsumer(Consumer $consumer) : void
     {
         if (isset($this->consumers[$consumer->getName()])) {
-            throw new \InvalidArgumentException('Multiple consumers with name: ' . $consumer->getName());
+            throw new InvalidArgumentException('Multiple consumers with name: ' . $consumer->getName());
         }
 
         $this->consumers[$consumer->getName()] = $consumer;

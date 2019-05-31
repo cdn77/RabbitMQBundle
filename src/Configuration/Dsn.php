@@ -44,7 +44,7 @@ final class Dsn
             throw InvalidDsn::malformed();
         }
 
-        if (!isset($parts['scheme'], $parts['host'])) {
+        if (! isset($parts['scheme'], $parts['host'])) {
             throw InvalidDsn::missingComponents();
         }
 
@@ -58,7 +58,7 @@ final class Dsn
         $this->password = $parts['pass'] ?? null;
         $this->vhost = $parts['path'] === '/' ? self::DEFAULT_VHOST : substr($parts['path'], 1);
 
-        if (!isset($parts['query'])) {
+        if (! isset($parts['query'])) {
             $this->parameters = [];
 
             return;

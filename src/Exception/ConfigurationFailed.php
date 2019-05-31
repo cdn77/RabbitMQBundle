@@ -7,9 +7,10 @@ namespace Cdn77\RabbitMQBundle\Exception;
 use Cdn77\RabbitMQBundle\RabbitMQ\Binding;
 use Cdn77\RabbitMQBundle\RabbitMQ\Exchange;
 use Cdn77\RabbitMQBundle\RabbitMQ\Queue;
+use RuntimeException;
 use function sprintf;
 
-final class ConfigurationFailed extends \RuntimeException implements Exception
+final class ConfigurationFailed extends RuntimeException implements Exception
 {
     public static function invalidPrefetchValues() : self
     {

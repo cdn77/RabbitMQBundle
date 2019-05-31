@@ -38,7 +38,7 @@ final class SetupAction
                 $exchange->getArguments()
             );
 
-            if (!($frame instanceof MethodExchangeDeclareOkFrame)) {
+            if (! ($frame instanceof MethodExchangeDeclareOkFrame)) {
                 throw ConfigurationFailed::cannotDeclareExchange($exchange);
             }
 
@@ -53,7 +53,7 @@ final class SetupAction
                     $binding->getArguments()
                 );
 
-                if (!($frame instanceof MethodExchangeBindOkFrame)) {
+                if (! ($frame instanceof MethodExchangeBindOkFrame)) {
                     throw ConfigurationFailed::cannotBindExchange($exchange, $binding);
                 }
             }
@@ -70,7 +70,7 @@ final class SetupAction
                 $queue->getArguments()
             );
 
-            if (!($frame instanceof MethodQueueDeclareOkFrame)) {
+            if (! ($frame instanceof MethodQueueDeclareOkFrame)) {
                 throw ConfigurationFailed::cannotDeclareQueue($queue);
             }
 
@@ -84,7 +84,7 @@ final class SetupAction
                     $binding->getArguments()
                 );
 
-                if (!($frame instanceof MethodQueueBindOkFrame)) {
+                if (! ($frame instanceof MethodQueueBindOkFrame)) {
                     throw ConfigurationFailed::cannotBindQueue($queue, $binding);
                 }
             }

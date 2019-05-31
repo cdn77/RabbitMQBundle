@@ -38,12 +38,6 @@ final class ConsumerRunnerTest extends TestCase
         parent::setUp();
     }
 
-    private function clearRabbitMQ() : void
-    {
-        $this->getConnection()->getChannel()->queueDelete('testQueue');
-        $this->getConnection()->getChannel()->exchangeDelete('test');
-    }
-
     /**
      * @dataProvider maxMessagesDataProvider
      */
@@ -76,6 +70,12 @@ final class ConsumerRunnerTest extends TestCase
         return [[0], [5]];
     }
 
+    private function clearRabbitMQ() : void
+    {
+        $this->getConnection()->getChannel()->queueDelete('testQueue');
+        $this->getConnection()->getChannel()->exchangeDelete('test');
+    }
+
     private function givenEnoughMessagesInQueue(Exchange $exchange, string $routingKey) : void
     {
         $channel = $this->getConnection()->getChannel();
@@ -86,12 +86,10 @@ final class ConsumerRunnerTest extends TestCase
 
     private function givenConfiguredConsumer(int $maxMessages, Queue $queue) : InMemoryConsumer
     {
-        $consumer = new InMemoryConsumer(
+        return new InMemoryConsumer(
             new AcknowledgeOperation($this->getConnection()),
             new Configuration($queue->getName(), 1, 0, $maxMessages)
         );
-
-        return $consumer;
     }
 
     private function whenConsume(Consumer $consumer) : void

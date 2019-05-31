@@ -29,7 +29,8 @@ final class RejectOperation
     }
 
     /**
-     * RabbitMQ will reject all outstanding delivery tags up to and including the tag specified in the not nacknowledgement
+     * RabbitMQ will reject all outstanding delivery tags
+     * up to and including the tag specified in the not nacknowledgement
      */
     public function handleAll(Message $lastMessage, bool $requeue = true) : void
     {

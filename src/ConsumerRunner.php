@@ -33,7 +33,7 @@ final class ConsumerRunner
         $consumerConfiguration = $consumer->getConfiguration();
 
         $qosOk = $channel->qos($consumerConfiguration->getPrefetchSize(), $consumerConfiguration->getPrefetchCount());
-        if (!$qosOk instanceof MethodBasicQosOkFrame) {
+        if (! $qosOk instanceof MethodBasicQosOkFrame) {
             throw ConfigurationFailed::invalidPrefetchValues();
         }
 
@@ -50,9 +50,11 @@ final class ConsumerRunner
 
                 $this->processedMessageCount++;
 
-                if (!$this->hasAnyMessageLeft($consumerConfig->getMaxMessages(), $this->processedMessageCount)) {
-                    $client->stop();
+                if ($this->hasAnyMessageLeft($consumerConfig->getMaxMessages(), $this->processedMessageCount)) {
+                    return;
                 }
+
+                $client->stop();
             },
             $consumer->getConfiguration()->getQueueName(),
             '',
@@ -77,7 +79,7 @@ final class ConsumerRunner
     private function shouldContinue(float $startTime, Configuration $consumerConfiguration) : bool
     {
         return $this->isInfinitelyRepeated($consumerConfiguration) ||
-            !$this->isLimitReached($startTime, $consumerConfiguration);
+            ! $this->isLimitReached($startTime, $consumerConfiguration);
     }
 
     private function isInfinitelyRepeated(Configuration $consumerConfiguration) : bool
@@ -87,8 +89,8 @@ final class ConsumerRunner
 
     private function isLimitReached(float $startTime, Configuration $consumerConfiguration) : bool
     {
-        return !$this->hasAnyTimeLeft($consumerConfiguration->getMaxSeconds(), $startTime)
-            || !$this->hasAnyMessageLeft($consumerConfiguration->getMaxMessages(), $this->processedMessageCount);
+        return ! $this->hasAnyTimeLeft($consumerConfiguration->getMaxSeconds(), $startTime)
+            || ! $this->hasAnyMessageLeft($consumerConfiguration->getMaxMessages(), $this->processedMessageCount);
     }
 
     private function hasAnyTimeLeft(?float $maxSeconds, float $startTime) : bool

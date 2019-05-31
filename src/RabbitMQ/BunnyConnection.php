@@ -10,6 +10,7 @@ use Cdn77\RabbitMQBundle\Configuration;
 use Cdn77\RabbitMQBundle\Exception\CannotCreateChannel;
 use Cdn77\RabbitMQBundle\Exception\ConnectionFailed;
 use React\Promise\PromiseInterface;
+use Throwable;
 
 final class BunnyConnection implements Connection
 {
@@ -36,6 +37,7 @@ final class BunnyConnection implements Connection
         if ($configuration->getUser() !== null) {
             $options['user'] = $configuration->getUser();
         }
+
         if ($configuration->getPassword() !== null) {
             $options['password'] = $configuration->getPassword();
         }
@@ -59,7 +61,7 @@ final class BunnyConnection implements Connection
 
             try {
                 $this->transactionalChannel->txSelect();
-            } catch (\Throwable $exception) {
+            } catch (Throwable $exception) {
                 throw new CannotCreateChannel('Cannot create transaction channel', 0, $exception);
             }
         }
@@ -75,14 +77,14 @@ final class BunnyConnection implements Connection
 
         try {
             $this->client->connect();
-        } catch (\Throwable $exception) {
+        } catch (Throwable $exception) {
             throw ConnectionFailed::causedBy($exception);
         }
     }
 
     public function disconnect() : void
     {
-        if (!$this->client->isConnected()) {
+        if (! $this->client->isConnected()) {
             return;
         }
 

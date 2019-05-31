@@ -19,7 +19,7 @@
         "symfony/yaml": "^3.3|^4.0"
     },
     "require-dev": {
-        "cdn77/coding-standard": "^0.7",
+        "cdn77/coding-standard": "^2.0",
         "jakub-onderka/php-parallel-lint": "^1.0.0",
         "phpstan/phpstan": "^0.10.5",
         "phpstan/phpstan-phpunit": "^0.10.0",

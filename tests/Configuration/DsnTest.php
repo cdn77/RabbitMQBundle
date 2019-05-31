@@ -35,8 +35,9 @@ class DsnTest extends TestCase
     }
 
     /**
-     * @dataProvider dataProviderCreate
      * @param string[] $parameters
+     *
+     * @dataProvider dataProviderCreate
      */
     public function testCreate(
         string $amqpUri,
@@ -71,6 +72,7 @@ class DsnTest extends TestCase
             'vhost',
             ['heartbeat' => '120'],
         ];
+
         yield [
             'amqp://user@host/vhost',
             'user',
@@ -80,6 +82,7 @@ class DsnTest extends TestCase
             'vhost',
             [],
         ];
+
         yield [
             'amqp://host/vhost',
             null,
@@ -89,6 +92,7 @@ class DsnTest extends TestCase
             'vhost',
             [],
         ];
+
         yield [
             'amqp://host//vhost',
             null,

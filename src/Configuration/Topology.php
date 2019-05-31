@@ -27,7 +27,7 @@ final class Topology
     {
         $this->exchanges = $exchanges;
         foreach ($this->exchanges as $exchange) {
-            if (!isset($exchangeBindings[$exchange->getName()])) {
+            if (! isset($exchangeBindings[$exchange->getName()])) {
                 continue;
             }
 
@@ -38,7 +38,7 @@ final class Topology
 
         $this->queues = $queues;
         foreach ($this->queues as $queue) {
-            if (!isset($queueBindings[$queue->getName()])) {
+            if (! isset($queueBindings[$queue->getName()])) {
                 continue;
             }
 

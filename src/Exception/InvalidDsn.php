@@ -4,9 +4,10 @@ declare(strict_types=1);
 
 namespace Cdn77\RabbitMQBundle\Exception;
 
+use LogicException;
 use function sprintf;
 
-final class InvalidDsn extends \LogicException implements Exception
+final class InvalidDsn extends LogicException implements Exception
 {
     public static function malformed() : self
     {

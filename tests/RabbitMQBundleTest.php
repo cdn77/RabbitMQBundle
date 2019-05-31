@@ -22,9 +22,11 @@ final class RabbitMQBundleTest extends TestCase
         $beforeOptimizationPasses = $passConfig->getBeforeOptimizationPasses();
         $containsConsumerCompilerPass = false;
         foreach ($beforeOptimizationPasses as $compilerPass) {
-            if ($compilerPass instanceof ConsumerCompilerPass) {
-                $containsConsumerCompilerPass = true;
+            if (! ($compilerPass instanceof ConsumerCompilerPass)) {
+                continue;
             }
+
+            $containsConsumerCompilerPass = true;
         }
 
         self::assertTrue(

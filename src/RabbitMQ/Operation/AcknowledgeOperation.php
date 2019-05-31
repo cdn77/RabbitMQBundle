@@ -28,7 +28,8 @@ final class AcknowledgeOperation
     }
 
     /**
-     * RabbitMQ will acknowledge all outstanding delivery tags up to and including the tag specified in the acknowledgement
+     * RabbitMQ will acknowledge all outstanding delivery tags
+     * up to and including the tag specified in the acknowledgement
      */
     public function handleAll(Message $lastMessage) : void
     {

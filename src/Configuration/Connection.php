@@ -65,19 +65,19 @@ final class Connection
         $new = self::fromDsn($dsn);
 
         if (isset($configuration[Configuration::KEY_CONFIGURATION_HEARTBEAT])
-            && !isset($dsn->getParameters()[Configuration::KEY_CONFIGURATION_HEARTBEAT])
+            && ! isset($dsn->getParameters()[Configuration::KEY_CONFIGURATION_HEARTBEAT])
         ) {
             $new->heartbeat = (int) $configuration[Configuration::KEY_CONFIGURATION_HEARTBEAT];
         }
 
         if (isset($configuration[Configuration::KEY_CONFIGURATION_CONNECTION_TIMEOUT])
-            && !isset($dsn->getParameters()[Configuration::KEY_CONFIGURATION_CONNECTION_TIMEOUT])
+            && ! isset($dsn->getParameters()[Configuration::KEY_CONFIGURATION_CONNECTION_TIMEOUT])
         ) {
             $new->connectionTimeout = (int) $configuration[Configuration::KEY_CONFIGURATION_CONNECTION_TIMEOUT];
         }
 
         if (isset($configuration[Configuration::KEY_CONFIGURATION_READ_WRITE_TIMEOUT])
-            && !isset($dsn->getParameters()[Configuration::KEY_CONFIGURATION_READ_WRITE_TIMEOUT])
+            && ! isset($dsn->getParameters()[Configuration::KEY_CONFIGURATION_READ_WRITE_TIMEOUT])
         ) {
             $new->readWriteTimeout = (int) $configuration[Configuration::KEY_CONFIGURATION_READ_WRITE_TIMEOUT];
         }
@@ -96,7 +96,8 @@ final class Connection
             $dsn->getUsername(),
             $dsn->getPassword(),
             (int) ($parameters[Configuration::KEY_CONFIGURATION_HEARTBEAT] ?? self::DEFAULT_HEARTBEAT),
-            (int) ($parameters[Configuration::KEY_CONFIGURATION_CONNECTION_TIMEOUT] ?? self::DEFAULT_CONNECTION_TIMEOUT),
+            (int) ($parameters[Configuration::KEY_CONFIGURATION_CONNECTION_TIMEOUT]
+                ?? self::DEFAULT_CONNECTION_TIMEOUT),
             (int) ($parameters[Configuration::KEY_CONFIGURATION_READ_WRITE_TIMEOUT] ?? self::DEFAULT_READ_WRITE_TIMEOUT)
         );
     }

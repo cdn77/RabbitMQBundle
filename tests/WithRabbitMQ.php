@@ -18,12 +18,14 @@ trait WithRabbitMQ
 {
     /**
      * @internal
+     *
      * @var BunnyConnection
      */
     private $connection;
 
     /**
      * @internal
+     *
      * @var ConsumerRunner
      */
     private $consumerRunner;
@@ -50,6 +52,7 @@ trait WithRabbitMQ
 
     /**
      * @internal
+     *
      * @before
      */
     protected function setupRabbitMQ() : void

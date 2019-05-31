@@ -7,6 +7,7 @@ namespace Cdn77\RabbitMQBundle\RabbitMQ\Operation;
 use Cdn77\RabbitMQBundle\Exception\OperationFailed;
 use Cdn77\RabbitMQBundle\RabbitMQ\Connection;
 use Cdn77\RabbitMQBundle\RabbitMQ\Message;
+use Throwable;
 use function array_walk;
 
 final class PublishOperation
@@ -67,7 +68,7 @@ final class PublishOperation
                 }
             );
             $transactionalChannel->txCommit();
-        } catch (\Throwable $exception) {
+        } catch (Throwable $exception) {
             $transactionalChannel->txRollback();
 
             throw new OperationFailed(
