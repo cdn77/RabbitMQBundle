@@ -36,6 +36,11 @@ class Message
         return new self($body, ['Content-Type' => 'application/json'] + $headers);
     }
 
+    public static function fromBunny(\Bunny\Message $message) : self
+    {
+        return new self($message->content, $message->headers);
+    }
+
     public function makeTransient() : self
     {
         $this->headers[self::HEADER_DELIVERY_MODE] = DeliveryMode::TRANSIENT;
