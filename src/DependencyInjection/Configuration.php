@@ -39,10 +39,10 @@ final class Configuration implements ConfigurationInterface
 
     public function getConfigTreeBuilder() : TreeBuilder
     {
-        $treeBuilder = new TreeBuilder();
+        $treeBuilder = new TreeBuilder(RabbitMQExtension::ALIAS);
 
         /** @var ArrayNodeDefinition $rootNode */
-        $rootNode = $treeBuilder->root(RabbitMQExtension::ALIAS);
+        $rootNode = $treeBuilder->getRootNode();
 
         $this->configureConnection($rootNode);
         $this->configureExchanges($rootNode);
