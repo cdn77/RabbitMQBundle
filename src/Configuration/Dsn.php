@@ -57,10 +57,10 @@ final class Dsn
         $this->username = $parts['user'] ?? null;
         $this->password = $parts['pass'] ?? null;
         $this->vhost = $parts['path'] === '/' ? self::DEFAULT_VHOST : substr($parts['path'], 1);
+        
+        $this->parameters = [];
 
         if (! isset($parts['query'])) {
-            $this->parameters = [];
-
             return;
         }
 
