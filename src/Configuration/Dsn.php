@@ -34,7 +34,7 @@ final class Dsn
     private $vhost;
 
     /** @var string[] */
-    private $parameters;
+    private $parameters = [];
 
     public function __construct(string $dsn)
     {
@@ -59,8 +59,6 @@ final class Dsn
         $this->vhost = $parts['path'] === '/' ? self::DEFAULT_VHOST : substr($parts['path'], 1);
 
         if (! isset($parts['query'])) {
-            $this->parameters = [];
-
             return;
         }
 
