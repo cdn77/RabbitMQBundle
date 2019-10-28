@@ -8,7 +8,6 @@ use Cdn77\RabbitMQBundle\Exception\OperationFailed;
 use Cdn77\RabbitMQBundle\RabbitMQ\Connection;
 use Cdn77\RabbitMQBundle\RabbitMQ\Message;
 use Throwable;
-use function array_walk;
 
 final class PublishOperation
 {
@@ -50,23 +49,25 @@ final class PublishOperation
     /**
      * @param Message[] $messages
      */
-    public function handleAll(Connection $connection, array $messages, string $routingKey, string $exchangeName) : void
-    {
+    public function handleAll(
+        Connection $connection,
+        iterable $messages,
+        string $routingKey,
+        string $exchangeName
+    ) : void {
         $transactionalChannel = $connection->getTransactionalChannel();
         try {
-            array_walk(
-                $messages,
-                static function (Message $message) use ($transactionalChannel, $routingKey, $exchangeName) : void {
-                    $transactionalChannel->publish(
-                        $message->body,
-                        $message->headers,
-                        $exchangeName,
-                        $routingKey,
-                        self::MANDATORY,
-                        self::IMMEDIATE
-                    );
-                }
-            );
+            foreach ($messages as $message) {
+                $transactionalChannel->publish(
+                    $message->body,
+                    $message->headers,
+                    $exchangeName,
+                    $routingKey,
+                    self::MANDATORY,
+                    self::IMMEDIATE
+                );
+            }
+
             $transactionalChannel->txCommit();
         } catch (Throwable $exception) {
             $transactionalChannel->txRollback();
