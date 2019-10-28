@@ -49,17 +49,17 @@ final class Exchange implements Bindable
     }
 
     /**
-     * @param mixed[] $exchangeConfigation
+     * @param mixed[] $configuration
      */
-    public static function fromConfiguration(string $name, array $exchangeConfigation) : self
+    public static function fromConfiguration(string $name, array $configuration) : self
     {
         return new self(
             $name,
-            ExchangeType::get($exchangeConfigation[Configuration::KEY_EXCHANGE_TYPE] ?? ExchangeType::DIRECT),
-            $exchangeConfigation[Configuration::KEY_EXCHANGE_DURABLE] ?? false,
-            $exchangeConfigation[Configuration::KEY_EXCHANGE_AUTO_DELETE] ?? false,
-            $exchangeConfigation[Configuration::KEY_EXCHANGE_INTERNAL] ?? false,
-            $exchangeConfigation[Configuration::KEY_EXCHANGE_ARGUMENTS] ?? []
+            ExchangeType::get($configuration[Configuration::KEY_EXCHANGE_TYPE] ?? ExchangeType::DIRECT),
+            $configuration[Configuration::KEY_EXCHANGE_DURABLE] ?? false,
+            $configuration[Configuration::KEY_EXCHANGE_AUTO_DELETE] ?? false,
+            $configuration[Configuration::KEY_EXCHANGE_INTERNAL] ?? false,
+            $configuration[Configuration::KEY_EXCHANGE_ARGUMENTS] ?? []
         );
     }
 
