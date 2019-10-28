@@ -44,16 +44,16 @@ final class Queue implements Bindable
     }
 
     /**
-     * @param mixed[] $exchangeConfigation
+     * @param mixed[] $configuration
      */
-    public static function fromConfiguration(string $name, array $exchangeConfigation) : self
+    public static function fromConfiguration(string $name, array $configuration) : self
     {
         return new self(
             $name,
-            $exchangeConfigation[Configuration::KEY_QUEUE_DURABLE] ?? false,
-            $exchangeConfigation[Configuration::KEY_QUEUE_EXCLUSIVE] ?? false,
-            $exchangeConfigation[Configuration::KEY_QUEUE_AUTO_DELETE] ?? false,
-            $exchangeConfigation[Configuration::KEY_QUEUE_ARGUMENTS] ?? []
+            $configuration[Configuration::KEY_QUEUE_DURABLE] ?? false,
+            $configuration[Configuration::KEY_QUEUE_EXCLUSIVE] ?? false,
+            $configuration[Configuration::KEY_QUEUE_AUTO_DELETE] ?? false,
+            $configuration[Configuration::KEY_QUEUE_ARGUMENTS] ?? []
         );
     }
 
