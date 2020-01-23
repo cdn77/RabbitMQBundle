@@ -31,10 +31,12 @@ final class ConsumerListCommand extends Command
             ->setDescription(self::DESCRIPTION);
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output) : void
+    protected function execute(InputInterface $input, OutputInterface $output) : int
     {
         foreach ($this->consumerStorage->getConsumers() as $consumerName => $consumer) {
             $output->writeln($consumerName);
         }
+
+        return 0;
     }
 }

@@ -36,8 +36,10 @@ final class SetUpCommand extends Command
         $this->setDescription(self::DESCRIPTION);
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output) : void
+    protected function execute(InputInterface $input, OutputInterface $output) : int
     {
         $this->setupAction->setup($this->topology);
+
+        return 0;
     }
 }

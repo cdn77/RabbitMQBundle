@@ -48,7 +48,7 @@ final class ConsumerCommand extends Command
         );
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output) : void
+    protected function execute(InputInterface $input, OutputInterface $output) : int
     {
         $consumerNameArgument = $input->getArgument(self::CONSUMER_ARGUMENT_NAME);
         assert(is_string($consumerNameArgument));
@@ -62,5 +62,7 @@ final class ConsumerCommand extends Command
 
         $consumer = $consumers[$consumerName];
         $this->consumerRunner->run($consumer);
+
+        return 0;
     }
 }
