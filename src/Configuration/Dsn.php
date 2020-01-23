@@ -53,7 +53,7 @@ final class Dsn
         }
 
         $this->host = $parts['host'];
-        $this->port = (int) ($parts['port'] ?? self::DEFAULT_PORT);
+        $this->port = $parts['port'] ?? self::DEFAULT_PORT;
         $this->username = $parts['user'] ?? null;
         $this->password = $parts['pass'] ?? null;
         $this->vhost = $parts['path'] === '/' ? self::DEFAULT_VHOST : substr($parts['path'], 1);
