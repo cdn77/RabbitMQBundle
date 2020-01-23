@@ -1,6 +1,6 @@
 # CDN77 RabbitMQ Bundle
 
-[![Build Status](https://travis-ci.org/cdn77/RabbitMQBundle.svg)](https://travis-ci.org/cdn77/RabbitMQBundle)
+[![Build Status](https://travis-ci.com/cdn77/RabbitMQBundle.svg?branch=master)](https://travis-ci.com/cdn77/RabbitMQBundle)
 [![Downloads](https://poser.pugx.org/cdn77/rabbitmq-bundle/d/total.svg)](https://packagist.org/packages/cdn77/rabbitmq-bundle)
 [![Packagist](https://poser.pugx.org/cdn77/rabbitmq-bundle/v/stable.svg)](https://packagist.org/packages/cdn77/rabbitmq-bundle)
 [![Licence](https://poser.pugx.org/cdn77/rabbitmq-bundle/license.svg)](https://packagist.org/packages/cdn77/rabbitmq-bundle)
