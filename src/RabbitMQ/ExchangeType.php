@@ -4,8 +4,9 @@ declare(strict_types=1);
 
 namespace Cdn77\RabbitMQBundle\RabbitMQ;
 
-use Consistence\Enum\Enum;
+use MyCLabs\Enum\Enum;
 
+/** @extends Enum<string> */
 final class ExchangeType extends Enum
 {
     public const DIRECT = 'direct';

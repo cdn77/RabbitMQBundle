@@ -43,7 +43,7 @@ final class ConsumerRunnerTest extends TestCase
      */
     public function testMaxMessagesLimit(int $maxMessages) : void
     {
-        $exchange = new Exchange('test', ExchangeType::get(ExchangeType::DIRECT));
+        $exchange = new Exchange('test', new ExchangeType(ExchangeType::DIRECT));
         $queue = new Queue('testQueue');
         $routingKey = 'a_routing_key';
         $topology = new Topology(
