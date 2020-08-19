@@ -9,7 +9,7 @@
     "require": {
         "php": "^7.2",
         "bunny/bunny": "^0.4.1",
-        "consistence/consistence": "^2.0",
+        "myclabs/php-enum": "^1.7",
         "react/promise": "^2.0",
         "symfony/config": "^4.3|^5.0",
         "symfony/console": "^4.3|^5.0",

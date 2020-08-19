@@ -55,7 +55,7 @@ final class Exchange implements Bindable
     {
         return new self(
             $name,
-            ExchangeType::get($configuration[Configuration::KEY_EXCHANGE_TYPE] ?? ExchangeType::DIRECT),
+            new ExchangeType($configuration[Configuration::KEY_EXCHANGE_TYPE] ?? ExchangeType::DIRECT),
             $configuration[Configuration::KEY_EXCHANGE_DURABLE] ?? false,
             $configuration[Configuration::KEY_EXCHANGE_AUTO_DELETE] ?? false,
             $configuration[Configuration::KEY_EXCHANGE_INTERNAL] ?? false,
