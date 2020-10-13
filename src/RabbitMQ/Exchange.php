@@ -29,9 +29,7 @@ final class Exchange implements Bindable
     /** @var Binding[] */
     private $bindings = [];
 
-    /**
-     * @param mixed[] $arguments
-     */
+    /** @param mixed[] $arguments */
     public function __construct(
         string $name,
         ExchangeType $exchangeType,
@@ -48,9 +46,7 @@ final class Exchange implements Bindable
         $this->arguments = $arguments;
     }
 
-    /**
-     * @param mixed[] $configuration
-     */
+    /** @param mixed[] $configuration */
     public static function fromConfiguration(string $name, array $configuration) : self
     {
         return new self(
@@ -83,9 +79,7 @@ final class Exchange implements Bindable
         return $this->exchangeType;
     }
 
-    /**
-     * @return Binding[]
-     */
+    /** @return Binding[] */
     public function getBindings() : array
     {
         return $this->bindings;
@@ -101,9 +95,7 @@ final class Exchange implements Bindable
         return $this->internal;
     }
 
-    /**
-     * @return mixed[]
-     */
+    /** @return mixed[] */
     public function getArguments() : array
     {
         return $this->arguments;

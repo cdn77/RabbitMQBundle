@@ -58,9 +58,7 @@ class DsnTest extends TestCase
         self::assertSame($parameters, $dsn->getParameters());
     }
 
-    /**
-     * @return mixed[][]
-     */
+    /** @return mixed[][] */
     public function dataProviderCreate() : iterable
     {
         yield [

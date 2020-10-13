@@ -10,6 +10,7 @@ use Cdn77\RabbitMQBundle\DependencyInjection\RabbitMQExtension;
 use Cdn77\RabbitMQBundle\RabbitMQ\ExchangeType;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\Yaml\Yaml;
+
 use function file_get_contents;
 
 final class ConfigurationTest extends TestCase

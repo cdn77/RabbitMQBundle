@@ -14,9 +14,7 @@ class Message
     /** @var mixed[] */
     public $headers;
 
-    /**
-     * @param mixed[] $headers
-     */
+    /** @param mixed[] $headers */
     public function __construct(string $body, array $headers = [])
     {
         $this->body = $body;
@@ -28,9 +26,7 @@ class Message
         $this->headers = $headers;
     }
 
-    /**
-     * @param mixed[] $headers
-     */
+    /** @param mixed[] $headers */
     public static function json(string $body, array $headers = []) : self
     {
         return new self($body, ['Content-Type' => 'application/json'] + $headers);

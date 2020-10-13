@@ -10,6 +10,7 @@ use Cdn77\RabbitMQBundle\Configuration\Topology;
 use Cdn77\RabbitMQBundle\ConsumerRunner;
 use Cdn77\RabbitMQBundle\RabbitMQ\BunnyConnection;
 use Cdn77\RabbitMQBundle\SetupAction;
+
 use function assert;
 use function getenv;
 use function is_string;

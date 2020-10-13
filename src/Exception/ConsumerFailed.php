@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Cdn77\RabbitMQBundle\Exception;
 
 use InvalidArgumentException;
+
 use function sprintf;
 
 final class ConsumerFailed extends InvalidArgumentException implements Exception

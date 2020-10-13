@@ -26,9 +26,7 @@ final class Queue implements Bindable
     /** @var mixed[] */
     private $arguments;
 
-    /**
-     * @param mixed[] $arguments
-     */
+    /** @param mixed[] $arguments */
     public function __construct(
         string $name,
         bool $durable = false,
@@ -43,9 +41,7 @@ final class Queue implements Bindable
         $this->arguments = $arguments;
     }
 
-    /**
-     * @param mixed[] $configuration
-     */
+    /** @param mixed[] $configuration */
     public static function fromConfiguration(string $name, array $configuration) : self
     {
         return new self(
@@ -72,9 +68,7 @@ final class Queue implements Bindable
         return $this->durable;
     }
 
-    /**
-     * @return Binding[]
-     */
+    /** @return Binding[] */
     public function getBindings() : array
     {
         return $this->bindings;
@@ -90,9 +84,7 @@ final class Queue implements Bindable
         return $this->autoDelete;
     }
 
-    /**
-     * @return mixed[]
-     */
+    /** @return mixed[] */
     public function getArguments() : array
     {
         return $this->arguments;

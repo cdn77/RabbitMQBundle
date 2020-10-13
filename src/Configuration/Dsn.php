@@ -5,6 +5,7 @@ declare(strict_types=1);
 namespace Cdn77\RabbitMQBundle\Configuration;
 
 use Cdn77\RabbitMQBundle\Exception\InvalidDsn;
+
 use function count;
 use function http_build_query;
 use function parse_str;
@@ -65,6 +66,21 @@ final class Dsn
         parse_str($parts['query'], $this->parameters);
     }
 
+    public function __toString() : string
+    {
+        return sprintf(
+            '%s://%s:%s@%s:%s/%s%s%s',
+            self::SCHEME,
+            $this->username,
+            $this->password,
+            $this->host,
+            $this->port,
+            $this->vhost === '/' ? '' : $this->vhost,
+            count($this->parameters) !== 0 ? '?' : '',
+            count($this->parameters) !== 0 ? http_build_query($this->parameters) : ''
+        );
+    }
+
     public function getHost() : string
     {
         return $this->host;
@@ -90,26 +106,9 @@ final class Dsn
         return $this->vhost;
     }
 
-    /**
-     * @return string[]
-     */
+    /** @return string[] */
     public function getParameters() : array
     {
         return $this->parameters;
-    }
-
-    public function __toString() : string
-    {
-        return sprintf(
-            '%s://%s:%s@%s:%s/%s%s%s',
-            self::SCHEME,
-            $this->username,
-            $this->password,
-            $this->host,
-            $this->port,
-            $this->vhost === '/' ? '' : $this->vhost,
-            count($this->parameters) !== 0 ? '?' : '',
-            count($this->parameters) !== 0 ? http_build_query($this->parameters) : ''
-        );
     }
 }

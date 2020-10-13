@@ -14,9 +14,7 @@ final class PublishOperation
     private const MANDATORY = false;
     private const IMMEDIATE = false;
 
-    /**
-     * @param mixed[] $headers
-     */
+    /** @param mixed[] $headers */
     public function handleRaw(
         Connection $connection,
         string $body,
@@ -46,9 +44,7 @@ final class PublishOperation
         );
     }
 
-    /**
-     * @param Message[] $messages
-     */
+    /** @param Message[] $messages */
     public function handleAll(
         Connection $connection,
         iterable $messages,

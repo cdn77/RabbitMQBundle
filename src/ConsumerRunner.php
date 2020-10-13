@@ -12,6 +12,7 @@ use Cdn77\RabbitMQBundle\Exception\ConfigurationFailed;
 use Cdn77\RabbitMQBundle\RabbitMQ\Connection;
 use Cdn77\RabbitMQBundle\RabbitMQ\Consumer\Configuration;
 use Cdn77\RabbitMQBundle\RabbitMQ\Consumer\Consumer;
+
 use function microtime;
 
 final class ConsumerRunner

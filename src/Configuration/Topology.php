@@ -48,9 +48,7 @@ final class Topology
         }
     }
 
-    /**
-     * @param mixed[] $configuration
-     */
+    /** @param mixed[] $configuration */
     public static function fromDI(array $configuration) : self
     {
         $exchanges = [];
@@ -107,17 +105,13 @@ final class Topology
         return new self($exchanges, $exchangesBindings, $queues, $queuesBindings);
     }
 
-    /**
-     * @return Exchange[]
-     */
+    /** @return Exchange[] */
     public function getExchanges() : array
     {
         return $this->exchanges;
     }
 
-    /**
-     * @return Queue[]
-     */
+    /** @return Queue[] */
     public function getQueues() : array
     {
         return $this->queues;

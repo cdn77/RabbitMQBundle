@@ -17,9 +17,7 @@ final class Binding
     /** @var mixed[] */
     private $arguments;
 
-    /**
-     * @param mixed[] $arguments
-     */
+    /** @param mixed[] $arguments */
     public function __construct(Bindable $bindable, string $routingKey, array $arguments = [])
     {
         $this->bindable = $bindable;
@@ -27,9 +25,7 @@ final class Binding
         $this->arguments = $arguments;
     }
 
-    /**
-     * @param mixed[] $configuration
-     */
+    /** @param mixed[] $configuration */
     public static function fromConfiguration(Bindable $bindable, array $configuration) : self
     {
         return new self(
@@ -49,9 +45,7 @@ final class Binding
         return $this->routingKey;
     }
 
-    /**
-     * @return mixed[]
-     */
+    /** @return mixed[] */
     public function getArguments() : array
     {
         return $this->arguments;

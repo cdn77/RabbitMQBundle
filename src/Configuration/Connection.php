@@ -56,27 +56,28 @@ final class Connection
         $this->readWriteTimeout = $readWriteTimeout;
     }
 
-    /**
-     * @param mixed[] $configuration
-     */
+    /** @param mixed[] $configuration */
     public static function fromDI(array $configuration) : self
     {
         $dsn = new Dsn($configuration[Configuration::KEY_CONFIGURATION_DSN]);
         $new = self::fromDsn($dsn);
 
-        if (isset($configuration[Configuration::KEY_CONFIGURATION_HEARTBEAT])
+        if (
+            isset($configuration[Configuration::KEY_CONFIGURATION_HEARTBEAT])
             && ! isset($dsn->getParameters()[Configuration::KEY_CONFIGURATION_HEARTBEAT])
         ) {
             $new->heartbeat = (int) $configuration[Configuration::KEY_CONFIGURATION_HEARTBEAT];
         }
 
-        if (isset($configuration[Configuration::KEY_CONFIGURATION_CONNECTION_TIMEOUT])
+        if (
+            isset($configuration[Configuration::KEY_CONFIGURATION_CONNECTION_TIMEOUT])
             && ! isset($dsn->getParameters()[Configuration::KEY_CONFIGURATION_CONNECTION_TIMEOUT])
         ) {
             $new->connectionTimeout = (int) $configuration[Configuration::KEY_CONFIGURATION_CONNECTION_TIMEOUT];
         }
 
-        if (isset($configuration[Configuration::KEY_CONFIGURATION_READ_WRITE_TIMEOUT])
+        if (
+            isset($configuration[Configuration::KEY_CONFIGURATION_READ_WRITE_TIMEOUT])
             && ! isset($dsn->getParameters()[Configuration::KEY_CONFIGURATION_READ_WRITE_TIMEOUT])
         ) {
             $new->readWriteTimeout = (int) $configuration[Configuration::KEY_CONFIGURATION_READ_WRITE_TIMEOUT];

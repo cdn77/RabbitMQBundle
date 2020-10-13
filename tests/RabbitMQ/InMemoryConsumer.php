@@ -43,9 +43,7 @@ final class InMemoryConsumer implements Consumer
         return $this->configuration;
     }
 
-    /**
-     * @return Message[]
-     */
+    /** @return Message[] */
     public function getConsumedMessages() : array
     {
         return $this->consumedMessages;

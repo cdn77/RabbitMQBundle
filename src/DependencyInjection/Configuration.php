@@ -8,6 +8,8 @@ use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
+use function assert;
+
 final class Configuration implements ConfigurationInterface
 {
     public const KEY_BINDING_EXCHANGE = 'exchange';
@@ -41,8 +43,8 @@ final class Configuration implements ConfigurationInterface
     {
         $treeBuilder = new TreeBuilder(RabbitMQExtension::ALIAS);
 
-        /** @var ArrayNodeDefinition $rootNode */
         $rootNode = $treeBuilder->getRootNode();
+        assert($rootNode instanceof ArrayNodeDefinition);
 
         $this->configureConnection($rootNode);
         $this->configureExchanges($rootNode);
@@ -72,13 +74,13 @@ final class Configuration implements ConfigurationInterface
 
     private function configureExchanges(ArrayNodeDefinition $rootNode) : void
     {
-        /** @var ArrayNodeDefinition $exchangesNode */
         $exchangesNode = $rootNode->children()
             ->arrayNode(self::KEY_CONFIGURATION_EXCHANGES)
             ->useAttributeAsKey(self::KEY_EXCHANGE_NAME)
             ->normalizeKeys(false)
             ->defaultValue([])
             ->prototype('array');
+        assert($exchangesNode instanceof ArrayNodeDefinition);
 
         $exchangesNode->children()
             ->scalarNode(self::KEY_EXCHANGE_TYPE);
@@ -106,13 +108,13 @@ final class Configuration implements ConfigurationInterface
 
     private function configureQueues(ArrayNodeDefinition $rootNode) : void
     {
-        /** @var ArrayNodeDefinition $queuesNode */
         $queuesNode = $rootNode->children()
             ->arrayNode(self::KEY_CONFIGURATION_QUEUES)
             ->useAttributeAsKey(self::KEY_QUEUE_NAME)
             ->normalizeKeys(false)
             ->defaultValue([])
             ->prototype('array');
+        assert($queuesNode instanceof ArrayNodeDefinition);
 
         $queuesNode->children()
             ->booleanNode(self::KEY_QUEUE_DURABLE)
@@ -137,24 +139,24 @@ final class Configuration implements ConfigurationInterface
 
     private function configureExchangeBindings(ArrayNodeDefinition $exchangesNode) : void
     {
-        /** @var ArrayNodeDefinition $exchangesBindingsNode */
         $exchangesBindingsNode = $exchangesNode->children()
             ->arrayNode(self::KEY_EXCHANGE_BINDINGS)
             ->normalizeKeys(false)
             ->defaultValue([])
             ->prototype('array');
+        assert($exchangesBindingsNode instanceof ArrayNodeDefinition);
 
         $this->configureBindingNode($exchangesBindingsNode);
     }
 
     private function configureQueueBindings(ArrayNodeDefinition $queuesNode) : void
     {
-        /** @var ArrayNodeDefinition $queueBindingsNode */
         $queueBindingsNode = $queuesNode->children()
             ->arrayNode(self::KEY_QUEUE_BINDINGS)
             ->normalizeKeys(false)
             ->defaultValue([])
             ->prototype('array');
+        assert($queueBindingsNode instanceof ArrayNodeDefinition);
 
         $this->configureBindingNode($queueBindingsNode);
     }
