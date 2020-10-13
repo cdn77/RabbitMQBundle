@@ -20,7 +20,6 @@
     },
     "require-dev": {
         "cdn77/coding-standard": "^2.0",
-        "jakub-onderka/php-parallel-lint": "^1.0.0",
         "phpstan/extension-installer": "^1.0",
         "phpstan/phpstan": "0.12.7",
         "phpstan/phpstan-phpunit": "0.12.6",
