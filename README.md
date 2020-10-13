@@ -1,11 +1,8 @@
 # CDN77 RabbitMQ Bundle
 
-[![Build Status](https://travis-ci.com/cdn77/RabbitMQBundle.svg?branch=master)](https://travis-ci.com/cdn77/RabbitMQBundle)
-[![Downloads](https://poser.pugx.org/cdn77/rabbitmq-bundle/d/total.svg)](https://packagist.org/packages/cdn77/rabbitmq-bundle)
-[![Packagist](https://poser.pugx.org/cdn77/rabbitmq-bundle/v/stable.svg)](https://packagist.org/packages/cdn77/rabbitmq-bundle)
-[![Licence](https://poser.pugx.org/cdn77/rabbitmq-bundle/license.svg)](https://packagist.org/packages/cdn77/rabbitmq-bundle)
-[![Quality Score](https://scrutinizer-ci.com/g/cdn77/RabbitMQBundle/badges/quality-score.png?b=master)](https://scrutinizer-ci.com/g/cdn77/RabbitMQBundle)
-[![Code Coverage](https://scrutinizer-ci.com/g/cdn77/RabbitMQBundle/badges/coverage.png?b=master)](https://scrutinizer-ci.com/g/cdn77/RabbitMQBundle)
+[![Build Status](https://github.com/cdn77/RabbitMQBundle/workflows/CI/badge.svg?branch=master)](https://github.com/cdn77/RabbitMQBundle/actions)
+[![Coverage Status](https://coveralls.io/repos/github/cdn77/RabbitMQBundle/badge.svg?branch=master)](https://coveralls.io/github/cdn77/RabbitMQBundle?branch=master)
+[![Downloads](https://poser.pugx.org/simpod/clickhouse-client/d/total.svg)](https://packagist.org/packages/simpod/clickhouse-client)
 
 This bundle provides following commands:
 
