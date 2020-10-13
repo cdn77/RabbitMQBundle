@@ -15,7 +15,7 @@
         "symfony/console": "^4.3|^5.0",
         "symfony/dependency-injection": "^4.3|^5.0",
         "symfony/framework-bundle": "^4.3|^5.0",
-        "symfony/http-kernel": "^4.3|^5.0",
+        "symfony/http-kernel": "^5.1.5",
         "symfony/yaml": "^4.3|^5.0"
     },
     "require-dev": {
