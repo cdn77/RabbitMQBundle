@@ -1,8 +1,11 @@
 # CDN77 RabbitMQ Bundle
 
-[![Build Status](https://github.com/cdn77/RabbitMQBundle/workflows/CI/badge.svg?branch=master)](https://github.com/cdn77/RabbitMQBundle/actions)
-[![Coverage Status](https://coveralls.io/repos/github/cdn77/RabbitMQBundle/badge.svg?branch=master)](https://coveralls.io/github/cdn77/RabbitMQBundle?branch=master)
-[![Downloads](https://poser.pugx.org/simpod/clickhouse-client/d/total.svg)](https://packagist.org/packages/simpod/clickhouse-client)
+[![GitHub Actions][GA Image]][GA Link]
+[![Shepherd Type][Shepherd Image]][Shepherd Link]
+[![Code Coverage][Coverage Image]][CodeCov Link]
+[![Downloads][Downloads Image]][Packagist Link]
+[![Packagist][Packagist Image]][Packagist Link]
+[![Infection MSI][Infection Image]][Infection Link]
 
 This bundle provides following commands:
 
@@ -16,3 +19,25 @@ For further information see following sections
 - [Setup](docs/Setup.md)
 - [Consuming](docs/Consuming.md)
 - [Producing](docs/Producing.md)
+
+[GA Image]: https://github.com/cdn77/RabbitMQBundle/workflows/CI/badge.svg
+
+[GA Link]: https://github.com/cdn77/RabbitMQBundle/actions?query=workflow%3A%22CI%22+branch%3Amaster
+
+[Shepherd Image]: https://shepherd.dev/github/cdn77/RabbitMQBundle/coverage.svg
+
+[Shepherd Link]: https://shepherd.dev/github/cdn77/RabbitMQBundle
+
+[Coverage Image]: https://codecov.io/gh/cdn77/RabbitMQBundle/branch/master/graph/badge.svg
+
+[CodeCov Link]: https://codecov.io/gh/cdn77/RabbitMQBundle/branch/master
+
+[Downloads Image]: https://poser.pugx.org/cdn77/rabbitmq-bundle/d/total.svg
+
+[Packagist Image]: https://poser.pugx.org/cdn77/rabbitmq-bundle/v/stable.svg
+
+[Packagist Link]: https://packagist.org/packages/cdn77/rabbitmq-bundle
+
+[Infection Image]: https://badge.stryker-mutator.io/github.com/cdn77/RabbitMQBundle/master
+
+[Infection Link]: https://infection.github.io

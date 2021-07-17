@@ -3,4 +3,5 @@
 /.phpcs.xml
 /.phpcs-cache
 /phpstan.neon
+/psalm.xml
 /phpunit.xml

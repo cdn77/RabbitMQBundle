@@ -31,7 +31,7 @@ class DsnTest extends TestCase
         $this->expectException(InvalidDsn::class);
         $this->expectExceptionMessage('The provided scheme "http" is invalid, expected "amqp".');
 
-        new Dsn('http://example.com');
+        new Dsn('http://example.com//vhost');
     }
 
     /**
