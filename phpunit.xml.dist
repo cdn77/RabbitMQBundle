@@ -1,24 +1,22 @@
 <?xml version="1.0" encoding="utf-8"?>
-<phpunit
-        xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-        xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd"
-        bootstrap="vendor/autoload.php"
+<phpunit xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd"
+         beStrictAboutChangesToGlobalState="true"
+         beStrictAboutOutputDuringTests="true"
+         beStrictAboutTodoAnnotatedTests="true"
+         executionOrder="random"
+         colors="true"
+         bootstrap="tests/bootstrap.php"
 >
     <php>
-        <ini name="error_reporting" value="-1" />
-        <env
-                name="RABBITMQ_DSN"
-                value="amqp://127.0.0.1/?hearbeat=60&amp;connection_timeout=10&amp;read_write_timeout=3"
-        />
+        <env name="RABBITMQ_DSN" value="amqp://127.0.0.1/?hearbeat=60&amp;connection_timeout=10&amp;read_write_timeout=3" />
     </php>
-
     <testsuite name="Tests">
         <directory>tests</directory>
     </testsuite>
-
-    <filter>
-        <whitelist>
+    <coverage>
+        <include>
             <directory suffix=".php">src</directory>
-        </whitelist>
-    </filter>
+        </include>
+    </coverage>
 </phpunit>

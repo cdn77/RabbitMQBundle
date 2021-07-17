@@ -1,0 +1,138 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<files psalm-version="4.8.1@f73f2299dbc59a3e6c4d66cff4605176e728ee69">
+  <file src="src/Cdn77RabbitMQBundle.php">
+    <MixedInferredReturnType occurrences="1">
+      <code>RabbitMQExtension</code>
+    </MixedInferredReturnType>
+    <MixedReturnStatement occurrences="1">
+      <code>$this-&gt;extension</code>
+    </MixedReturnStatement>
+  </file>
+  <file src="src/Configuration/Connection.php">
+    <MixedArgument occurrences="1">
+      <code>$configuration[Configuration::KEY_CONFIGURATION_DSN]</code>
+    </MixedArgument>
+  </file>
+  <file src="src/Configuration/Dsn.php">
+    <MixedPropertyTypeCoercion occurrences="1">
+      <code>$this-&gt;parameters</code>
+    </MixedPropertyTypeCoercion>
+    <PossiblyNullArgument occurrences="2">
+      <code>$this-&gt;password</code>
+      <code>$this-&gt;username</code>
+    </PossiblyNullArgument>
+  </file>
+  <file src="src/Configuration/Topology.php">
+    <MixedArgument occurrences="4">
+      <code>$bindingsConfiguration</code>
+      <code>$bindingsConfiguration</code>
+      <code>$exchangeConfiguration</code>
+      <code>$queueConfiguration</code>
+    </MixedArgument>
+    <MixedArgumentTypeCoercion occurrences="2">
+      <code>$exchangeName</code>
+      <code>$queueName</code>
+    </MixedArgumentTypeCoercion>
+    <MixedArrayAccess occurrences="4">
+      <code>$bindingsConfiguration[Configuration::KEY_BINDING_EXCHANGE]</code>
+      <code>$bindingsConfiguration[Configuration::KEY_BINDING_EXCHANGE]</code>
+      <code>$exchangeConfiguration[Configuration::KEY_EXCHANGE_BINDINGS]</code>
+      <code>$queueConfiguration[Configuration::KEY_QUEUE_BINDINGS]</code>
+    </MixedArrayAccess>
+    <MixedArrayOffset occurrences="2">
+      <code>$exchanges[$bindingsConfiguration[Configuration::KEY_BINDING_EXCHANGE]]</code>
+      <code>$exchanges[$bindingsConfiguration[Configuration::KEY_BINDING_EXCHANGE]]</code>
+    </MixedArrayOffset>
+    <MixedAssignment occurrences="6">
+      <code>$bindingsConfiguration</code>
+      <code>$bindingsConfiguration</code>
+      <code>$exchangeConfiguration</code>
+      <code>$exchangeConfiguration</code>
+      <code>$queueConfiguration</code>
+      <code>$queueConfiguration</code>
+    </MixedAssignment>
+  </file>
+  <file src="src/Console/ConsumerListCommand.php">
+    <MixedArgumentTypeCoercion occurrences="1">
+      <code>$consumerName</code>
+    </MixedArgumentTypeCoercion>
+    <UnusedForeachValue occurrences="1">
+      <code>$consumer</code>
+    </UnusedForeachValue>
+  </file>
+  <file src="src/ConsumerRunner.php">
+    <UnusedClosureParam occurrences="1">
+      <code>$channel</code>
+    </UnusedClosureParam>
+  </file>
+  <file src="src/DependencyInjection/ConsumerCompilerPass.php">
+    <MixedArgumentTypeCoercion occurrences="1">
+      <code>$id</code>
+    </MixedArgumentTypeCoercion>
+    <MixedAssignment occurrences="1">
+      <code>$tags</code>
+    </MixedAssignment>
+    <ParamNameMismatch occurrences="1">
+      <code>$containerBuilder</code>
+    </ParamNameMismatch>
+    <UnusedForeachValue occurrences="1">
+      <code>$tags</code>
+    </UnusedForeachValue>
+  </file>
+  <file src="src/DependencyInjection/RabbitMQExtension.php">
+    <ParamNameMismatch occurrences="1">
+      <code>$configuration</code>
+    </ParamNameMismatch>
+  </file>
+  <file src="src/RabbitMQ/Binding.php">
+    <MixedArgument occurrences="2">
+      <code>$configuration[Configuration::KEY_BINDING_ARGUMENTS] ?? []</code>
+      <code>$configuration[Configuration::KEY_BINDING_ROUTING_KEY]</code>
+    </MixedArgument>
+  </file>
+  <file src="src/RabbitMQ/BunnyConnection.php">
+    <DocblockTypeContradiction occurrences="1">
+      <code>$this-&gt;transactionalChannel === null</code>
+    </DocblockTypeContradiction>
+    <PropertyNotSetInConstructor occurrences="1">
+      <code>$transactionalChannel</code>
+    </PropertyNotSetInConstructor>
+  </file>
+  <file src="src/RabbitMQ/DeliveryMode.php">
+    <MissingImmutableAnnotation occurrences="1">
+      <code>Enum</code>
+    </MissingImmutableAnnotation>
+  </file>
+  <file src="src/RabbitMQ/Exchange.php">
+    <MixedArgument occurrences="5">
+      <code>$configuration[Configuration::KEY_EXCHANGE_ARGUMENTS] ?? []</code>
+      <code>$configuration[Configuration::KEY_EXCHANGE_AUTO_DELETE] ?? false</code>
+      <code>$configuration[Configuration::KEY_EXCHANGE_DURABLE] ?? false</code>
+      <code>$configuration[Configuration::KEY_EXCHANGE_INTERNAL] ?? false</code>
+      <code>$configuration[Configuration::KEY_EXCHANGE_TYPE] ?? ExchangeType::DIRECT</code>
+    </MixedArgument>
+  </file>
+  <file src="src/RabbitMQ/ExchangeType.php">
+    <MissingImmutableAnnotation occurrences="1">
+      <code>Enum</code>
+    </MissingImmutableAnnotation>
+  </file>
+  <file src="src/RabbitMQ/Operation/GetOperation.php">
+    <UnnecessaryVarAnnotation occurrences="1">
+      <code>Message|PromiseInterface|null</code>
+    </UnnecessaryVarAnnotation>
+  </file>
+  <file src="src/RabbitMQ/Operation/PublishOperation.php">
+    <InvalidScalarArgument occurrences="1">
+      <code>$exception-&gt;getCode()</code>
+    </InvalidScalarArgument>
+  </file>
+  <file src="src/RabbitMQ/Queue.php">
+    <MixedArgument occurrences="4">
+      <code>$configuration[Configuration::KEY_QUEUE_ARGUMENTS] ?? []</code>
+      <code>$configuration[Configuration::KEY_QUEUE_AUTO_DELETE] ?? false</code>
+      <code>$configuration[Configuration::KEY_QUEUE_DURABLE] ?? false</code>
+      <code>$configuration[Configuration::KEY_QUEUE_EXCLUSIVE] ?? false</code>
+    </MixedArgument>
+  </file>
+</files>

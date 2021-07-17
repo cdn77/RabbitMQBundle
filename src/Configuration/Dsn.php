@@ -45,7 +45,7 @@ final class Dsn
             throw InvalidDsn::malformed();
         }
 
-        if (! isset($parts['scheme'], $parts['host'])) {
+        if (! isset($parts['scheme'], $parts['host'], $parts['path'])) {
             throw InvalidDsn::missingComponents();
         }
 

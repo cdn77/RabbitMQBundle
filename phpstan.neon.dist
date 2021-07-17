@@ -1,8 +1,8 @@
 parameters:
-    level: 7
+    level: max
     paths:
         - %currentWorkingDirectory%/src
         - %currentWorkingDirectory%/tests
 
     ignoreErrors:
-        - '~Parameter #\d+ \$\w+ of [\w ]+ [\w\\]+(::\w+\(\)| constructor) expects [\w|]+, [\w|]+ given~'
+        - '~Parameter #\d+ \$\w+ of [\w ]+ [\w\\]+(::\w+\(\)| constructor) expects [\w\|]+, [\w\|]+ given~'
