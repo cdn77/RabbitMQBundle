@@ -1,6 +1,19 @@
 version: '3'
 services:
+    hello_world:
+        image: hello-world
+#        command: [ /bin/echo, 'Hello world' ]
+        restart: on-failure
+        depends_on:
+            - rabbitmq
+
     rabbitmq:
         image: rabbitmq:3
         ports:
             - "5672:5672"
+
+        healthcheck:
+            test: rabbitmq-diagnostics -q ping
+            interval: 30s
+            timeout: 10s
+            retries: 5
