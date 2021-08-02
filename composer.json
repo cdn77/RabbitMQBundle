@@ -7,7 +7,7 @@
         "sort-packages": true
     },
     "require": {
-        "php": "^7.4|^8.0",
+        "php": "^7.4 || ^8.0",
         "bunny/bunny": "^0.5.0",
         "myclabs/php-enum": "^1.7",
         "react/promise": "^2.0",
