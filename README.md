@@ -40,4 +40,4 @@ For further information see following sections
 
 [Infection Image]: https://badge.stryker-mutator.io/github.com/cdn77/RabbitMQBundle/master
 
-[Infection Link]: https://infection.github.io
+[Infection Link]: https://dashboard.stryker-mutator.io/reports/github.com/cdn77/RabbitMQBundle/master
