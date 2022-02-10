@@ -20,7 +20,7 @@ final class GetOperation
     }
 
     /** @return Message[] */
-    public function handle(string $queueName, int $maxCount) : array
+    public function handle(string $queueName, int $maxCount): array
     {
         $messages = [];
 

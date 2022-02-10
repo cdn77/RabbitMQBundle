@@ -38,7 +38,7 @@ final class ConsumerCommand extends Command
         $this->consumerStorage = $consumerStorage;
     }
 
-    protected function configure() : void
+    protected function configure(): void
     {
         $this->setName(self::NAME);
         $this->setDescription(self::DESCRIPTION);
@@ -49,7 +49,7 @@ final class ConsumerCommand extends Command
         );
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output) : int
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $consumerNameArgument = $input->getArgument(self::CONSUMER_ARGUMENT_NAME);
         assert(is_string($consumerNameArgument));

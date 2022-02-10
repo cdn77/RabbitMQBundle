@@ -35,27 +35,27 @@ final class Configuration
         $this->maxSeconds = $maxSeconds;
     }
 
-    public function getQueueName() : string
+    public function getQueueName(): string
     {
         return $this->queueName;
     }
 
-    public function getPrefetchCount() : int
+    public function getPrefetchCount(): int
     {
         return $this->prefetchCount;
     }
 
-    public function getPrefetchSize() : int
+    public function getPrefetchSize(): int
     {
         return $this->prefetchSize;
     }
 
-    public function getMaxMessages() : ?int
+    public function getMaxMessages(): ?int
     {
         return $this->maxMessages;
     }
 
-    public function getMaxSeconds() : ?float
+    public function getMaxSeconds(): ?float
     {
         return $this->maxSeconds;
     }

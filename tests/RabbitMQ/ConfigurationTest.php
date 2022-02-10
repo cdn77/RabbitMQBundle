@@ -15,7 +15,7 @@ use function file_get_contents;
 
 final class ConfigurationTest extends TestCase
 {
-    public function testConnectionConfiguration() : void
+    public function testConnectionConfiguration(): void
     {
         $config = Yaml::parse(file_get_contents(__DIR__ . '/ConfigurationTest.yaml'));
         $rabbitConfiguration = $config[RabbitMQExtension::ALIAS];
@@ -31,7 +31,7 @@ final class ConfigurationTest extends TestCase
         self::assertSame(11, $configuration->getReadWriteTimeout());
     }
 
-    public function testTopologyConfiguration() : void
+    public function testTopologyConfiguration(): void
     {
         $config = Yaml::parse(file_get_contents(__DIR__ . '/ConfigurationTest.yaml'));
         $rabbitConfiguration = $config[RabbitMQExtension::ALIAS];

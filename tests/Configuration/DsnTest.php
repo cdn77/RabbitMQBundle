@@ -10,7 +10,7 @@ use PHPUnit\Framework\TestCase;
 
 class DsnTest extends TestCase
 {
-    public function testMalformedUri() : void
+    public function testMalformedUri(): void
     {
         $this->expectException(InvalidDsn::class);
         $this->expectExceptionMessage('The provided DSN is malformed.');
@@ -18,7 +18,7 @@ class DsnTest extends TestCase
         new Dsn('http:///example.com');
     }
 
-    public function testMissingComponents() : void
+    public function testMissingComponents(): void
     {
         $this->expectException(InvalidDsn::class);
         $this->expectExceptionMessage('The provided DSN is incomplete.');
@@ -26,7 +26,7 @@ class DsnTest extends TestCase
         new Dsn('Fluff lobster ultimately, then mix with sweet chili sauce and serve roughly in sauté pan.');
     }
 
-    public function testInvalidScheme() : void
+    public function testInvalidScheme(): void
     {
         $this->expectException(InvalidDsn::class);
         $this->expectExceptionMessage('The provided scheme "http" is invalid, expected "amqp".');
@@ -47,7 +47,7 @@ class DsnTest extends TestCase
         int $port,
         string $vhost,
         array $parameters
-    ) : void {
+    ): void {
         $dsn = new Dsn($amqpUri);
 
         self::assertSame($username, $dsn->getUsername());
@@ -59,7 +59,7 @@ class DsnTest extends TestCase
     }
 
     /** @return mixed[][] */
-    public function dataProviderCreate() : iterable
+    public function dataProviderCreate(): iterable
     {
         yield [
             'amqp://username:password@host:1234/vhost?heartbeat=120',

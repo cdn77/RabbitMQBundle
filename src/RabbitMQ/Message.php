@@ -27,17 +27,17 @@ class Message
     }
 
     /** @param mixed[] $headers */
-    public static function json(string $body, array $headers = []) : self
+    public static function json(string $body, array $headers = []): self
     {
         return new self($body, ['Content-Type' => 'application/json'] + $headers);
     }
 
-    public static function fromBunny(\Bunny\Message $message) : self
+    public static function fromBunny(\Bunny\Message $message): self
     {
         return new self($message->content, $message->headers);
     }
 
-    public function makeTransient() : self
+    public function makeTransient(): self
     {
         $this->headers[self::HEADER_DELIVERY_MODE] = DeliveryMode::TRANSIENT;
 

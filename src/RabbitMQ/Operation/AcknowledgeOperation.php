@@ -17,7 +17,7 @@ final class AcknowledgeOperation
         $this->connection = $connection;
     }
 
-    public function handle(Message $message) : void
+    public function handle(Message $message): void
     {
         $channel = $this->connection->getChannel();
         $channel->getClient()->ack(
@@ -31,7 +31,7 @@ final class AcknowledgeOperation
      * RabbitMQ will acknowledge all outstanding delivery tags
      * up to and including the tag specified in the acknowledgement
      */
-    public function handleAll(Message $lastMessage) : void
+    public function handleAll(Message $lastMessage): void
     {
         $channel = $this->connection->getChannel();
         $channel->getClient()->ack(

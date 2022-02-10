@@ -10,7 +10,7 @@ use PHPUnit\Framework\TestCase;
 
 final class MessageTest extends TestCase
 {
-    public function testDeliveryMode() : void
+    public function testDeliveryMode(): void
     {
         $message = new Message('body');
         self::assertArrayHasKey(Message::HEADER_DELIVERY_MODE, $message->headers);
@@ -21,7 +21,7 @@ final class MessageTest extends TestCase
         self::assertSame($message->headers[Message::HEADER_DELIVERY_MODE], DeliveryMode::TRANSIENT);
     }
 
-    public function testJson() : void
+    public function testJson(): void
     {
         $message = Message::json('json string');
 

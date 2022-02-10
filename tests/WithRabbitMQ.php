@@ -31,18 +31,18 @@ trait WithRabbitMQ
      */
     private $consumerRunner;
 
-    public function setupTopology(Topology $topologyConfiguration) : void
+    public function setupTopology(Topology $topologyConfiguration): void
     {
         $setupAction = new SetupAction($this->connection);
         $setupAction->setup($topologyConfiguration);
     }
 
-    public function getConnection() : BunnyConnection
+    public function getConnection(): BunnyConnection
     {
         return $this->connection;
     }
 
-    public function getConsumerRunner() : ConsumerRunner
+    public function getConsumerRunner(): ConsumerRunner
     {
         if ($this->consumerRunner === null) {
             $this->consumerRunner = new ConsumerRunner($this->getConnection());
@@ -56,7 +56,7 @@ trait WithRabbitMQ
      *
      * @before
      */
-    protected function setupRabbitMQ() : void
+    protected function setupRabbitMQ(): void
     {
         $dsn = getenv('RABBITMQ_DSN');
 

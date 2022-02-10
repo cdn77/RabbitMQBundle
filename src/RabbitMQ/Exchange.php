@@ -47,7 +47,7 @@ final class Exchange implements Bindable
     }
 
     /** @param mixed[] $configuration */
-    public static function fromConfiguration(string $name, array $configuration) : self
+    public static function fromConfiguration(string $name, array $configuration): self
     {
         return new self(
             $name,
@@ -59,44 +59,44 @@ final class Exchange implements Bindable
         );
     }
 
-    public function addBinding(Binding $binding) : void
+    public function addBinding(Binding $binding): void
     {
         $this->bindings[] = $binding;
     }
 
-    public function getName() : string
+    public function getName(): string
     {
         return $this->name;
     }
 
-    public function isDurable() : bool
+    public function isDurable(): bool
     {
         return $this->durable;
     }
 
-    public function getExchangeType() : ExchangeType
+    public function getExchangeType(): ExchangeType
     {
         return $this->exchangeType;
     }
 
     /** @return Binding[] */
-    public function getBindings() : array
+    public function getBindings(): array
     {
         return $this->bindings;
     }
 
-    public function shouldAutoDelete() : bool
+    public function shouldAutoDelete(): bool
     {
         return $this->autoDelete;
     }
 
-    public function isInternal() : bool
+    public function isInternal(): bool
     {
         return $this->internal;
     }
 
     /** @return mixed[] */
-    public function getArguments() : array
+    public function getArguments(): array
     {
         return $this->arguments;
     }

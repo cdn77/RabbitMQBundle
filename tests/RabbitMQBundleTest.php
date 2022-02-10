@@ -14,7 +14,7 @@ final class RabbitMQBundleTest extends TestCase
     /** @var Cdn77RabbitMQBundle */
     private $bundle;
 
-    public function testBuild() : void
+    public function testBuild(): void
     {
         $containerBuilder = new ContainerBuilder();
         $this->bundle->build($containerBuilder);
@@ -35,7 +35,7 @@ final class RabbitMQBundleTest extends TestCase
         );
     }
 
-    protected function setUp() : void
+    protected function setUp(): void
     {
         $this->bundle = new Cdn77RabbitMQBundle();
     }

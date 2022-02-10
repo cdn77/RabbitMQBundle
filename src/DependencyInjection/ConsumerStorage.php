@@ -13,12 +13,12 @@ final class ConsumerStorage
     private $consumers = [];
 
     /** @return Consumer[] */
-    public function getConsumers() : array
+    public function getConsumers(): array
     {
         return $this->consumers;
     }
 
-    public function addConsumer(Consumer $consumer) : void
+    public function addConsumer(Consumer $consumer): void
     {
         if (isset($this->consumers[$consumer->getName()])) {
             throw new InvalidArgumentException('Multiple consumers with name: ' . $consumer->getName());

@@ -8,9 +8,9 @@ use Bunny\Message;
 
 interface Consumer
 {
-    public function consume(Message $message) : void;
+    public function consume(Message $message): void;
 
-    public function getConfiguration() : Configuration;
+    public function getConfiguration(): Configuration;
 
-    public function getName() : string;
+    public function getName(): string;
 }

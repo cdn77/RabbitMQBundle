@@ -45,7 +45,7 @@ final class BunnyConnection implements Connection
         $this->client = new Client($options);
     }
 
-    public function getChannel() : Channel
+    public function getChannel(): Channel
     {
         if ($this->channel === null) {
             $this->channel = $this->createChannel();
@@ -54,7 +54,7 @@ final class BunnyConnection implements Connection
         return $this->channel;
     }
 
-    public function getTransactionalChannel() : Channel
+    public function getTransactionalChannel(): Channel
     {
         if ($this->transactionalChannel === null) {
             $this->transactionalChannel = $this->createChannel();
@@ -69,7 +69,7 @@ final class BunnyConnection implements Connection
         return $this->transactionalChannel;
     }
 
-    public function connect() : void
+    public function connect(): void
     {
         if ($this->client->isConnected()) {
             return;
@@ -82,7 +82,7 @@ final class BunnyConnection implements Connection
         }
     }
 
-    public function disconnect() : void
+    public function disconnect(): void
     {
         if (! $this->client->isConnected()) {
             return;
@@ -92,7 +92,7 @@ final class BunnyConnection implements Connection
         $this->channel = null;
     }
 
-    private function createChannel() : Channel
+    private function createChannel(): Channel
     {
         $this->connect();
 

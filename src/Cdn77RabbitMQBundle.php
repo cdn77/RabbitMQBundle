@@ -12,7 +12,7 @@ use Symfony\Component\HttpKernel\Bundle\Bundle;
 
 final class Cdn77RabbitMQBundle extends Bundle
 {
-    public function build(ContainerBuilder $container) : void
+    public function build(ContainerBuilder $container): void
     {
         parent::build($container);
 
@@ -21,7 +21,7 @@ final class Cdn77RabbitMQBundle extends Bundle
         $container->addCompilerPass(new ConsumerCompilerPass());
     }
 
-    public function getContainerExtension() : RabbitMQExtension
+    public function getContainerExtension(): RabbitMQExtension
     {
         if ($this->extension === null) {
             $this->extension = new RabbitMQExtension();

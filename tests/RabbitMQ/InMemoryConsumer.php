@@ -26,25 +26,25 @@ final class InMemoryConsumer implements Consumer
         $this->configuration = $configuration;
     }
 
-    public function consume(Message $message) : void
+    public function consume(Message $message): void
     {
         $this->consumedMessages[] = $message;
 
         $this->acknowledgeOperation->handle($message);
     }
 
-    public function getName() : string
+    public function getName(): string
     {
         return 'test';
     }
 
-    public function getConfiguration() : Configuration
+    public function getConfiguration(): Configuration
     {
         return $this->configuration;
     }
 
     /** @return Message[] */
-    public function getConsumedMessages() : array
+    public function getConsumedMessages(): array
     {
         return $this->consumedMessages;
     }

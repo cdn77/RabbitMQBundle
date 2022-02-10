@@ -39,7 +39,7 @@ final class Configuration implements ConfigurationInterface
     private const DEFAULT_TIMEOUT = 10;
     private const DEAFULT_READ_WRITE_TIMEOUT = 3;
 
-    public function getConfigTreeBuilder() : TreeBuilder
+    public function getConfigTreeBuilder(): TreeBuilder
     {
         $treeBuilder = new TreeBuilder(RabbitMQExtension::ALIAS);
 
@@ -53,7 +53,7 @@ final class Configuration implements ConfigurationInterface
         return $treeBuilder;
     }
 
-    private function configureConnection(ArrayNodeDefinition $rootNode) : void
+    private function configureConnection(ArrayNodeDefinition $rootNode): void
     {
         $rootNode->children()
             ->scalarNode(self::KEY_CONFIGURATION_DSN)
@@ -72,7 +72,7 @@ final class Configuration implements ConfigurationInterface
             ->defaultValue(self::DEAFULT_READ_WRITE_TIMEOUT);
     }
 
-    private function configureExchanges(ArrayNodeDefinition $rootNode) : void
+    private function configureExchanges(ArrayNodeDefinition $rootNode): void
     {
         $exchangesNode = $rootNode->children()
             ->arrayNode(self::KEY_CONFIGURATION_EXCHANGES)
@@ -106,7 +106,7 @@ final class Configuration implements ConfigurationInterface
         $this->configureExchangeBindings($exchangesNode);
     }
 
-    private function configureQueues(ArrayNodeDefinition $rootNode) : void
+    private function configureQueues(ArrayNodeDefinition $rootNode): void
     {
         $queuesNode = $rootNode->children()
             ->arrayNode(self::KEY_CONFIGURATION_QUEUES)
@@ -137,7 +137,7 @@ final class Configuration implements ConfigurationInterface
         $this->configureQueueBindings($queuesNode);
     }
 
-    private function configureExchangeBindings(ArrayNodeDefinition $exchangesNode) : void
+    private function configureExchangeBindings(ArrayNodeDefinition $exchangesNode): void
     {
         $exchangesBindingsNode = $exchangesNode->children()
             ->arrayNode(self::KEY_EXCHANGE_BINDINGS)
@@ -149,7 +149,7 @@ final class Configuration implements ConfigurationInterface
         $this->configureBindingNode($exchangesBindingsNode);
     }
 
-    private function configureQueueBindings(ArrayNodeDefinition $queuesNode) : void
+    private function configureQueueBindings(ArrayNodeDefinition $queuesNode): void
     {
         $queueBindingsNode = $queuesNode->children()
             ->arrayNode(self::KEY_QUEUE_BINDINGS)
@@ -161,7 +161,7 @@ final class Configuration implements ConfigurationInterface
         $this->configureBindingNode($queueBindingsNode);
     }
 
-    private function configureBindingNode(ArrayNodeDefinition $bindingsNode) : void
+    private function configureBindingNode(ArrayNodeDefinition $bindingsNode): void
     {
         $bindingsNode->children()
             ->scalarNode(self::KEY_BINDING_EXCHANGE)

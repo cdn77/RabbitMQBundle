@@ -30,13 +30,13 @@ final class SetUpCommand extends Command
         parent::__construct();
     }
 
-    protected function configure() : void
+    protected function configure(): void
     {
         $this->setName(self::NAME);
         $this->setDescription(self::DESCRIPTION);
     }
 
-    protected function execute(InputInterface $input, OutputInterface $output) : int
+    protected function execute(InputInterface $input, OutputInterface $output): int
     {
         $this->setupAction->setup($this->topology);
 

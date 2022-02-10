@@ -19,7 +19,7 @@
         "symfony/yaml": "^4.3|^5.0"
     },
     "require-dev": {
-        "cdn77/coding-standard": "^5.0",
+        "cdn77/coding-standard": "^6.0",
         "infection/infection": "^0.26.0",
         "phpstan/extension-installer": "^1.0",
         "phpstan/phpstan": "^0.12.92",

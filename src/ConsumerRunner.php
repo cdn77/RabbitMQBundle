@@ -28,7 +28,7 @@ final class ConsumerRunner
         $this->connection = $connection;
     }
 
-    public function run(Consumer $consumer) : void
+    public function run(Consumer $consumer): void
     {
         $channel = $this->connection->getChannel();
         $consumerConfiguration = $consumer->getConfiguration();
@@ -42,10 +42,10 @@ final class ConsumerRunner
         $this->consumerRun($channel, $consumer);
     }
 
-    private function createConsumerOnChannel(Channel $channel, Consumer $consumer) : void
+    private function createConsumerOnChannel(Channel $channel, Consumer $consumer): void
     {
         $channel->consume(
-            function (Message $message, Channel $channel, Client $client) use ($consumer) : void {
+            function (Message $message, Channel $channel, Client $client) use ($consumer): void {
                 $consumerConfig = $consumer->getConfiguration();
                 $consumer->consume($message);
 
@@ -67,7 +67,7 @@ final class ConsumerRunner
         );
     }
 
-    private function consumerRun(Channel $channel, Consumer $consumer) : void
+    private function consumerRun(Channel $channel, Consumer $consumer): void
     {
         $consumerConfiguration = $consumer->getConfiguration();
         $startTime = microtime(true);
@@ -77,29 +77,29 @@ final class ConsumerRunner
         }
     }
 
-    private function shouldContinue(float $startTime, Configuration $consumerConfiguration) : bool
+    private function shouldContinue(float $startTime, Configuration $consumerConfiguration): bool
     {
         return $this->isInfinitelyRepeated($consumerConfiguration) ||
             ! $this->isLimitReached($startTime, $consumerConfiguration);
     }
 
-    private function isInfinitelyRepeated(Configuration $consumerConfiguration) : bool
+    private function isInfinitelyRepeated(Configuration $consumerConfiguration): bool
     {
         return $consumerConfiguration->getMaxSeconds() === null && $consumerConfiguration->getMaxMessages() === null;
     }
 
-    private function isLimitReached(float $startTime, Configuration $consumerConfiguration) : bool
+    private function isLimitReached(float $startTime, Configuration $consumerConfiguration): bool
     {
         return ! $this->hasAnyTimeLeft($consumerConfiguration->getMaxSeconds(), $startTime)
             || ! $this->hasAnyMessageLeft($consumerConfiguration->getMaxMessages(), $this->processedMessageCount);
     }
 
-    private function hasAnyTimeLeft(?float $maxSeconds, float $startTime) : bool
+    private function hasAnyTimeLeft(?float $maxSeconds, float $startTime): bool
     {
         return $maxSeconds === null || microtime(true) < $startTime + $maxSeconds;
     }
 
-    private function hasAnyMessageLeft(?int $maxMessages, int $processedMessageCount) : bool
+    private function hasAnyMessageLeft(?int $maxMessages, int $processedMessageCount): bool
     {
         return $maxMessages === null || $processedMessageCount < $maxMessages;
     }

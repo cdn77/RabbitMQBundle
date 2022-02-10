@@ -21,7 +21,7 @@ final class PublishOperation
         array $headers,
         string $routingKey,
         string $exchange
-    ) : void {
+    ): void {
         $connection->getChannel()->publish(
             $body,
             $headers,
@@ -32,7 +32,7 @@ final class PublishOperation
         );
     }
 
-    public function handle(Connection $connection, Message $message, string $routingKey, string $exchange) : void
+    public function handle(Connection $connection, Message $message, string $routingKey, string $exchange): void
     {
         $connection->getChannel()->publish(
             $message->body,
@@ -50,7 +50,7 @@ final class PublishOperation
         iterable $messages,
         string $routingKey,
         string $exchangeName
-    ) : void {
+    ): void {
         $transactionalChannel = $connection->getTransactionalChannel();
         try {
             foreach ($messages as $message) {

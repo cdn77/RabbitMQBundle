@@ -14,7 +14,7 @@ final class RabbitMQExtension extends Extension
     public const ALIAS = 'rabbitmq';
 
     /** @param mixed[] $configuration */
-    public function load(array $configuration, ContainerBuilder $container) : void
+    public function load(array $configuration, ContainerBuilder $container): void
     {
         $container->setParameter(
             self::ALIAS,
@@ -29,7 +29,7 @@ final class RabbitMQExtension extends Extension
         $loader->load('services.yaml');
     }
 
-    public function getAlias() : string
+    public function getAlias(): string
     {
         return self::ALIAS;
     }

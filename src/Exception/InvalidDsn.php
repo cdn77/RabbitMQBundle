@@ -10,17 +10,17 @@ use function sprintf;
 
 final class InvalidDsn extends LogicException implements Exception
 {
-    public static function malformed() : self
+    public static function malformed(): self
     {
         throw new self('The provided DSN is malformed.');
     }
 
-    public static function missingComponents() : self
+    public static function missingComponents(): self
     {
         throw new self('The provided DSN is incomplete.');
     }
 
-    public static function invalidScheme(string $provided, string $expected) : self
+    public static function invalidScheme(string $provided, string $expected): self
     {
         throw new self(sprintf('The provided scheme "%s" is invalid, expected "%s".', $provided, $expected));
     }

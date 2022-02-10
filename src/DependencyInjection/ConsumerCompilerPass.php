@@ -13,7 +13,7 @@ final class ConsumerCompilerPass implements CompilerPassInterface
 {
     public const TAG_NAME_CONSUMER = RabbitMQExtension::ALIAS . '.consumer';
 
-    public function process(ContainerBuilder $containerBuilder) : void
+    public function process(ContainerBuilder $containerBuilder): void
     {
         $consumerServices = [];
 

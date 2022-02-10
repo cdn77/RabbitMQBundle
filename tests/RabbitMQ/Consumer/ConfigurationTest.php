@@ -9,7 +9,7 @@ use PHPUnit\Framework\TestCase;
 
 final class ConfigurationTest extends TestCase
 {
-    public function testConstruct() : void
+    public function testConstruct(): void
     {
         $queueName = 'queue';
         $prefetchCount = 1;
