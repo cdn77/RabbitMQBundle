@@ -8,11 +8,11 @@ use Bunny\Channel;
 
 interface Connection
 {
-    public function getChannel() : Channel;
+    public function getChannel(): Channel;
 
-    public function getTransactionalChannel() : Channel;
+    public function getTransactionalChannel(): Channel;
 
-    public function connect() : void;
+    public function connect(): void;
 
-    public function disconnect() : void;
+    public function disconnect(): void;
 }

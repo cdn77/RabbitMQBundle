@@ -13,22 +13,22 @@ use function sprintf;
 
 final class ConfigurationFailed extends RuntimeException implements Exception
 {
-    public static function invalidPrefetchValues() : self
+    public static function invalidPrefetchValues(): self
     {
         return new self('Could not set prefetch-size/prefetch-count');
     }
 
-    public static function cannotDeclareExchange(Exchange $exchange) : self
+    public static function cannotDeclareExchange(Exchange $exchange): self
     {
         return new self(sprintf('Could not declare exchange %s', $exchange->getName()));
     }
 
-    public static function cannotDeclareQueue(Queue $queue) : self
+    public static function cannotDeclareQueue(Queue $queue): self
     {
         return new self(sprintf('Could not declare queue %s', $queue->getName()));
     }
 
-    public static function cannotBindExchange(Exchange $exchange, Binding $binding) : self
+    public static function cannotBindExchange(Exchange $exchange, Binding $binding): self
     {
         return new self(
             sprintf(
@@ -40,7 +40,7 @@ final class ConfigurationFailed extends RuntimeException implements Exception
         );
     }
 
-    public static function cannotBindQueue(Queue $queue, Binding $binding) : self
+    public static function cannotBindQueue(Queue $queue, Binding $binding): self
     {
         return new self(
             sprintf(

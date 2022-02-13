@@ -26,7 +26,7 @@ final class Binding
     }
 
     /** @param mixed[] $configuration */
-    public static function fromConfiguration(Bindable $bindable, array $configuration) : self
+    public static function fromConfiguration(Bindable $bindable, array $configuration): self
     {
         return new self(
             $bindable,
@@ -35,18 +35,18 @@ final class Binding
         );
     }
 
-    public function getBindable() : Bindable
+    public function getBindable(): Bindable
     {
         return $this->bindable;
     }
 
-    public function getRoutingKey() : string
+    public function getRoutingKey(): string
     {
         return $this->routingKey;
     }
 
     /** @return mixed[] */
-    public function getArguments() : array
+    public function getArguments(): array
     {
         return $this->arguments;
     }

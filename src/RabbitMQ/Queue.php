@@ -42,7 +42,7 @@ final class Queue implements Bindable
     }
 
     /** @param mixed[] $configuration */
-    public static function fromConfiguration(string $name, array $configuration) : self
+    public static function fromConfiguration(string $name, array $configuration): self
     {
         return new self(
             $name,
@@ -53,39 +53,39 @@ final class Queue implements Bindable
         );
     }
 
-    public function addBinding(Binding $binding) : void
+    public function addBinding(Binding $binding): void
     {
         $this->bindings[] = $binding;
     }
 
-    public function getName() : string
+    public function getName(): string
     {
         return $this->name;
     }
 
-    public function isDurable() : bool
+    public function isDurable(): bool
     {
         return $this->durable;
     }
 
     /** @return Binding[] */
-    public function getBindings() : array
+    public function getBindings(): array
     {
         return $this->bindings;
     }
 
-    public function isExclusive() : bool
+    public function isExclusive(): bool
     {
         return $this->exclusive;
     }
 
-    public function shouldAutoDelete() : bool
+    public function shouldAutoDelete(): bool
     {
         return $this->autoDelete;
     }
 
     /** @return mixed[] */
-    public function getArguments() : array
+    public function getArguments(): array
     {
         return $this->arguments;
     }

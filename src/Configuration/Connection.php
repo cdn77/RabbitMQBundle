@@ -57,7 +57,7 @@ final class Connection
     }
 
     /** @param mixed[] $configuration */
-    public static function fromDI(array $configuration) : self
+    public static function fromDI(array $configuration): self
     {
         $dsn = new Dsn($configuration[Configuration::KEY_CONFIGURATION_DSN]);
         $new = self::fromDsn($dsn);
@@ -86,7 +86,7 @@ final class Connection
         return $new;
     }
 
-    public static function fromDsn(Dsn $dsn) : self
+    public static function fromDsn(Dsn $dsn): self
     {
         $parameters = $dsn->getParameters();
 
@@ -103,42 +103,42 @@ final class Connection
         );
     }
 
-    public function getHost() : string
+    public function getHost(): string
     {
         return $this->host;
     }
 
-    public function getPort() : int
+    public function getPort(): int
     {
         return $this->port;
     }
 
-    public function getVhost() : string
+    public function getVhost(): string
     {
         return $this->vhost;
     }
 
-    public function getUser() : ?string
+    public function getUser(): ?string
     {
         return $this->user;
     }
 
-    public function getPassword() : ?string
+    public function getPassword(): ?string
     {
         return $this->password;
     }
 
-    public function getHeartbeat() : int
+    public function getHeartbeat(): int
     {
         return $this->heartbeat;
     }
 
-    public function getConnectionTimeout() : int
+    public function getConnectionTimeout(): int
     {
         return $this->connectionTimeout;
     }
 
-    public function getReadWriteTimeout() : int
+    public function getReadWriteTimeout(): int
     {
         return $this->readWriteTimeout;
     }

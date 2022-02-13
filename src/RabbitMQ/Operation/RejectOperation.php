@@ -17,7 +17,7 @@ final class RejectOperation
         $this->connection = $connection;
     }
 
-    public function handle(Message $message, bool $requeue = true) : void
+    public function handle(Message $message, bool $requeue = true): void
     {
         $channel = $this->connection->getChannel();
         $channel->getClient()->nack(
@@ -32,7 +32,7 @@ final class RejectOperation
      * RabbitMQ will reject all outstanding delivery tags
      * up to and including the tag specified in the not nacknowledgement
      */
-    public function handleAll(Message $lastMessage, bool $requeue = true) : void
+    public function handleAll(Message $lastMessage, bool $requeue = true): void
     {
         $channel = $this->connection->getChannel();
         $channel->getClient()->nack(

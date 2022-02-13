@@ -10,7 +10,7 @@ use function sprintf;
 
 final class CannotCreateChannel extends RuntimeException implements Exception
 {
-    public static function gotInvalidType(string $expected, string $actual) : self
+    public static function gotInvalidType(string $expected, string $actual): self
     {
         return new self(sprintf('Expected "%s", got "%s"', $expected, $actual));
     }

@@ -23,14 +23,14 @@ final class ConsumerRunnerTest extends TestCase
 {
     use WithRabbitMQ;
 
-    public function setUp() : void
+    public function setUp(): void
     {
         $this->clearRabbitMQ();
 
         parent::setUp();
     }
 
-    public function tearDown() : void
+    public function tearDown(): void
     {
         $this->clearRabbitMQ();
 
@@ -38,7 +38,7 @@ final class ConsumerRunnerTest extends TestCase
     }
 
     /** @dataProvider maxMessagesDataProvider */
-    public function testMaxMessagesLimit(int $maxMessages) : void
+    public function testMaxMessagesLimit(int $maxMessages): void
     {
         $exchange = new Exchange('test', new ExchangeType(ExchangeType::DIRECT));
         $queue = new Queue('testQueue');
@@ -60,18 +60,18 @@ final class ConsumerRunnerTest extends TestCase
     }
 
     /** @return int[][] */
-    public function maxMessagesDataProvider() : array
+    public function maxMessagesDataProvider(): array
     {
         return [[0], [5]];
     }
 
-    private function clearRabbitMQ() : void
+    private function clearRabbitMQ(): void
     {
         $this->getConnection()->getChannel()->queueDelete('testQueue');
         $this->getConnection()->getChannel()->exchangeDelete('test');
     }
 
-    private function givenEnoughMessagesInQueue(Exchange $exchange, string $routingKey) : void
+    private function givenEnoughMessagesInQueue(Exchange $exchange, string $routingKey): void
     {
         $channel = $this->getConnection()->getChannel();
         for ($i = 1; $i <= 10; $i++) {
@@ -79,7 +79,7 @@ final class ConsumerRunnerTest extends TestCase
         }
     }
 
-    private function givenConfiguredConsumer(int $maxMessages, Queue $queue) : InMemoryConsumer
+    private function givenConfiguredConsumer(int $maxMessages, Queue $queue): InMemoryConsumer
     {
         return new InMemoryConsumer(
             new AcknowledgeOperation($this->getConnection()),
@@ -87,12 +87,12 @@ final class ConsumerRunnerTest extends TestCase
         );
     }
 
-    private function whenConsume(Consumer $consumer) : void
+    private function whenConsume(Consumer $consumer): void
     {
         $this->getConsumerRunner()->run($consumer);
     }
 
-    private function thenOnlyMaxMessagesCountIsConsumed(int $maxMessages, InMemoryConsumer $consumer) : void
+    private function thenOnlyMaxMessagesCountIsConsumed(int $maxMessages, InMemoryConsumer $consumer): void
     {
         $consumedMessages = $consumer->getConsumedMessages();
         self::assertCount($maxMessages, $consumedMessages);

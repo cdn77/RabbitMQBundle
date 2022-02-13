@@ -66,7 +66,7 @@ final class Dsn
         parse_str($parts['query'], $this->parameters);
     }
 
-    public function __toString() : string
+    public function __toString(): string
     {
         return sprintf(
             '%s://%s:%s@%s:%s/%s%s%s',
@@ -81,33 +81,33 @@ final class Dsn
         );
     }
 
-    public function getHost() : string
+    public function getHost(): string
     {
         return $this->host;
     }
 
-    public function getPort() : int
+    public function getPort(): int
     {
         return $this->port;
     }
 
-    public function getUsername() : ?string
+    public function getUsername(): ?string
     {
         return $this->username;
     }
 
-    public function getPassword() : ?string
+    public function getPassword(): ?string
     {
         return $this->password;
     }
 
-    public function getVhost() : string
+    public function getVhost(): string
     {
         return $this->vhost;
     }
 
     /** @return string[] */
-    public function getParameters() : array
+    public function getParameters(): array
     {
         return $this->parameters;
     }

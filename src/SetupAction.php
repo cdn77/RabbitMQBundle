@@ -22,7 +22,7 @@ final class SetupAction
         $this->connection = $connection;
     }
 
-    public function setup(Topology $topology) : void
+    public function setup(Topology $topology): void
     {
         $channel = $this->connection->getChannel();
 
