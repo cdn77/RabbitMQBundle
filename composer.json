@@ -26,7 +26,7 @@
         "phpstan/phpstan-phpunit": "0.12.22",
         "phpstan/phpstan-strict-rules": "0.12.11",
         "phpunit/phpunit": "^9.5",
-        "psalm/plugin-phpunit": "^0.16.1",
+        "psalm/plugin-phpunit": "^0.17.0",
         "roave/infection-static-analysis-plugin": "^1.8",
         "simpod/php-coveralls-mirror": "^3.0",
         "vimeo/psalm": "^4.8"
