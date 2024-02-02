@@ -1,7 +1,6 @@
 # CDN77 RabbitMQ Bundle
 
 [![GitHub Actions][GA Image]][GA Link]
-[![Shepherd Type][Shepherd Image]][Shepherd Link]
 [![Code Coverage][Coverage Image]][CodeCov Link]
 [![Downloads][Downloads Image]][Packagist Link]
 [![Packagist][Packagist Image]][Packagist Link]
@@ -23,10 +22,6 @@ For further information see following sections
 [GA Image]: https://github.com/cdn77/RabbitMQBundle/workflows/CI/badge.svg
 
 [GA Link]: https://github.com/cdn77/RabbitMQBundle/actions?query=workflow%3A%22CI%22+branch%3Amaster
-
-[Shepherd Image]: https://shepherd.dev/github/cdn77/RabbitMQBundle/coverage.svg
-
-[Shepherd Link]: https://shepherd.dev/github/cdn77/RabbitMQBundle
 
 [Coverage Image]: https://codecov.io/gh/cdn77/RabbitMQBundle/branch/master/graph/badge.svg
 
