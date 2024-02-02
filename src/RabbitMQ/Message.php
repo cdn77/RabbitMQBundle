@@ -6,7 +6,7 @@ namespace Cdn77\RabbitMQBundle\RabbitMQ;
 
 class Message
 {
-    public const HEADER_DELIVERY_MODE = 'Delivery-Mode';
+    public const HEADER_DELIVERY_MODE = 'delivery-mode';
 
     /** @var string */
     public $body;
