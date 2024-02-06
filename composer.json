@@ -1,30 +1,23 @@
 {
     "name": "cdn77/rabbitmq-bundle",
     "description": "RabbitMQ Symfony bundle for BunnyPHP.",
-    "type": "library",
     "license": "MIT",
-    "config": {
-        "allow-plugins": {
-            "dealerdirect/phpcodesniffer-composer-installer": true,
-            "infection/extension-installer": true,
-            "phpstan/extension-installer": true
-        },
-        "sort-packages": true
-    },
+    "type": "library",
     "require": {
         "php": "^8.0",
         "bunny/bunny": "^0.5.0",
         "myclabs/php-enum": "^1.7",
         "react/promise": "^2.0",
-        "symfony/config": "^5.0|^6.0",
-        "symfony/console": "^5.0|^6.0",
-        "symfony/dependency-injection": "^5.0|^6.0",
-        "symfony/framework-bundle": "^5.0|^6.0",
-        "symfony/http-kernel": "^5.1.5|^6.0",
-        "symfony/yaml": "^5.0|^6.0"
+        "symfony/config": "^5.0 || ^6.0",
+        "symfony/console": "^5.0 || ^6.0",
+        "symfony/dependency-injection": "^5.0 || ^6.0",
+        "symfony/framework-bundle": "^5.0 || ^6.0",
+        "symfony/http-kernel": "^5.1.5 || ^6.0",
+        "symfony/yaml": "^5.0 || ^6.0"
     },
     "require-dev": {
         "cdn77/coding-standard": "^6.0",
+        "ergebnis/composer-normalize": "^2.42",
         "infection/infection": "^0.26.0",
         "phpstan/extension-installer": "^1.0",
         "phpstan/phpstan": "^0.12.92",
@@ -42,5 +35,19 @@
         "psr-4": {
             "Cdn77\\RabbitMQBundle\\Tests\\": "tests/"
         }
+    },
+    "config": {
+        "allow-plugins": {
+            "dealerdirect/phpcodesniffer-composer-installer": true,
+            "ergebnis/composer-normalize": true,
+            "infection/extension-installer": true,
+            "phpstan/extension-installer": true
+        },
+        "sort-packages": true
+    },
+    "scripts": {
+        "post-update-cmd": [
+            "composer normalize"
+        ]
     }
 }
