@@ -25,7 +25,7 @@ final class MessageTest extends TestCase
     {
         $message = Message::json('json string');
 
-        self::assertArrayHasKey('Content-Type', $message->headers);
-        self::assertSame('application/json', $message->headers['Content-Type']);
+        self::assertArrayHasKey(Message::HEADER_CONTENT_TYPE, $message->headers);
+        self::assertSame('application/json', $message->headers[Message::HEADER_CONTENT_TYPE]);
     }
 }

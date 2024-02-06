@@ -6,6 +6,7 @@ namespace Cdn77\RabbitMQBundle\RabbitMQ;
 
 class Message
 {
+    public const HEADER_CONTENT_TYPE = 'content-type';
     public const HEADER_DELIVERY_MODE = 'delivery-mode';
 
     /** @var string */
@@ -29,7 +30,7 @@ class Message
     /** @param mixed[] $headers */
     public static function json(string $body, array $headers = []): self
     {
-        return new self($body, ['Content-Type' => 'application/json'] + $headers);
+        return new self($body, [self::HEADER_CONTENT_TYPE => 'application/json'] + $headers);
     }
 
     public static function fromBunny(\Bunny\Message $message): self
