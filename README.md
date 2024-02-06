@@ -33,6 +33,6 @@ For further information see following sections
 
 [Packagist Link]: https://packagist.org/packages/cdn77/rabbitmq-bundle
 
-[Infection Image]: https://badge.stryker-mutator.io/github.com/cdn77/RabbitMQBundle/master
+[Infection Image]: https://img.shields.io/endpoint?url=https%3A%2F%2Fbadge-api.stryker-mutator.io%2Fgithub.com%2Fcdn77%2FRabbitMQBundle%2Fmaster
 
 [Infection Link]: https://dashboard.stryker-mutator.io/reports/github.com/cdn77/RabbitMQBundle/master
