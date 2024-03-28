@@ -1,0 +1,21 @@
+parameters:
+	ignoreErrors:
+		-
+			message: "#^Cannot cast mixed to int\\.$#"
+			count: 1
+			path: src/Configuration/Connection.php
+
+		-
+			message: "#^Cannot access offset 'bindings' on mixed\\.$#"
+			count: 2
+			path: src/Configuration/Topology.php
+
+		-
+			message: "#^Cannot access offset 'exchange' on mixed\\.$#"
+			count: 2
+			path: src/Configuration/Topology.php
+
+		-
+			message: "#^Cannot access offset 'rabbitmq' on mixed\\.$#"
+			count: 2
+			path: tests/RabbitMQ/ConfigurationTest.php
