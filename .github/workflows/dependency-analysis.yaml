@@ -1,0 +1,29 @@
+name: "Dependency Analysis"
+
+on:
+  pull_request:
+  push:
+    branches:
+      - "master"
+
+jobs:
+  dependency-analysis:
+    name: "Dependency Analysis"
+    runs-on: "ubuntu-20.04"
+
+    steps:
+      - name: "Checkout code"
+        uses: "actions/checkout@v2"
+
+      - name: "Install PHP"
+        uses: "shivammathur/setup-php@v2"
+        with:
+          php-version: "8.0"
+          coverage: "none"
+          extensions: "json, mbstring"
+
+      - name: "Install dependencies with Composer"
+        uses: "ramsey/composer-install@v1"
+
+      - name: "Run a dependency analysis"
+        run: "vendor/bin/composer-dependency-analyser"
