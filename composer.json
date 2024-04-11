@@ -16,7 +16,7 @@
         "symfony/yaml": "^5.0 || ^6.0 || ^7.0"
     },
     "require-dev": {
-        "cdn77/coding-standard": "^6.0",
+        "cdn77/coding-standard": "^7.2",
         "ergebnis/composer-normalize": "^2.42",
         "infection/infection": "^0.28.1",
         "phpstan/extension-installer": "^1.0",
