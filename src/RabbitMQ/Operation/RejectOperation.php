@@ -19,13 +19,9 @@ final class RejectOperation
 
     public function handle(Message $message, bool $requeue = true): void
     {
-        $channel = $this->connection->getChannel();
-        $channel->getClient()->nack(
-            $channel->getChannelId(),
-            $message->deliveryTag,
-            false,
-            $requeue,
-        );
+        $this->connection->run(function () use ($message, $requeue): void {
+            $this->connection->getChannel()->nack($message, false, $requeue);
+        });
     }
 
     /**
@@ -34,12 +30,8 @@ final class RejectOperation
      */
     public function handleAll(Message $lastMessage, bool $requeue = true): void
     {
-        $channel = $this->connection->getChannel();
-        $channel->getClient()->nack(
-            $channel->getChannelId(),
-            $lastMessage->deliveryTag,
-            true,
-            $requeue,
-        );
+        $this->connection->run(function () use ($lastMessage, $requeue): void {
+            $this->connection->getChannel()->nack($lastMessage, true, $requeue);
+        });
     }
 }

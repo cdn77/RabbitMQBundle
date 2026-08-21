@@ -4,7 +4,7 @@ This bundle uses `rabbitmq` container extension key and is able to merge configu
 
 These configuration options are available to setup connection to your RabbitMQ instance. 
 
-Example DSN: `amqp://username:password@host:1234/vhost?heartbeat=60&connection_timeout=10&read_write_timeout=3`
+Example DSN: `amqp://username:password@host:1234/vhost?heartbeat=60&connection_timeout=10`
 
 ```yaml
 rabbitmq:

@@ -13,4 +13,9 @@ final class ConnectionFailed extends RuntimeException implements Exception
     {
         return new self('Connection to RabbitMQ failed', 0, $previous);
     }
+
+    public static function channelClosed(): self
+    {
+        return new self('Channel was closed by the broker');
+    }
 }

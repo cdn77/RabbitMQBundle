@@ -4,13 +4,10 @@ declare(strict_types=1);
 
 namespace Cdn77\RabbitMQBundle;
 
-use Bunny\Protocol\MethodExchangeBindOkFrame;
-use Bunny\Protocol\MethodExchangeDeclareOkFrame;
-use Bunny\Protocol\MethodQueueBindOkFrame;
-use Bunny\Protocol\MethodQueueDeclareOkFrame;
 use Cdn77\RabbitMQBundle\Configuration\Topology;
 use Cdn77\RabbitMQBundle\Exception\ConfigurationFailed;
 use Cdn77\RabbitMQBundle\RabbitMQ\Connection;
+use Throwable;
 
 final class SetupAction
 {
@@ -24,68 +21,77 @@ final class SetupAction
 
     public function setup(Topology $topology): void
     {
+        $this->connection->run(function () use ($topology): void {
+            $this->declareTopology($topology);
+        });
+    }
+
+    private function declareTopology(Topology $topology): void
+    {
         $channel = $this->connection->getChannel();
 
         foreach ($topology->getExchanges() as $exchange) {
-            $frame = $channel->exchangeDeclare(
-                $exchange->getName(),
-                $exchange->getExchangeType()->getValue(),
-                false,
-                $exchange->isDurable(),
-                $exchange->shouldAutoDelete(),
-                $exchange->isInternal(),
-                false,
-                $exchange->getArguments(),
-            );
-
-            if (! ($frame instanceof MethodExchangeDeclareOkFrame)) {
-                throw ConfigurationFailed::cannotDeclareExchange($exchange);
+            try {
+                $channel->exchangeDeclare(
+                    $exchange->getName(),
+                    $exchange->getExchangeType()->getValue(),
+                    false,
+                    $exchange->isDurable(),
+                    $exchange->shouldAutoDelete(),
+                    $exchange->isInternal(),
+                    false,
+                    $exchange->getArguments(),
+                );
+            } catch (Throwable $exception) {
+                throw ConfigurationFailed::cannotDeclareExchange($exchange, $exception);
             }
 
             foreach ($exchange->getBindings() as $binding) {
                 $boundQueue = $binding->getBindable();
 
-                $frame = $channel->exchangeBind(
-                    $exchange->getName(),
-                    $boundQueue->getName(),
-                    $binding->getRoutingKey(),
-                    false,
-                    $binding->getArguments(),
-                );
-
-                if (! ($frame instanceof MethodExchangeBindOkFrame)) {
-                    throw ConfigurationFailed::cannotBindExchange($exchange, $binding);
+                try {
+                    $channel->exchangeBind(
+                        $exchange->getName(),
+                        $boundQueue->getName(),
+                        $binding->getRoutingKey(),
+                        false,
+                        $binding->getArguments(),
+                    );
+                } catch (Throwable $exception) {
+                    throw ConfigurationFailed::cannotBindExchange($exchange, $binding, $exception);
                 }
             }
         }
 
         foreach ($topology->getQueues() as $queue) {
-            $frame = $channel->queueDeclare(
-                $queue->getName(),
-                false,
-                $queue->isDurable(),
-                $queue->isExclusive(),
-                $queue->shouldAutoDelete(),
-                false,
-                $queue->getArguments(),
-            );
-
-            if (! ($frame instanceof MethodQueueDeclareOkFrame)) {
-                throw ConfigurationFailed::cannotDeclareQueue($queue);
+            try {
+                $channel->queueDeclare(
+                    $queue->getName(),
+                    false,
+                    $queue->isDurable(),
+                    $queue->isExclusive(),
+                    $queue->shouldAutoDelete(),
+                    false,
+                    $queue->getArguments(),
+                );
+            } catch (Throwable $exception) {
+                throw ConfigurationFailed::cannotDeclareQueue($queue, $exception);
             }
 
             foreach ($queue->getBindings() as $binding) {
                 $boundQueue = $binding->getBindable();
-                $frame = $channel->queueBind(
-                    $queue->getName(),
-                    $boundQueue->getName(),
-                    $binding->getRoutingKey(),
-                    false,
-                    $binding->getArguments(),
-                );
 
-                if (! ($frame instanceof MethodQueueBindOkFrame)) {
-                    throw ConfigurationFailed::cannotBindQueue($queue, $binding);
+                try {
+                    // Bunny 0.6 changed queue.bind argument order to (exchange, queue).
+                    $channel->queueBind(
+                        $boundQueue->getName(),
+                        $queue->getName(),
+                        $binding->getRoutingKey(),
+                        false,
+                        $binding->getArguments(),
+                    );
+                } catch (Throwable $exception) {
+                    throw ConfigurationFailed::cannotBindQueue($queue, $binding, $exception);
                 }
             }
         }

@@ -9,11 +9,15 @@ use Cdn77\RabbitMQBundle\RabbitMQ\Operation\PublishOperation;
 
 final class ExampleProducer
 {
+    /** @var Connection */
+    private $connection;
+
     /** @var PublishOperation */
     private $publishOperation;
 
     public function __construct(Connection $connection, PublishOperation $publishOperation)
     {
+        $this->connection = $connection;
         $this->publishOperation = $publishOperation;
     }
 
@@ -28,7 +32,7 @@ final class ExampleProducer
         $message->makeTransient();
 
         $this->publishOperation->handle(
-            $this->connection
+            $this->connection,
             $message,
             $routingKey,
             'default_exchange', // Exchange to send the message to
@@ -36,3 +40,11 @@ final class ExampleProducer
     }
 }
 ```
+
+> **Heads up (Bunny 0.6):** while connected, Bunny keeps a heartbeat timer on the ReactPHP event
+> loop, which would otherwise keep the php-fpm worker or console process alive after the work is
+> done. The bundle ships a `DisconnectConnection` subscriber that closes the connection on
+> `kernel.terminate` (after the HTTP response is flushed) and on `console.terminate` (after a
+> command returns), so HTTP and console producers are handled automatically. If you publish from a
+> context that dispatches neither event (e.g. a bare script using the event loop directly), call
+> `$connection->disconnect()` yourself when you're done.

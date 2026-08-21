@@ -28,7 +28,6 @@ final class ConfigurationTest extends TestCase
         self::assertSame('password', $configuration->getPassword());
         self::assertSame(60, $configuration->getHeartbeat());
         self::assertSame(10, $configuration->getConnectionTimeout());
-        self::assertSame(11, $configuration->getReadWriteTimeout());
     }
 
     public function testTopologyConfiguration(): void

@@ -4,66 +4,79 @@ declare(strict_types=1);
 
 namespace Cdn77\RabbitMQBundle\RabbitMQ;
 
-use Bunny\Channel;
+use Bunny\ChannelInterface;
 use Bunny\Client;
+use Bunny\Configuration as BunnyConfiguration;
+use Bunny\Defaults;
 use Cdn77\RabbitMQBundle\Configuration;
 use Cdn77\RabbitMQBundle\Exception\CannotCreateChannel;
 use Cdn77\RabbitMQBundle\Exception\ConnectionFailed;
-use React\Promise\PromiseInterface;
+use Closure;
 use Throwable;
+
+use function React\Async\async;
+use function React\Async\await;
 
 final class BunnyConnection implements Connection
 {
+    /** @var BunnyConfiguration */
+    private $configuration;
+
     /** @var Client */
     private $client;
 
-    /** @var Channel|null */
+    /** @var ChannelInterface|null */
     private $channel;
 
-    /** @var Channel */
+    /** @var ChannelInterface|null */
     private $transactionalChannel;
 
     public function __construct(Configuration\Connection $configuration)
     {
-        $options = [
-            'host' => $configuration->getHost(),
-            'port' => $configuration->getPort(),
-            'vhost' => $configuration->getVhost(),
-            'heartbeat' => $configuration->getHeartbeat(),
-            'timeout' => $configuration->getConnectionTimeout(),
-            'read_write_timeout' => $configuration->getReadWriteTimeout(),
-        ];
-
-        if ($configuration->getUser() !== null) {
-            $options['user'] = $configuration->getUser();
-        }
-
-        if ($configuration->getPassword() !== null) {
-            $options['password'] = $configuration->getPassword();
-        }
-
-        $this->client = new Client($options);
+        $this->configuration = new BunnyConfiguration(
+            host: $configuration->getHost(),
+            port: $configuration->getPort(),
+            vhost: $configuration->getVhost(),
+            user: $configuration->getUser() ?? Defaults::USER,
+            password: $configuration->getPassword() ?? Defaults::PASSWORD,
+            timeout: $configuration->getConnectionTimeout(),
+            heartbeat: (float) $configuration->getHeartbeat(),
+        );
+        $this->client = new Client($this->configuration);
     }
 
-    public function getChannel(): Channel
+    public function getChannel(): ChannelInterface
     {
-        if ($this->channel === null) {
-            $this->channel = $this->createChannel();
+        $channel = $this->channel;
+        if ($channel === null) {
+            $channel = $this->createChannel();
+            $channel->once('close', function (): void {
+                $this->channel = null;
+            });
+
+            $this->channel = $channel;
         }
 
-        return $this->channel;
+        return $channel;
     }
 
-    public function getTransactionalChannel(): Channel
+    public function getTransactionalChannel(): ChannelInterface
     {
         if ($this->transactionalChannel === null) {
-            $this->transactionalChannel = $this->createChannel();
+            $channel = $this->createChannel();
+            $channel->once('close', function (): void {
+                $this->transactionalChannel = null;
+            });
 
             try {
-                $this->transactionalChannel->txSelect();
+                $channel->txSelect();
             } catch (Throwable $exception) {
                 throw new CannotCreateChannel('Cannot create transaction channel', 0, $exception);
             }
+
+            // Cache it only once it is transactional, otherwise a retry would hand back a plain
+            // channel from the fast path above and fail on txCommit() instead.
+            $this->transactionalChannel = $channel;
         }
 
         return $this->transactionalChannel;
@@ -71,12 +84,23 @@ final class BunnyConnection implements Connection
 
     public function connect(): void
     {
-        if ($this->client->isConnected()) {
+        if ($this->client->canDisconnect()) {
             return;
         }
 
+        // Bunny never rolls the state back when connect() fails, leaving a client that reports
+        // itself as connected yet refuses to connect again - so every later attempt would await a
+        // promise nothing can resolve. Such a client is unusable; start over with a fresh one.
+        if ($this->client->isConnected()) {
+            $this->channel = null;
+            $this->transactionalChannel = null;
+            $this->client = new Client($this->configuration);
+        }
+
         try {
-            $this->client->connect();
+            $this->run(function (): void {
+                $this->client->connect();
+            });
         } catch (Throwable $exception) {
             throw ConnectionFailed::causedBy($exception);
         }
@@ -84,24 +108,40 @@ final class BunnyConnection implements Connection
 
     public function disconnect(): void
     {
-        if (! $this->client->isConnected()) {
+        // Bunny only tolerates disconnect() on a fully connected client - canDisconnect() also
+        // rules out the connecting/disconnecting states that isConnected() reports as connected.
+        if (! $this->client->canDisconnect()) {
             return;
         }
 
-        $this->client->disconnect();
+        $this->run(function (): void {
+            $this->client->disconnect();
+        });
+
         $this->channel = null;
+        $this->transactionalChannel = null;
     }
 
-    private function createChannel(): Channel
+    /**
+     * @param Closure(): T $operation
+     *
+     * @return T
+     *
+     * @template T
+     */
+    public function run(Closure $operation): mixed
+    {
+        // Always on a Fiber of its own, even when one is already current (an acknowledge issued
+        // from inside a consumer callback). Running the operation on the calling Fiber instead
+        // saves an allocation, but makes PHP unable to switch back out of contexts that forbid it
+        // - a signal handler above all - turning a survivable shutdown into a fatal FiberError.
+        return await(async($operation)());
+    }
+
+    private function createChannel(): ChannelInterface
     {
         $this->connect();
 
-        $channel = $this->client->channel();
-
-        if ($channel instanceof PromiseInterface) {
-            throw CannotCreateChannel::gotInvalidType(Channel::class, PromiseInterface::class);
-        }
-
-        return $channel;
+        return $this->client->channel();
     }
 }

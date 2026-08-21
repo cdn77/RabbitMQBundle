@@ -12,10 +12,10 @@ class Message
     /** @var string */
     public $body;
 
-    /** @var mixed[] */
+    /** @var array<string, mixed> */
     public $headers;
 
-    /** @param mixed[] $headers */
+    /** @param array<string, mixed> $headers */
     public function __construct(string $body, array $headers = [])
     {
         $this->body = $body;
@@ -27,7 +27,7 @@ class Message
         $this->headers = $headers;
     }
 
-    /** @param mixed[] $headers */
+    /** @param array<string, mixed> $headers */
     public static function json(string $body, array $headers = []): self
     {
         return new self($body, [self::HEADER_CONTENT_TYPE => 'application/json'] + $headers);

@@ -14,7 +14,7 @@ final class PublishOperation
     private const bool MANDATORY = false;
     private const bool IMMEDIATE = false;
 
-    /** @param mixed[] $headers */
+    /** @param array<string, mixed> $headers */
     public function handleRaw(
         Connection $connection,
         string $body,
@@ -22,26 +22,30 @@ final class PublishOperation
         string $routingKey,
         string $exchange,
     ): void {
-        $connection->getChannel()->publish(
-            $body,
-            $headers,
-            $exchange,
-            $routingKey,
-            self::MANDATORY,
-            self::IMMEDIATE,
-        );
+        $connection->run(static function () use ($connection, $body, $headers, $routingKey, $exchange): void {
+            $connection->getChannel()->publish(
+                $body,
+                $headers,
+                $exchange,
+                $routingKey,
+                self::MANDATORY,
+                self::IMMEDIATE,
+            );
+        });
     }
 
     public function handle(Connection $connection, Message $message, string $routingKey, string $exchange): void
     {
-        $connection->getChannel()->publish(
-            $message->body,
-            $message->headers,
-            $exchange,
-            $routingKey,
-            self::MANDATORY,
-            self::IMMEDIATE,
-        );
+        $connection->run(static function () use ($connection, $message, $routingKey, $exchange): void {
+            $connection->getChannel()->publish(
+                $message->body,
+                $message->headers,
+                $exchange,
+                $routingKey,
+                self::MANDATORY,
+                self::IMMEDIATE,
+            );
+        });
     }
 
     /** @param Message[] $messages */
@@ -51,28 +55,36 @@ final class PublishOperation
         string $routingKey,
         string $exchangeName,
     ): void {
-        $transactionalChannel = $connection->getTransactionalChannel();
-        try {
-            foreach ($messages as $message) {
-                $transactionalChannel->publish(
-                    $message->body,
-                    $message->headers,
-                    $exchangeName,
-                    $routingKey,
-                    self::MANDATORY,
-                    self::IMMEDIATE,
+        $connection->run(static function () use ($connection, $messages, $routingKey, $exchangeName): void {
+            $transactionalChannel = $connection->getTransactionalChannel();
+            try {
+                foreach ($messages as $message) {
+                    $transactionalChannel->publish(
+                        $message->body,
+                        $message->headers,
+                        $exchangeName,
+                        $routingKey,
+                        self::MANDATORY,
+                        self::IMMEDIATE,
+                    );
+                }
+
+                $transactionalChannel->txCommit();
+            } catch (Throwable $exception) {
+                try {
+                    $transactionalChannel->txRollback();
+                } catch (Throwable) {
+                    // The usual cause of the failure above is the broker closing the channel, and
+                    // such a channel can no longer be rolled back - nor does it need to be. Keep
+                    // reporting what actually went wrong.
+                }
+
+                throw new OperationFailed(
+                    $exception->getMessage(),
+                    $exception->getCode(),
+                    $exception,
                 );
             }
-
-            $transactionalChannel->txCommit();
-        } catch (Throwable $exception) {
-            $transactionalChannel->txRollback();
-
-            throw new OperationFailed(
-                $exception->getMessage(),
-                $exception->getCode(),
-                $exception,
-            );
-        }
+        });
     }
 }

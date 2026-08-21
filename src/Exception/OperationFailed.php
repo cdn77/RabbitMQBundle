@@ -6,12 +6,6 @@ namespace Cdn77\RabbitMQBundle\Exception;
 
 use RuntimeException;
 
-use function sprintf;
-
 final class OperationFailed extends RuntimeException implements Exception
 {
-    public static function gotInvalidType(string $expected, string $actual): self
-    {
-        return new self(sprintf('Expected "%s", got "%s"', $expected, $actual));
-    }
 }

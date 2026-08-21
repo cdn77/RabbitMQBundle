@@ -5,9 +5,7 @@ declare(strict_types=1);
 namespace Cdn77\RabbitMQBundle\RabbitMQ\Operation;
 
 use Bunny\Message;
-use Cdn77\RabbitMQBundle\Exception\OperationFailed;
 use Cdn77\RabbitMQBundle\RabbitMQ\Connection;
-use React\Promise\PromiseInterface;
 
 final class GetOperation
 {
@@ -22,23 +20,21 @@ final class GetOperation
     /** @return Message[] */
     public function handle(string $queueName, int $maxCount): array
     {
-        $messages = [];
+        return $this->connection->run(function () use ($queueName, $maxCount): array {
+            $messages = [];
+            $channel = $this->connection->getChannel();
 
-        for ($count = 0; $count < $maxCount; $count++) {
-            /** @var Message|PromiseInterface|null $message */
-            $message = $this->connection->getChannel()->get($queueName, false);
+            for ($count = 0; $count < $maxCount; $count++) {
+                $message = $channel->get($queueName, false);
 
-            if ($message === null) {
-                return $messages;
+                if ($message === null) {
+                    return $messages;
+                }
+
+                $messages[] = $message;
             }
 
-            if ($message instanceof PromiseInterface) {
-                throw OperationFailed::gotInvalidType(Message::class, PromiseInterface::class);
-            }
-
-            $messages[] = $message;
-        }
-
-        return $messages;
+            return $messages;
+        });
     }
 }

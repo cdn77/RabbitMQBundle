@@ -37,3 +37,5 @@ services:
 
     Cdn77\RabbitMQBundle\ConsumerRunner:
     Cdn77\RabbitMQBundle\SetupAction:
+
+    Cdn77\RabbitMQBundle\EventListener\DisconnectConnection:

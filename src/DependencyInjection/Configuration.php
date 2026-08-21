@@ -16,7 +16,6 @@ final class Configuration implements ConfigurationInterface
     public const string KEY_CONFIGURATION_DSN = 'dsn';
     public const string KEY_CONFIGURATION_HEARTBEAT = 'heartbeat';
     public const string KEY_CONFIGURATION_CONNECTION_TIMEOUT = 'connection_timeout';
-    public const string KEY_CONFIGURATION_READ_WRITE_TIMEOUT = 'read_write_timeout';
     public const string KEY_CONFIGURATION_EXCHANGES = 'exchanges';
     public const string KEY_CONFIGURATION_QUEUES = 'queues';
     public const string KEY_EXCHANGE_NAME = 'name';
@@ -35,7 +34,6 @@ final class Configuration implements ConfigurationInterface
     private const string DEFAULT_DSN = 'amqp://127.0.0.1/';
     private const int DEFAULT_HEARTBEAT = 60;
     private const int DEFAULT_TIMEOUT = 10;
-    private const int DEAFULT_READ_WRITE_TIMEOUT = 3;
 
     public function getConfigTreeBuilder(): TreeBuilder
     {
@@ -63,10 +61,6 @@ final class Configuration implements ConfigurationInterface
         $rootNode->children()
             ->scalarNode(self::KEY_CONFIGURATION_CONNECTION_TIMEOUT)
             ->defaultValue(self::DEFAULT_TIMEOUT);
-
-        $rootNode->children()
-            ->scalarNode(self::KEY_CONFIGURATION_READ_WRITE_TIMEOUT)
-            ->defaultValue(self::DEAFULT_READ_WRITE_TIMEOUT);
     }
 
     private function configureExchanges(ArrayNodeDefinition $rootNode): void

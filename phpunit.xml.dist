@@ -8,7 +8,7 @@
          bootstrap="tests/bootstrap.php"
 >
     <php>
-        <env name="RABBITMQ_DSN" value="amqp://127.0.0.1/?hearbeat=60&amp;connection_timeout=10&amp;read_write_timeout=3" />
+        <env name="RABBITMQ_DSN" value="amqp://127.0.0.1/?heartbeat=60&amp;connection_timeout=10" />
     </php>
     <testsuite name="Tests">
         <directory>tests</directory>

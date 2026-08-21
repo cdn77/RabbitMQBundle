@@ -23,10 +23,10 @@ final class Queue implements Bindable
     /** @var bool */
     private $autoDelete;
 
-    /** @var mixed[] */
+    /** @var array<string, mixed> */
     private $arguments;
 
-    /** @param mixed[] $arguments */
+    /** @param array<string, mixed> $arguments */
     public function __construct(
         string $name,
         bool $durable = false,
@@ -84,7 +84,7 @@ final class Queue implements Bindable
         return $this->autoDelete;
     }
 
-    /** @return mixed[] */
+    /** @return array<string, mixed> */
     public function getArguments(): array
     {
         return $this->arguments;

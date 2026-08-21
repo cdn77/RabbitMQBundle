@@ -5,12 +5,15 @@
     "type": "library",
     "require": {
         "php": "^8.3",
-        "bunny/bunny": "^0.5.0",
+        "bunny/bunny": "^0.6.0-alpha.4",
         "myclabs/php-enum": "^1.8.4",
-        "react/promise": "^2.0",
+        "react/async": "^4.2",
+        "react/event-loop": "^1.2",
+        "react/promise": "^3",
         "symfony/config": "^7.4",
         "symfony/console": "^7.4",
         "symfony/dependency-injection": "^7.4",
+        "symfony/event-dispatcher": "^7.4",
         "symfony/framework-bundle": "^7.4",
         "symfony/http-kernel": "^7.4",
         "symfony/yaml": "^7.4"
@@ -26,6 +29,8 @@
         "phpunit/phpunit": "^12.5",
         "shipmonk/composer-dependency-analyser": "^1.4"
     },
+    "minimum-stability": "alpha",
+    "prefer-stable": true,
     "autoload": {
         "psr-4": {
             "Cdn77\\RabbitMQBundle\\": "src/"

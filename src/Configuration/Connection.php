@@ -10,7 +10,6 @@ final class Connection
 {
     private const int DEFAULT_HEARTBEAT = 60;
     private const int DEFAULT_CONNECTION_TIMEOUT = 3;
-    private const int DEFAULT_READ_WRITE_TIMEOUT = 5;
 
     /** @var string */
     private $host;
@@ -33,9 +32,6 @@ final class Connection
     /** @var int */
     private $connectionTimeout;
 
-    /** @var int */
-    private $readWriteTimeout;
-
     public function __construct(
         string $host,
         int $port,
@@ -44,7 +40,6 @@ final class Connection
         string|null $password,
         int $heartbeat = self::DEFAULT_HEARTBEAT,
         int $connectionTimeout = self::DEFAULT_CONNECTION_TIMEOUT,
-        int $readWriteTimeout = self::DEFAULT_READ_WRITE_TIMEOUT,
     ) {
         $this->host = $host;
         $this->port = $port;
@@ -53,7 +48,6 @@ final class Connection
         $this->password = $password;
         $this->heartbeat = $heartbeat;
         $this->connectionTimeout = $connectionTimeout;
-        $this->readWriteTimeout = $readWriteTimeout;
     }
 
     /** @param mixed[] $configuration */
@@ -76,13 +70,6 @@ final class Connection
             $new->connectionTimeout = (int) $configuration[Configuration::KEY_CONFIGURATION_CONNECTION_TIMEOUT];
         }
 
-        if (
-            isset($configuration[Configuration::KEY_CONFIGURATION_READ_WRITE_TIMEOUT])
-            && ! isset($dsn->getParameters()[Configuration::KEY_CONFIGURATION_READ_WRITE_TIMEOUT])
-        ) {
-            $new->readWriteTimeout = (int) $configuration[Configuration::KEY_CONFIGURATION_READ_WRITE_TIMEOUT];
-        }
-
         return $new;
     }
 
@@ -99,8 +86,6 @@ final class Connection
             (int) ($parameters[Configuration::KEY_CONFIGURATION_HEARTBEAT] ?? self::DEFAULT_HEARTBEAT),
             (int) ($parameters[Configuration::KEY_CONFIGURATION_CONNECTION_TIMEOUT]
                 ?? self::DEFAULT_CONNECTION_TIMEOUT),
-            (int) ($parameters[Configuration::KEY_CONFIGURATION_READ_WRITE_TIMEOUT]
-                ?? self::DEFAULT_READ_WRITE_TIMEOUT),
         );
     }
 
@@ -137,10 +122,5 @@ final class Connection
     public function getConnectionTimeout(): int
     {
         return $this->connectionTimeout;
-    }
-
-    public function getReadWriteTimeout(): int
-    {
-        return $this->readWriteTimeout;
     }
 }

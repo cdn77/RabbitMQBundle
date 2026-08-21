@@ -14,9 +14,11 @@ use Cdn77\RabbitMQBundle\RabbitMQ\ExchangeType;
 use Cdn77\RabbitMQBundle\RabbitMQ\Operation\AcknowledgeOperation;
 use Cdn77\RabbitMQBundle\RabbitMQ\Queue;
 use Cdn77\RabbitMQBundle\Tests\RabbitMQ\InMemoryConsumer;
+use Cdn77\RabbitMQBundle\Tests\RabbitMQ\ThrowingConsumer;
 use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\TestCase;
+use RuntimeException;
 
 use function end;
 
@@ -41,12 +43,69 @@ final class ConsumerRunnerTest extends TestCase
     public function tearDown(): void
     {
         $this->clearRabbitMQ();
+        $this->getConnection()->disconnect();
 
         parent::tearDown();
     }
 
     #[DataProvider('maxMessagesDataProvider')]
     public function testMaxMessagesLimit(int $maxMessages): void
+    {
+        $queue = $this->givenQueueWithEnoughMessages();
+        $consumer = $this->givenConfiguredConsumer($maxMessages, $queue);
+
+        $this->whenConsume($consumer);
+
+        $this->thenOnlyMaxMessagesCountIsConsumed($maxMessages, $consumer);
+    }
+
+    public function testConsumerExceptionIsPropagated(): void
+    {
+        $queue = $this->givenQueueWithEnoughMessages();
+
+        // The consumer callback runs in its own Fiber, so an exception thrown there can only end
+        // up as an unhandled promise rejection unless the runner routes it out of run(). maxSeconds
+        // is a safety net: without it a regression would block the suite instead of failing it.
+        $consumer = new ThrowingConsumer(new Configuration($queue->getName(), 1, 0, null, 5.0));
+
+        $this->expectException(RuntimeException::class);
+        $this->expectExceptionMessage(ThrowingConsumer::EXCEPTION_MESSAGE);
+
+        $this->whenConsume($consumer);
+    }
+
+    public function testConsumerIsNotCalledAgainAfterItFailed(): void
+    {
+        $queue = $this->givenQueueWithEnoughMessages();
+
+        // Prefetch more than one message, so Bunny has further deliveries buffered by the time the
+        // first one fails.
+        $consumer = new ThrowingConsumer(new Configuration($queue->getName(), 10, 0, null, 5.0));
+
+        try {
+            $this->whenConsume($consumer);
+
+            self::fail('The consumer exception should have been propagated');
+        } catch (RuntimeException $error) {
+            self::assertSame(ThrowingConsumer::EXCEPTION_MESSAGE, $error->getMessage());
+        }
+
+        // The failure settles the awaited promise only on a future tick, while Bunny hands over the
+        // next buffered delivery as soon as the callback returns - a consumer that has just failed
+        // must not be given those, they belong back in the queue.
+        self::assertSame(1, $consumer->getConsumeCallCount());
+    }
+
+    private function clearRabbitMQ(): void
+    {
+        $connection = $this->getConnection();
+        $connection->run(static function () use ($connection): void {
+            $connection->getChannel()->queueDelete('testQueue');
+            $connection->getChannel()->exchangeDelete('test');
+        });
+    }
+
+    private function givenQueueWithEnoughMessages(): Queue
     {
         $exchange = new Exchange('test', new ExchangeType(ExchangeType::DIRECT));
         $queue = new Queue('testQueue');
@@ -60,25 +119,19 @@ final class ConsumerRunnerTest extends TestCase
         $this->setupTopology($topology);
 
         $this->givenEnoughMessagesInQueue($exchange, $routingKey);
-        $consumer = $this->givenConfiguredConsumer($maxMessages, $queue);
 
-        $this->whenConsume($consumer);
-
-        $this->thenOnlyMaxMessagesCountIsConsumed($maxMessages, $consumer);
-    }
-
-    private function clearRabbitMQ(): void
-    {
-        $this->getConnection()->getChannel()->queueDelete('testQueue');
-        $this->getConnection()->getChannel()->exchangeDelete('test');
+        return $queue;
     }
 
     private function givenEnoughMessagesInQueue(Exchange $exchange, string $routingKey): void
     {
-        $channel = $this->getConnection()->getChannel();
-        for ($i = 1; $i <= 10; $i++) {
-            $channel->publish((string) $i, [], $exchange->getName(), $routingKey);
-        }
+        $connection = $this->getConnection();
+        $connection->run(static function () use ($connection, $exchange, $routingKey): void {
+            $channel = $connection->getChannel();
+            for ($i = 1; $i <= 10; $i++) {
+                $channel->publish((string) $i, [], $exchange->getName(), $routingKey);
+            }
+        });
     }
 
     private function givenConfiguredConsumer(int $maxMessages, Queue $queue): InMemoryConsumer
