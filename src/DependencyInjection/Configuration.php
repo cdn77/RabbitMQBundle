@@ -8,8 +8,6 @@ use Symfony\Component\Config\Definition\Builder\ArrayNodeDefinition;
 use Symfony\Component\Config\Definition\Builder\TreeBuilder;
 use Symfony\Component\Config\Definition\ConfigurationInterface;
 
-use function assert;
-
 final class Configuration implements ConfigurationInterface
 {
     public const KEY_BINDING_EXCHANGE = 'exchange';
@@ -44,7 +42,6 @@ final class Configuration implements ConfigurationInterface
         $treeBuilder = new TreeBuilder(RabbitMQExtension::ALIAS);
 
         $rootNode = $treeBuilder->getRootNode();
-        assert($rootNode instanceof ArrayNodeDefinition);
 
         $this->configureConnection($rootNode);
         $this->configureExchanges($rootNode);
@@ -80,7 +77,6 @@ final class Configuration implements ConfigurationInterface
             ->normalizeKeys(false)
             ->defaultValue([])
             ->prototype('array');
-        assert($exchangesNode instanceof ArrayNodeDefinition);
 
         $exchangesNode->children()
             ->scalarNode(self::KEY_EXCHANGE_TYPE);
@@ -114,7 +110,6 @@ final class Configuration implements ConfigurationInterface
             ->normalizeKeys(false)
             ->defaultValue([])
             ->prototype('array');
-        assert($queuesNode instanceof ArrayNodeDefinition);
 
         $queuesNode->children()
             ->booleanNode(self::KEY_QUEUE_DURABLE)
@@ -144,7 +139,6 @@ final class Configuration implements ConfigurationInterface
             ->normalizeKeys(false)
             ->defaultValue([])
             ->prototype('array');
-        assert($exchangesBindingsNode instanceof ArrayNodeDefinition);
 
         $this->configureBindingNode($exchangesBindingsNode);
     }
@@ -156,7 +150,6 @@ final class Configuration implements ConfigurationInterface
             ->normalizeKeys(false)
             ->defaultValue([])
             ->prototype('array');
-        assert($queueBindingsNode instanceof ArrayNodeDefinition);
 
         $this->configureBindingNode($queueBindingsNode);
     }
