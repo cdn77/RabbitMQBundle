@@ -14,14 +14,22 @@ use Cdn77\RabbitMQBundle\RabbitMQ\ExchangeType;
 use Cdn77\RabbitMQBundle\RabbitMQ\Operation\AcknowledgeOperation;
 use Cdn77\RabbitMQBundle\RabbitMQ\Queue;
 use Cdn77\RabbitMQBundle\Tests\RabbitMQ\InMemoryConsumer;
+use PHPUnit\Framework\Attributes\DataProvider;
+use PHPUnit\Framework\Attributes\Group;
 use PHPUnit\Framework\TestCase;
 
 use function end;
 
-/** @group Integration */
+#[Group('Integration')]
 final class ConsumerRunnerTest extends TestCase
 {
     use WithRabbitMQ;
+
+    /** @return int[][] */
+    public static function maxMessagesDataProvider(): array
+    {
+        return [[0], [5]];
+    }
 
     public function setUp(): void
     {
@@ -37,7 +45,7 @@ final class ConsumerRunnerTest extends TestCase
         parent::tearDown();
     }
 
-    /** @dataProvider maxMessagesDataProvider */
+    #[DataProvider('maxMessagesDataProvider')]
     public function testMaxMessagesLimit(int $maxMessages): void
     {
         $exchange = new Exchange('test', new ExchangeType(ExchangeType::DIRECT));
@@ -57,12 +65,6 @@ final class ConsumerRunnerTest extends TestCase
         $this->whenConsume($consumer);
 
         $this->thenOnlyMaxMessagesCountIsConsumed($maxMessages, $consumer);
-    }
-
-    /** @return int[][] */
-    public function maxMessagesDataProvider(): array
-    {
-        return [[0], [5]];
     }
 
     private function clearRabbitMQ(): void

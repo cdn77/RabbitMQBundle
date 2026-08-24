@@ -3,7 +3,6 @@
          xsi:noNamespaceSchemaLocation="vendor/phpunit/phpunit/phpunit.xsd"
          beStrictAboutChangesToGlobalState="true"
          beStrictAboutOutputDuringTests="true"
-         beStrictAboutTodoAnnotatedTests="true"
          executionOrder="random"
          colors="true"
          bootstrap="tests/bootstrap.php"
@@ -14,9 +13,9 @@
     <testsuite name="Tests">
         <directory>tests</directory>
     </testsuite>
-    <coverage>
+    <source>
         <include>
             <directory suffix=".php">src</directory>
         </include>
-    </coverage>
+    </source>
 </phpunit>

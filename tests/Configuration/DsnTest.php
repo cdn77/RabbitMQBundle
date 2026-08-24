@@ -6,60 +6,13 @@ namespace Cdn77\RabbitMQBundle\Tests\Configuration;
 
 use Cdn77\RabbitMQBundle\Configuration\Dsn;
 use Cdn77\RabbitMQBundle\Exception\InvalidDsn;
+use PHPUnit\Framework\Attributes\DataProvider;
 use PHPUnit\Framework\TestCase;
 
 class DsnTest extends TestCase
 {
-    public function testMalformedUri(): void
-    {
-        $this->expectException(InvalidDsn::class);
-        $this->expectExceptionMessage('The provided DSN is malformed.');
-
-        new Dsn('http:///example.com');
-    }
-
-    public function testMissingComponents(): void
-    {
-        $this->expectException(InvalidDsn::class);
-        $this->expectExceptionMessage('The provided DSN is incomplete.');
-
-        new Dsn('Fluff lobster ultimately, then mix with sweet chili sauce and serve roughly in sauté pan.');
-    }
-
-    public function testInvalidScheme(): void
-    {
-        $this->expectException(InvalidDsn::class);
-        $this->expectExceptionMessage('The provided scheme "http" is invalid, expected "amqp".');
-
-        new Dsn('http://example.com//vhost');
-    }
-
-    /**
-     * @param string[] $parameters
-     *
-     * @dataProvider dataProviderCreate
-     */
-    public function testCreate(
-        string $amqpUri,
-        string|null $username,
-        string|null $password,
-        string $host,
-        int $port,
-        string $vhost,
-        array $parameters,
-    ): void {
-        $dsn = new Dsn($amqpUri);
-
-        self::assertSame($username, $dsn->getUsername());
-        self::assertSame($password, $dsn->getPassword());
-        self::assertSame($host, $dsn->getHost());
-        self::assertSame($port, $dsn->getPort());
-        self::assertSame($vhost, $dsn->getVhost());
-        self::assertSame($parameters, $dsn->getParameters());
-    }
-
     /** @return mixed[][] */
-    public function dataProviderCreate(): iterable
+    public static function dataProviderCreate(): iterable
     {
         yield [
             'amqp://username:password@host:1234/vhost?heartbeat=120',
@@ -100,5 +53,50 @@ class DsnTest extends TestCase
             '/vhost',
             [],
         ];
+    }
+
+    public function testMalformedUri(): void
+    {
+        $this->expectException(InvalidDsn::class);
+        $this->expectExceptionMessage('The provided DSN is malformed.');
+
+        new Dsn('http:///example.com');
+    }
+
+    public function testMissingComponents(): void
+    {
+        $this->expectException(InvalidDsn::class);
+        $this->expectExceptionMessage('The provided DSN is incomplete.');
+
+        new Dsn('Fluff lobster ultimately, then mix with sweet chili sauce and serve roughly in sauté pan.');
+    }
+
+    public function testInvalidScheme(): void
+    {
+        $this->expectException(InvalidDsn::class);
+        $this->expectExceptionMessage('The provided scheme "http" is invalid, expected "amqp".');
+
+        new Dsn('http://example.com//vhost');
+    }
+
+    /** @param string[] $parameters */
+    #[DataProvider('dataProviderCreate')]
+    public function testCreate(
+        string $amqpUri,
+        string|null $username,
+        string|null $password,
+        string $host,
+        int $port,
+        string $vhost,
+        array $parameters,
+    ): void {
+        $dsn = new Dsn($amqpUri);
+
+        self::assertSame($username, $dsn->getUsername());
+        self::assertSame($password, $dsn->getPassword());
+        self::assertSame($host, $dsn->getHost());
+        self::assertSame($port, $dsn->getPort());
+        self::assertSame($vhost, $dsn->getVhost());
+        self::assertSame($parameters, $dsn->getParameters());
     }
 }

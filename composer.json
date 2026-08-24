@@ -23,7 +23,7 @@
         "phpstan/phpstan": "^2.2.9",
         "phpstan/phpstan-phpunit": "^2.0.18",
         "phpstan/phpstan-strict-rules": "^2.0.12",
-        "phpunit/phpunit": "^9.5",
+        "phpunit/phpunit": "^12.5",
         "shipmonk/composer-dependency-analyser": "^1.4"
     },
     "autoload": {

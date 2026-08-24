@@ -10,6 +10,7 @@ use Cdn77\RabbitMQBundle\Configuration\Topology;
 use Cdn77\RabbitMQBundle\ConsumerRunner;
 use Cdn77\RabbitMQBundle\RabbitMQ\BunnyConnection;
 use Cdn77\RabbitMQBundle\SetupAction;
+use PHPUnit\Framework\Attributes\Before;
 
 use function assert;
 use function getenv;
@@ -51,11 +52,8 @@ trait WithRabbitMQ
         return $this->consumerRunner;
     }
 
-    /**
-     * @internal
-     *
-     * @before
-     */
+    /** @internal */
+    #[Before]
     protected function setupRabbitMQ(): void
     {
         $dsn = getenv('RABBITMQ_DSN');
