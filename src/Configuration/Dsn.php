@@ -34,7 +34,7 @@ final class Dsn
     /** @var string */
     private $vhost;
 
-    /** @var string[] */
+    /** @var array<array<mixed>|string> */
     private $parameters = [];
 
     public function __construct(string $dsn)
@@ -106,7 +106,7 @@ final class Dsn
         return $this->vhost;
     }
 
-    /** @return string[] */
+    /** @return array<array<mixed>|string> */
     public function getParameters(): array
     {
         return $this->parameters;

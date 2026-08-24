@@ -23,7 +23,7 @@ final class Cdn77RabbitMQBundle extends Bundle
 
     public function getContainerExtension(): RabbitMQExtension
     {
-        if ($this->extension === null) {
+        if (! $this->extension instanceof RabbitMQExtension) {
             $this->extension = new RabbitMQExtension();
         }
 
