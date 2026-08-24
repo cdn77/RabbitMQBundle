@@ -8,9 +8,9 @@ use Cdn77\RabbitMQBundle\DependencyInjection\Configuration;
 
 final class Connection
 {
-    private const DEFAULT_HEARTBEAT = 60;
-    private const DEFAULT_CONNECTION_TIMEOUT = 3;
-    private const DEFAULT_READ_WRITE_TIMEOUT = 5;
+    private const int DEFAULT_HEARTBEAT = 60;
+    private const int DEFAULT_CONNECTION_TIMEOUT = 3;
+    private const int DEFAULT_READ_WRITE_TIMEOUT = 5;
 
     /** @var string */
     private $host;
@@ -40,11 +40,11 @@ final class Connection
         string $host,
         int $port,
         string $vhost,
-        ?string $user,
-        ?string $password,
+        string|null $user,
+        string|null $password,
         int $heartbeat = self::DEFAULT_HEARTBEAT,
         int $connectionTimeout = self::DEFAULT_CONNECTION_TIMEOUT,
-        int $readWriteTimeout = self::DEFAULT_READ_WRITE_TIMEOUT
+        int $readWriteTimeout = self::DEFAULT_READ_WRITE_TIMEOUT,
     ) {
         $this->host = $host;
         $this->port = $port;
@@ -99,7 +99,8 @@ final class Connection
             (int) ($parameters[Configuration::KEY_CONFIGURATION_HEARTBEAT] ?? self::DEFAULT_HEARTBEAT),
             (int) ($parameters[Configuration::KEY_CONFIGURATION_CONNECTION_TIMEOUT]
                 ?? self::DEFAULT_CONNECTION_TIMEOUT),
-            (int) ($parameters[Configuration::KEY_CONFIGURATION_READ_WRITE_TIMEOUT] ?? self::DEFAULT_READ_WRITE_TIMEOUT)
+            (int) ($parameters[Configuration::KEY_CONFIGURATION_READ_WRITE_TIMEOUT]
+                ?? self::DEFAULT_READ_WRITE_TIMEOUT),
         );
     }
 
@@ -118,12 +119,12 @@ final class Connection
         return $this->vhost;
     }
 
-    public function getUser(): ?string
+    public function getUser(): string|null
     {
         return $this->user;
     }
 
-    public function getPassword(): ?string
+    public function getPassword(): string|null
     {
         return $this->password;
     }

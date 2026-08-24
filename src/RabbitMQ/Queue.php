@@ -32,7 +32,7 @@ final class Queue implements Bindable
         bool $durable = false,
         bool $exclusive = false,
         bool $autoDelete = false,
-        array $arguments = []
+        array $arguments = [],
     ) {
         $this->name = $name;
         $this->durable = $durable;
@@ -49,7 +49,7 @@ final class Queue implements Bindable
             $configuration[Configuration::KEY_QUEUE_DURABLE] ?? false,
             $configuration[Configuration::KEY_QUEUE_EXCLUSIVE] ?? false,
             $configuration[Configuration::KEY_QUEUE_AUTO_DELETE] ?? false,
-            $configuration[Configuration::KEY_QUEUE_ARGUMENTS] ?? []
+            $configuration[Configuration::KEY_QUEUE_ARGUMENTS] ?? [],
         );
     }
 

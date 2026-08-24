@@ -31,7 +31,7 @@ final class Binding
         return new self(
             $bindable,
             $configuration[Configuration::KEY_BINDING_ROUTING_KEY],
-            $configuration[Configuration::KEY_BINDING_ARGUMENTS] ?? []
+            $configuration[Configuration::KEY_BINDING_ARGUMENTS] ?? [],
         );
     }
 

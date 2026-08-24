@@ -6,8 +6,8 @@ namespace Cdn77\RabbitMQBundle\RabbitMQ;
 
 class Message
 {
-    public const HEADER_CONTENT_TYPE = 'content-type';
-    public const HEADER_DELIVERY_MODE = 'delivery-mode';
+    public const string HEADER_CONTENT_TYPE = 'content-type';
+    public const string HEADER_DELIVERY_MODE = 'delivery-mode';
 
     /** @var string */
     public $body;

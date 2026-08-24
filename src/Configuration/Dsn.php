@@ -15,9 +15,9 @@ use function substr;
 
 final class Dsn
 {
-    private const SCHEME = 'amqp';
-    private const DEFAULT_PORT = 5672;
-    private const DEFAULT_VHOST = '/';
+    private const string SCHEME = 'amqp';
+    private const int DEFAULT_PORT = 5672;
+    private const string DEFAULT_VHOST = '/';
 
     /** @var string */
     private $host;
@@ -77,7 +77,7 @@ final class Dsn
             $this->port,
             $this->vhost === '/' ? '' : $this->vhost,
             count($this->parameters) !== 0 ? '?' : '',
-            count($this->parameters) !== 0 ? http_build_query($this->parameters) : ''
+            count($this->parameters) !== 0 ? http_build_query($this->parameters) : '',
         );
     }
 
@@ -91,12 +91,12 @@ final class Dsn
         return $this->port;
     }
 
-    public function getUsername(): ?string
+    public function getUsername(): string|null
     {
         return $this->username;
     }
 
-    public function getPassword(): ?string
+    public function getPassword(): string|null
     {
         return $this->password;
     }

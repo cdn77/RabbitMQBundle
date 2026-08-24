@@ -35,8 +35,8 @@ final class ConfigurationFailed extends RuntimeException implements Exception
                 'Could not bind exchange "%s" to "%s" with routing key "%s"',
                 $exchange->getName(),
                 $binding->getBindable()->getName(),
-                $binding->getRoutingKey()
-            )
+                $binding->getRoutingKey(),
+            ),
         );
     }
 
@@ -47,8 +47,8 @@ final class ConfigurationFailed extends RuntimeException implements Exception
                 'Could not bind queue "%s" to "%s" with routing key "%s"',
                 $queue->getName(),
                 $binding->getBindable()->getName(),
-                $binding->getRoutingKey()
-            )
+                $binding->getRoutingKey(),
+            ),
         );
     }
 }

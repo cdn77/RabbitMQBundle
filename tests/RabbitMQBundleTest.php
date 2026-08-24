@@ -31,7 +31,7 @@ final class RabbitMQBundleTest extends TestCase
 
         self::assertTrue(
             $containsConsumerCompilerPass,
-            'RabbitMQ bundle does not have registered consumer compiler pass.'
+            'RabbitMQ bundle does not have registered consumer compiler pass.',
         );
     }
 

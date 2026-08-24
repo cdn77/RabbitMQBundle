@@ -13,8 +13,8 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 final class SetUpCommand extends Command
 {
-    private const NAME = RabbitMQExtension::ALIAS . ':setup';
-    private const DESCRIPTION = 'Set up exchanges and queues from configuration';
+    private const string NAME = RabbitMQExtension::ALIAS . ':setup';
+    private const string DESCRIPTION = 'Set up exchanges and queues from configuration';
 
     /** @var SetupAction */
     private $setupAction;

@@ -9,6 +9,6 @@ use MyCLabs\Enum\Enum;
 /** @extends Enum<int> */
 final class DeliveryMode extends Enum
 {
-    public const TRANSIENT = 1;
-    public const PERSISTENT = 2;
+    public const int TRANSIENT = 1;
+    public const int PERSISTENT = 2;
 }

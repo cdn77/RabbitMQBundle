@@ -35,7 +35,7 @@ final class SetupAction
                 $exchange->shouldAutoDelete(),
                 $exchange->isInternal(),
                 false,
-                $exchange->getArguments()
+                $exchange->getArguments(),
             );
 
             if (! ($frame instanceof MethodExchangeDeclareOkFrame)) {
@@ -50,7 +50,7 @@ final class SetupAction
                     $boundQueue->getName(),
                     $binding->getRoutingKey(),
                     false,
-                    $binding->getArguments()
+                    $binding->getArguments(),
                 );
 
                 if (! ($frame instanceof MethodExchangeBindOkFrame)) {
@@ -67,7 +67,7 @@ final class SetupAction
                 $queue->isExclusive(),
                 $queue->shouldAutoDelete(),
                 false,
-                $queue->getArguments()
+                $queue->getArguments(),
             );
 
             if (! ($frame instanceof MethodQueueDeclareOkFrame)) {
@@ -81,7 +81,7 @@ final class SetupAction
                     $boundQueue->getName(),
                     $binding->getRoutingKey(),
                     false,
-                    $binding->getArguments()
+                    $binding->getArguments(),
                 );
 
                 if (! ($frame instanceof MethodQueueBindOkFrame)) {
