@@ -20,9 +20,9 @@
         "ergebnis/composer-normalize": "^2.42",
         "infection/infection": "^0.28.1",
         "phpstan/extension-installer": "^1.0",
-        "phpstan/phpstan": "^1.10.66",
-        "phpstan/phpstan-phpunit": "^1.3.16",
-        "phpstan/phpstan-strict-rules": "^1.5.2",
+        "phpstan/phpstan": "^2.2.9",
+        "phpstan/phpstan-phpunit": "^2.0.18",
+        "phpstan/phpstan-strict-rules": "^2.0.12",
         "phpunit/phpunit": "^9.5",
         "shipmonk/composer-dependency-analyser": "^1.4"
     },
