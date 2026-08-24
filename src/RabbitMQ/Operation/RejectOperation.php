@@ -24,7 +24,7 @@ final class RejectOperation
             $channel->getChannelId(),
             $message->deliveryTag,
             false,
-            $requeue
+            $requeue,
         );
     }
 
@@ -39,7 +39,7 @@ final class RejectOperation
             $channel->getChannelId(),
             $lastMessage->deliveryTag,
             true,
-            $requeue
+            $requeue,
         );
     }
 }

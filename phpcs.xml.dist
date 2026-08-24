@@ -6,7 +6,7 @@
     <arg name="cache" value=".phpcs-cache" />
     <arg name="colors" />
 
-    <config name="php_version" value="70400"/>
+    <config name="php_version" value="80300"/>
 
     <!-- Ignore warnings, show progress of the run and show sniff names -->
     <arg value="nps" />
@@ -15,6 +15,7 @@
     <file>tests</file>
 
     <rule ref="Cdn77">
+        <exclude name="Cdn77.NamingConventions.ValidConstantName.ClassConstantNotUpperCase" />
         <exclude name="SlevomatCodingStandard.TypeHints.PropertyTypeHint.MissingNativeTypeHint" />
         <exclude name="SlevomatCodingStandard.PHP.RequireExplicitAssertion.RequiredExplicitAssertion" />
     </rule>

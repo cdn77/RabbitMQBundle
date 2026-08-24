@@ -11,8 +11,8 @@ use Throwable;
 
 final class PublishOperation
 {
-    private const MANDATORY = false;
-    private const IMMEDIATE = false;
+    private const bool MANDATORY = false;
+    private const bool IMMEDIATE = false;
 
     /** @param mixed[] $headers */
     public function handleRaw(
@@ -20,7 +20,7 @@ final class PublishOperation
         string $body,
         array $headers,
         string $routingKey,
-        string $exchange
+        string $exchange,
     ): void {
         $connection->getChannel()->publish(
             $body,
@@ -28,7 +28,7 @@ final class PublishOperation
             $exchange,
             $routingKey,
             self::MANDATORY,
-            self::IMMEDIATE
+            self::IMMEDIATE,
         );
     }
 
@@ -40,7 +40,7 @@ final class PublishOperation
             $exchange,
             $routingKey,
             self::MANDATORY,
-            self::IMMEDIATE
+            self::IMMEDIATE,
         );
     }
 
@@ -49,7 +49,7 @@ final class PublishOperation
         Connection $connection,
         iterable $messages,
         string $routingKey,
-        string $exchangeName
+        string $exchangeName,
     ): void {
         $transactionalChannel = $connection->getTransactionalChannel();
         try {
@@ -60,7 +60,7 @@ final class PublishOperation
                     $exchangeName,
                     $routingKey,
                     self::MANDATORY,
-                    self::IMMEDIATE
+                    self::IMMEDIATE,
                 );
             }
 
@@ -71,7 +71,7 @@ final class PublishOperation
             throw new OperationFailed(
                 $exception->getMessage(),
                 $exception->getCode(),
-                $exception
+                $exception,
             );
         }
     }

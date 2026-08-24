@@ -23,7 +23,7 @@ final class AcknowledgeOperation
         $channel->getClient()->ack(
             $channel->getChannelId(),
             $message->deliveryTag,
-            false
+            false,
         );
     }
 
@@ -37,7 +37,7 @@ final class AcknowledgeOperation
         $channel->getClient()->ack(
             $channel->getChannelId(),
             $lastMessage->deliveryTag,
-            true
+            true,
         );
     }
 }

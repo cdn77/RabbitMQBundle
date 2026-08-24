@@ -12,8 +12,8 @@ use Symfony\Component\Console\Output\OutputInterface;
 
 final class ConsumerListCommand extends Command
 {
-    private const NAME = 'debug:' . RabbitMQExtension::ALIAS . ':consumers';
-    private const DESCRIPTION = 'Show list of defined consumers.';
+    private const string NAME = 'debug:' . RabbitMQExtension::ALIAS . ':consumers';
+    private const string DESCRIPTION = 'Show list of defined consumers.';
 
     /** @var ConsumerStorage */
     private $consumerStorage;

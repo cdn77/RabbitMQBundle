@@ -47,7 +47,7 @@ final class ConsumerRunnerTest extends TestCase
             [$exchange],
             [],
             [$queue],
-            [$queue->getName() => [new Binding($exchange, $routingKey)]]
+            [$queue->getName() => [new Binding($exchange, $routingKey)]],
         );
         $this->setupTopology($topology);
 
@@ -83,7 +83,7 @@ final class ConsumerRunnerTest extends TestCase
     {
         return new InMemoryConsumer(
             new AcknowledgeOperation($this->getConnection()),
-            new Configuration($queue->getName(), 1, 0, $maxMessages)
+            new Configuration($queue->getName(), 1, 0, $maxMessages),
         );
     }
 

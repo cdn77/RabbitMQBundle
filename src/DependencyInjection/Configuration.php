@@ -10,32 +10,32 @@ use Symfony\Component\Config\Definition\ConfigurationInterface;
 
 final class Configuration implements ConfigurationInterface
 {
-    public const KEY_BINDING_EXCHANGE = 'exchange';
-    public const KEY_BINDING_ROUTING_KEY = 'routing_key';
-    public const KEY_BINDING_ARGUMENTS = 'arguments';
-    public const KEY_CONFIGURATION_DSN = 'dsn';
-    public const KEY_CONFIGURATION_HEARTBEAT = 'heartbeat';
-    public const KEY_CONFIGURATION_CONNECTION_TIMEOUT = 'connection_timeout';
-    public const KEY_CONFIGURATION_READ_WRITE_TIMEOUT = 'read_write_timeout';
-    public const KEY_CONFIGURATION_EXCHANGES = 'exchanges';
-    public const KEY_CONFIGURATION_QUEUES = 'queues';
-    public const KEY_EXCHANGE_NAME = 'name';
-    public const KEY_EXCHANGE_TYPE = 'type';
-    public const KEY_EXCHANGE_DURABLE = 'durable';
-    public const KEY_EXCHANGE_AUTO_DELETE = 'auto_delete';
-    public const KEY_EXCHANGE_INTERNAL = 'internal';
-    public const KEY_EXCHANGE_ARGUMENTS = 'arguments';
-    public const KEY_EXCHANGE_BINDINGS = 'bindings';
-    public const KEY_QUEUE_NAME = 'name';
-    public const KEY_QUEUE_DURABLE = 'durable';
-    public const KEY_QUEUE_EXCLUSIVE = 'exclusive';
-    public const KEY_QUEUE_AUTO_DELETE = 'auto_delete';
-    public const KEY_QUEUE_ARGUMENTS = 'arguments';
-    public const KEY_QUEUE_BINDINGS = 'bindings';
-    private const DEFAULT_DSN = 'amqp://127.0.0.1/';
-    private const DEFAULT_HEARTBEAT = 60;
-    private const DEFAULT_TIMEOUT = 10;
-    private const DEAFULT_READ_WRITE_TIMEOUT = 3;
+    public const string KEY_BINDING_EXCHANGE = 'exchange';
+    public const string KEY_BINDING_ROUTING_KEY = 'routing_key';
+    public const string KEY_BINDING_ARGUMENTS = 'arguments';
+    public const string KEY_CONFIGURATION_DSN = 'dsn';
+    public const string KEY_CONFIGURATION_HEARTBEAT = 'heartbeat';
+    public const string KEY_CONFIGURATION_CONNECTION_TIMEOUT = 'connection_timeout';
+    public const string KEY_CONFIGURATION_READ_WRITE_TIMEOUT = 'read_write_timeout';
+    public const string KEY_CONFIGURATION_EXCHANGES = 'exchanges';
+    public const string KEY_CONFIGURATION_QUEUES = 'queues';
+    public const string KEY_EXCHANGE_NAME = 'name';
+    public const string KEY_EXCHANGE_TYPE = 'type';
+    public const string KEY_EXCHANGE_DURABLE = 'durable';
+    public const string KEY_EXCHANGE_AUTO_DELETE = 'auto_delete';
+    public const string KEY_EXCHANGE_INTERNAL = 'internal';
+    public const string KEY_EXCHANGE_ARGUMENTS = 'arguments';
+    public const string KEY_EXCHANGE_BINDINGS = 'bindings';
+    public const string KEY_QUEUE_NAME = 'name';
+    public const string KEY_QUEUE_DURABLE = 'durable';
+    public const string KEY_QUEUE_EXCLUSIVE = 'exclusive';
+    public const string KEY_QUEUE_AUTO_DELETE = 'auto_delete';
+    public const string KEY_QUEUE_ARGUMENTS = 'arguments';
+    public const string KEY_QUEUE_BINDINGS = 'bindings';
+    private const string DEFAULT_DSN = 'amqp://127.0.0.1/';
+    private const int DEFAULT_HEARTBEAT = 60;
+    private const int DEFAULT_TIMEOUT = 10;
+    private const int DEAFULT_READ_WRITE_TIMEOUT = 3;
 
     public function getConfigTreeBuilder(): TreeBuilder
     {

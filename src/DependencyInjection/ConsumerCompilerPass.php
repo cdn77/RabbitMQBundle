@@ -11,7 +11,7 @@ use Symfony\Component\DependencyInjection\Reference;
 
 final class ConsumerCompilerPass implements CompilerPassInterface
 {
-    public const TAG_NAME_CONSUMER = RabbitMQExtension::ALIAS . '.consumer';
+    public const string TAG_NAME_CONSUMER = RabbitMQExtension::ALIAS . '.consumer';
 
     public function process(ContainerBuilder $containerBuilder): void
     {
@@ -21,8 +21,8 @@ final class ConsumerCompilerPass implements CompilerPassInterface
             ConsumerStorage::class,
             new Definition(
                 ConsumerStorage::class,
-                [$consumerServices]
-            )
+                [$consumerServices],
+            ),
         );
 
         foreach ($containerBuilder->findTaggedServiceIds(self::TAG_NAME_CONSUMER) as $id => $tags) {

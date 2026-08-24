@@ -63,7 +63,7 @@ final class ConsumerRunner
             false,
             false,
             false,
-            []
+            [],
         );
     }
 
@@ -94,12 +94,12 @@ final class ConsumerRunner
             || ! $this->hasAnyMessageLeft($consumerConfiguration->getMaxMessages(), $this->processedMessageCount);
     }
 
-    private function hasAnyTimeLeft(?float $maxSeconds, float $startTime): bool
+    private function hasAnyTimeLeft(float|null $maxSeconds, float $startTime): bool
     {
         return $maxSeconds === null || microtime(true) < $startTime + $maxSeconds;
     }
 
-    private function hasAnyMessageLeft(?int $maxMessages, int $processedMessageCount): bool
+    private function hasAnyMessageLeft(int|null $maxMessages, int $processedMessageCount): bool
     {
         return $maxMessages === null || $processedMessageCount < $maxMessages;
     }

@@ -25,8 +25,8 @@ final class Configuration
         string $queueName,
         int $prefetchCount = 1,
         int $prefetchSize = 0,
-        ?int $maxMessages = null,
-        ?float $maxSeconds = null
+        int|null $maxMessages = null,
+        float|null $maxSeconds = null,
     ) {
         $this->queueName = $queueName;
         $this->prefetchCount = $prefetchCount;
@@ -50,12 +50,12 @@ final class Configuration
         return $this->prefetchSize;
     }
 
-    public function getMaxMessages(): ?int
+    public function getMaxMessages(): int|null
     {
         return $this->maxMessages;
     }
 
-    public function getMaxSeconds(): ?float
+    public function getMaxSeconds(): float|null
     {
         return $this->maxSeconds;
     }

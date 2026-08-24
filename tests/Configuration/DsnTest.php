@@ -41,12 +41,12 @@ class DsnTest extends TestCase
      */
     public function testCreate(
         string $amqpUri,
-        ?string $username,
-        ?string $password,
+        string|null $username,
+        string|null $password,
         string $host,
         int $port,
         string $vhost,
-        array $parameters
+        array $parameters,
     ): void {
         $dsn = new Dsn($amqpUri);
 

@@ -21,7 +21,7 @@ final class ConfigurationTest extends TestCase
             $prefetchCount,
             $prefetchSize,
             $maxMessages,
-            $maxSeconds
+            $maxSeconds,
         );
 
         self::assertSame($queueName, $consumerConfiguration->getQueueName());

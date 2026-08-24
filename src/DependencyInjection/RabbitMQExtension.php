@@ -11,19 +11,19 @@ use Symfony\Component\DependencyInjection\Loader\YamlFileLoader;
 
 final class RabbitMQExtension extends Extension
 {
-    public const ALIAS = 'rabbitmq';
+    public const string ALIAS = 'rabbitmq';
 
     /** @param mixed[] $configuration */
     public function load(array $configuration, ContainerBuilder $container): void
     {
         $container->setParameter(
             self::ALIAS,
-            $this->processConfiguration(new Configuration(), $configuration)
+            $this->processConfiguration(new Configuration(), $configuration),
         );
 
         $loader = new YamlFileLoader(
             $container,
-            new FileLocator(__DIR__ . '/../Resources/config')
+            new FileLocator(__DIR__ . '/../Resources/config'),
         );
 
         $loader->load('services.yaml');

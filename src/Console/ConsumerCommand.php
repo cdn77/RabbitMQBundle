@@ -19,10 +19,10 @@ use function strtolower;
 
 final class ConsumerCommand extends Command
 {
-    private const NAME = RabbitMQExtension::ALIAS . ':consumer:run';
-    private const DESCRIPTION = 'Starts given consumer.';
-    private const CONSUMER_ARGUMENT_NAME = 'consumerName';
-    private const CONSUMER_ARGUMENT_DESCRIPTION = 'Name of consumer.';
+    private const string NAME = RabbitMQExtension::ALIAS . ':consumer:run';
+    private const string DESCRIPTION = 'Starts given consumer.';
+    private const string CONSUMER_ARGUMENT_NAME = 'consumerName';
+    private const string CONSUMER_ARGUMENT_DESCRIPTION = 'Name of consumer.';
 
     /** @var ConsumerStorage */
     private $consumerStorage;
@@ -45,7 +45,7 @@ final class ConsumerCommand extends Command
         $this->addArgument(
             self::CONSUMER_ARGUMENT_NAME,
             InputArgument::REQUIRED,
-            self::CONSUMER_ARGUMENT_DESCRIPTION
+            self::CONSUMER_ARGUMENT_DESCRIPTION,
         );
     }
 

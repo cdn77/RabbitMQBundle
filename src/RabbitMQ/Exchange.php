@@ -36,7 +36,7 @@ final class Exchange implements Bindable
         bool $durable = true,
         bool $autoDelete = false,
         bool $internal = false,
-        array $arguments = []
+        array $arguments = [],
     ) {
         $this->name = $name;
         $this->exchangeType = $exchangeType;
@@ -55,7 +55,7 @@ final class Exchange implements Bindable
             $configuration[Configuration::KEY_EXCHANGE_DURABLE] ?? false,
             $configuration[Configuration::KEY_EXCHANGE_AUTO_DELETE] ?? false,
             $configuration[Configuration::KEY_EXCHANGE_INTERNAL] ?? false,
-            $configuration[Configuration::KEY_EXCHANGE_ARGUMENTS] ?? []
+            $configuration[Configuration::KEY_EXCHANGE_ARGUMENTS] ?? [],
         );
     }
 

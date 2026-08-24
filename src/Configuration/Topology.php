@@ -73,7 +73,7 @@ final class Topology
             foreach ($bindingsConfigurations as $bindingsConfiguration) {
                 $exchangesBindings[$exchangeName][] = Binding::fromConfiguration(
                     $exchanges[$bindingsConfiguration[Configuration::KEY_BINDING_EXCHANGE]],
-                    $bindingsConfiguration
+                    $bindingsConfiguration,
                 );
             }
         }
@@ -97,7 +97,7 @@ final class Topology
             foreach ($bindingsConfigurations as $bindingsConfiguration) {
                 $queuesBindings[$queueName][] = Binding::fromConfiguration(
                     $exchanges[$bindingsConfiguration[Configuration::KEY_BINDING_EXCHANGE]],
-                    $bindingsConfiguration
+                    $bindingsConfiguration,
                 );
             }
         }
