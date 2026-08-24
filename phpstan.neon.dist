@@ -4,8 +4,5 @@ parameters:
         - %currentWorkingDirectory%/src
         - %currentWorkingDirectory%/tests
 
-    ignoreErrors:
-        - '~Parameter #\d+ \$\w+ of [\w ]+ [\w\\]+(::\w+\(\)| constructor) expects [\w\|]+, [\w\|]+ given~'
-
 includes:
     - phpstan-baseline.neon

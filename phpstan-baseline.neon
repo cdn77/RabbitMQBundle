@@ -1,21 +1,139 @@
 parameters:
 	ignoreErrors:
 		-
-			message: "#^Cannot cast mixed to int\\.$#"
+			message: '#^Cannot cast mixed to int\.$#'
+			identifier: cast.int
+			count: 3
+			path: src/Configuration/Connection.php
+
+		-
+			message: '#^Parameter \#1 \$dsn of class Cdn77\\RabbitMQBundle\\Configuration\\Dsn constructor expects string, mixed given\.$#'
+			identifier: argument.type
 			count: 1
 			path: src/Configuration/Connection.php
 
 		-
-			message: "#^Cannot access offset 'bindings' on mixed\\.$#"
+			message: '#^Cannot access offset ''bindings'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
 			count: 2
 			path: src/Configuration/Topology.php
 
 		-
-			message: "#^Cannot access offset 'exchange' on mixed\\.$#"
+			message: '#^Cannot access offset ''exchange'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
 			count: 2
 			path: src/Configuration/Topology.php
 
 		-
-			message: "#^Cannot access offset 'rabbitmq' on mixed\\.$#"
+			message: '#^Parameter \#2 \$configuration of static method Cdn77\\RabbitMQBundle\\RabbitMQ\\Binding\:\:fromConfiguration\(\) expects array\<mixed\>, mixed given\.$#'
+			identifier: argument.type
+			count: 2
+			path: src/Configuration/Topology.php
+
+		-
+			message: '#^Parameter \#2 \$configuration of static method Cdn77\\RabbitMQBundle\\RabbitMQ\\Exchange\:\:fromConfiguration\(\) expects array\<mixed\>, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Configuration/Topology.php
+
+		-
+			message: '#^Parameter \#2 \$configuration of static method Cdn77\\RabbitMQBundle\\RabbitMQ\\Queue\:\:fromConfiguration\(\) expects array\<mixed\>, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/Configuration/Topology.php
+
+		-
+			message: '#^Possibly invalid array key type mixed\.$#'
+			identifier: offsetAccess.invalidOffset
+			count: 2
+			path: src/Configuration/Topology.php
+
+		-
+			message: '#^Parameter \#2 \$routingKey of class Cdn77\\RabbitMQBundle\\RabbitMQ\\Binding constructor expects string, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/RabbitMQ/Binding.php
+
+		-
+			message: '#^Parameter \#3 \$arguments of class Cdn77\\RabbitMQBundle\\RabbitMQ\\Binding constructor expects array\<mixed\>, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/RabbitMQ/Binding.php
+
+		-
+			message: '#^Parameter \#1 \$value of class Cdn77\\RabbitMQBundle\\RabbitMQ\\ExchangeType constructor expects string, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/RabbitMQ/Exchange.php
+
+		-
+			message: '#^Parameter \#3 \$durable of class Cdn77\\RabbitMQBundle\\RabbitMQ\\Exchange constructor expects bool, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/RabbitMQ/Exchange.php
+
+		-
+			message: '#^Parameter \#4 \$autoDelete of class Cdn77\\RabbitMQBundle\\RabbitMQ\\Exchange constructor expects bool, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/RabbitMQ/Exchange.php
+
+		-
+			message: '#^Parameter \#5 \$internal of class Cdn77\\RabbitMQBundle\\RabbitMQ\\Exchange constructor expects bool, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/RabbitMQ/Exchange.php
+
+		-
+			message: '#^Parameter \#6 \$arguments of class Cdn77\\RabbitMQBundle\\RabbitMQ\\Exchange constructor expects array\<mixed\>, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/RabbitMQ/Exchange.php
+
+		-
+			message: '#^Parameter \#2 \$durable of class Cdn77\\RabbitMQBundle\\RabbitMQ\\Queue constructor expects bool, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/RabbitMQ/Queue.php
+
+		-
+			message: '#^Parameter \#3 \$exclusive of class Cdn77\\RabbitMQBundle\\RabbitMQ\\Queue constructor expects bool, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/RabbitMQ/Queue.php
+
+		-
+			message: '#^Parameter \#4 \$autoDelete of class Cdn77\\RabbitMQBundle\\RabbitMQ\\Queue constructor expects bool, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/RabbitMQ/Queue.php
+
+		-
+			message: '#^Parameter \#5 \$arguments of class Cdn77\\RabbitMQBundle\\RabbitMQ\\Queue constructor expects array\<mixed\>, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: src/RabbitMQ/Queue.php
+
+		-
+			message: '#^Cannot access offset ''rabbitmq'' on mixed\.$#'
+			identifier: offsetAccess.nonOffsetAccessible
+			count: 2
+			path: tests/RabbitMQ/ConfigurationTest.php
+
+		-
+			message: '#^Parameter \#1 \$configuration of static method Cdn77\\RabbitMQBundle\\Configuration\\Connection\:\:fromDI\(\) expects array\<mixed\>, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: tests/RabbitMQ/ConfigurationTest.php
+
+		-
+			message: '#^Parameter \#1 \$configuration of static method Cdn77\\RabbitMQBundle\\Configuration\\Topology\:\:fromDI\(\) expects array\<mixed\>, mixed given\.$#'
+			identifier: argument.type
+			count: 1
+			path: tests/RabbitMQ/ConfigurationTest.php
+
+		-
+			message: '#^Parameter \#1 \$input of static method Symfony\\Component\\Yaml\\Yaml\:\:parse\(\) expects string, string\|false given\.$#'
+			identifier: argument.type
 			count: 2
 			path: tests/RabbitMQ/ConfigurationTest.php
