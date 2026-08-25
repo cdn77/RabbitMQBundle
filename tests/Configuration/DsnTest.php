@@ -34,6 +34,14 @@ class DsnTest extends TestCase
         new Dsn('http://example.com//vhost');
     }
 
+    public function testNestedParameters(): void
+    {
+        $this->expectException(InvalidDsn::class);
+        $this->expectExceptionMessage('The DSN query parameters "heartbeat" are nested, expected a single value');
+
+        new Dsn('amqp://host/vhost?heartbeat[]=120&connection_timeout=7');
+    }
+
     /**
      * @param string[] $parameters
      *

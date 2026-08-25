@@ -6,6 +6,9 @@ namespace Cdn77\RabbitMQBundle\Configuration;
 
 use Cdn77\RabbitMQBundle\Exception\InvalidDsn;
 
+use function array_diff_key;
+use function array_filter;
+use function array_keys;
 use function count;
 use function http_build_query;
 use function parse_str;
@@ -34,7 +37,7 @@ final class Dsn
     /** @var string */
     private $vhost;
 
-    /** @var array<array<mixed>|string> */
+    /** @var string[] */
     private $parameters = [];
 
     public function __construct(string $dsn)
@@ -63,7 +66,15 @@ final class Dsn
             return;
         }
 
-        parse_str($parts['query'], $this->parameters);
+        parse_str($parts['query'], $parameters);
+
+        $values = array_filter($parameters, 'is_string');
+
+        if (count($values) !== count($parameters)) {
+            throw InvalidDsn::nestedParameters(array_keys(array_diff_key($parameters, $values)));
+        }
+
+        $this->parameters = $values;
     }
 
     public function __toString(): string
@@ -106,7 +117,7 @@ final class Dsn
         return $this->vhost;
     }
 
-    /** @return array<array<mixed>|string> */
+    /** @return string[] */
     public function getParameters(): array
     {
         return $this->parameters;
