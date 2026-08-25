@@ -34,7 +34,7 @@ final class ConsumerRunnerTest extends TestCase
     {
         $this->clearRabbitMQ();
 
-        parent::setUp();
+        parent::tearDown();
     }
 
     /** @dataProvider maxMessagesDataProvider */
