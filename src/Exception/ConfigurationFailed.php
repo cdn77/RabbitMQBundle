@@ -14,6 +14,11 @@ use function sprintf;
 
 final class ConfigurationFailed extends RuntimeException implements Exception
 {
+    public static function heartbeatMustBePositive(int $heartbeat): self
+    {
+        return new self(sprintf('Heartbeat must be a positive number of seconds, %d given', $heartbeat));
+    }
+
     public static function invalidPrefetchValues(Throwable|null $previous = null): self
     {
         return new self('Could not set prefetch-size/prefetch-count', 0, $previous);

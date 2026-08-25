@@ -55,6 +55,24 @@ final class DisconnectConnection implements EventSubscriberInterface
         }
 
         $this->connection->disconnect();
+
+        if (! $event instanceof ConsoleTerminateEvent) {
+            return;
+        }
+
+        // Not the belt and braces it looks like: a handshake that stalls leaves Bunny's socket on
+        // the loop for good - `Client::connect()` neither closes the connection nor rolls the state
+        // back when it throws, so `disconnect()` is left with a client it cannot disconnect - and
+        // React's shutdown then blocks in `stream_select()` with no timeout. A command that could
+        // not reach the broker would never exit. Both ways round in
+        // `DisconnectConnectionTest::testCommandExitsAfterAHandshakeThatStalled`.
+        //
+        // It costs what it says: process-wide and permanent, so a later `console.terminate` listener
+        // that puts work on the loop without awaiting it loses that work. Awaited work is fine -
+        // `await()` enters the loop itself - and a process that hangs is worse than either. Console
+        // only, all the same: a php-fpm worker serves further requests after `kernel.terminate`, and
+        // their first await() would resume a scheduler Fiber sitting in a loop that no longer runs.
+        Loop::stop();
     }
 
     /**

@@ -48,3 +48,11 @@ final class ExampleProducer
 > command returns), so HTTP and console producers are handled automatically. If you publish from a
 > context that dispatches neither event (e.g. a bare script using the event loop directly), call
 > `$connection->disconnect()` yourself when you're done.
+
+> **Heads up (Bunny 0.6):** a single `handle()` is fire-and-forget - the broker sends no reply to
+> wait for - so it tells you the message was written to the socket, not that the broker has it. The
+> bundle does make sure of the writing: publishing awaits nothing, so the event loop would otherwise
+> never turn and the message would sit in a buffer until some later operation happened to flush it,
+> which for a producer of ordinary messages could be never. Use `handleAll()` when you need to know
+> the broker has the messages before you carry on: it publishes in a transaction and returns once
+> the commit is confirmed.
