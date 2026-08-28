@@ -19,12 +19,9 @@ final class AcknowledgeOperation
 
     public function handle(Message $message): void
     {
-        $channel = $this->connection->getChannel();
-        $channel->getClient()->ack(
-            $channel->getChannelId(),
-            $message->deliveryTag,
-            false,
-        );
+        $this->connection->run(function () use ($message): void {
+            $this->connection->getChannel()->ack($message);
+        });
     }
 
     /**
@@ -33,11 +30,8 @@ final class AcknowledgeOperation
      */
     public function handleAll(Message $lastMessage): void
     {
-        $channel = $this->connection->getChannel();
-        $channel->getClient()->ack(
-            $channel->getChannelId(),
-            $lastMessage->deliveryTag,
-            true,
-        );
+        $this->connection->run(function () use ($lastMessage): void {
+            $this->connection->getChannel()->ack($lastMessage, true);
+        });
     }
 }

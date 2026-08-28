@@ -23,13 +23,13 @@ final class Exchange implements Bindable
     /** @var bool */
     private $internal;
 
-    /** @var mixed[] */
+    /** @var array<string, mixed> */
     private $arguments;
 
     /** @var Binding[] */
     private $bindings = [];
 
-    /** @param mixed[] $arguments */
+    /** @param array<string, mixed> $arguments */
     public function __construct(
         string $name,
         ExchangeType $exchangeType,
@@ -95,7 +95,7 @@ final class Exchange implements Bindable
         return $this->internal;
     }
 
-    /** @return mixed[] */
+    /** @return array<string, mixed> */
     public function getArguments(): array
     {
         return $this->arguments;

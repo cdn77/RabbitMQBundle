@@ -8,28 +8,37 @@ use Cdn77\RabbitMQBundle\RabbitMQ\Binding;
 use Cdn77\RabbitMQBundle\RabbitMQ\Exchange;
 use Cdn77\RabbitMQBundle\RabbitMQ\Queue;
 use RuntimeException;
+use Throwable;
 
 use function sprintf;
 
 final class ConfigurationFailed extends RuntimeException implements Exception
 {
-    public static function invalidPrefetchValues(): self
+    public static function heartbeatMustBePositive(int $heartbeat): self
     {
-        return new self('Could not set prefetch-size/prefetch-count');
+        return new self(sprintf('Heartbeat must be a positive number of seconds, %d given', $heartbeat));
     }
 
-    public static function cannotDeclareExchange(Exchange $exchange): self
+    public static function invalidPrefetchValues(Throwable|null $previous = null): self
     {
-        return new self(sprintf('Could not declare exchange %s', $exchange->getName()));
+        return new self('Could not set prefetch-size/prefetch-count', 0, $previous);
     }
 
-    public static function cannotDeclareQueue(Queue $queue): self
+    public static function cannotDeclareExchange(Exchange $exchange, Throwable|null $previous = null): self
     {
-        return new self(sprintf('Could not declare queue %s', $queue->getName()));
+        return new self(sprintf('Could not declare exchange %s', $exchange->getName()), 0, $previous);
     }
 
-    public static function cannotBindExchange(Exchange $exchange, Binding $binding): self
+    public static function cannotDeclareQueue(Queue $queue, Throwable|null $previous = null): self
     {
+        return new self(sprintf('Could not declare queue %s', $queue->getName()), 0, $previous);
+    }
+
+    public static function cannotBindExchange(
+        Exchange $exchange,
+        Binding $binding,
+        Throwable|null $previous = null,
+    ): self {
         return new self(
             sprintf(
                 'Could not bind exchange "%s" to "%s" with routing key "%s"',
@@ -37,10 +46,12 @@ final class ConfigurationFailed extends RuntimeException implements Exception
                 $binding->getBindable()->getName(),
                 $binding->getRoutingKey(),
             ),
+            0,
+            $previous,
         );
     }
 
-    public static function cannotBindQueue(Queue $queue, Binding $binding): self
+    public static function cannotBindQueue(Queue $queue, Binding $binding, Throwable|null $previous = null): self
     {
         return new self(
             sprintf(
@@ -49,6 +60,8 @@ final class ConfigurationFailed extends RuntimeException implements Exception
                 $binding->getBindable()->getName(),
                 $binding->getRoutingKey(),
             ),
+            0,
+            $previous,
         );
     }
 }

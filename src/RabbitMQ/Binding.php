@@ -14,10 +14,10 @@ final class Binding
     /** @var string */
     private $routingKey;
 
-    /** @var mixed[] */
+    /** @var array<string, mixed> */
     private $arguments;
 
-    /** @param mixed[] $arguments */
+    /** @param array<string, mixed> $arguments */
     public function __construct(Bindable $bindable, string $routingKey, array $arguments = [])
     {
         $this->bindable = $bindable;
@@ -45,7 +45,7 @@ final class Binding
         return $this->routingKey;
     }
 
-    /** @return mixed[] */
+    /** @return array<string, mixed> */
     public function getArguments(): array
     {
         return $this->arguments;
